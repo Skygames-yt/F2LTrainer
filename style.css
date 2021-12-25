@@ -1,0 +1,349 @@
+/* * {
+  margin: 0%;
+  padding: 0%;
+} */
+
+body {
+  background-color: #fa8bff;
+  background-image: linear-gradient(
+    45deg,
+    #fa8bff 0%,
+    #2bd2ff 52%,
+    #2bff88 90%
+  );
+  /* background-color: #4c4177;
+  background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%); */
+  /* background-color: #0cbaba;
+  background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%); */
+
+  /* background: linear-gradient(150deg, #0093e9, #80d0c7); */
+  background-attachment: fixed;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Disable scolling */
+/* html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+} */
+
+div {
+  /* border: solid; */
+}
+
+/* Selection */
+.div-container {
+  display: flex;
+  /* display: none; */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+  border-radius: 20px;
+  max-width: 700px;
+  margin: 10px auto;
+  border: solid;
+}
+
+.case-number {
+  /* align-items: center; */
+  width: 40px;
+  font-size: 2rem;
+  text-align: center;
+  margin-right: 3px;
+}
+
+.image-container {
+  height: 110px;
+  cursor: pointer;
+}
+
+.img-case {
+  height: 100%;
+}
+
+.algorithm {
+  flex-grow: 1;
+  height: 110px;
+  display: flex;
+  font-size: 1.5rem;
+  text-align: center;
+  vertical-align: middle;
+  justify-content: flex-start;
+
+  /* margin: auto; */
+}
+
+.algorithm:hover .img-edit-trash {
+  visibility: visible;
+}
+
+.img-edit-trash {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.div-algorithm {
+  /* justify-content: center; */
+  /* align-items: center; */
+  flex-grow: 1;
+  text-align: center;
+  vertical-align: middle;
+  line-height: normal;
+  margin: auto;
+}
+
+/* Side Buttons */
+#side-container {
+  display: flex;
+  /* display: none; */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.side-button {
+  cursor: pointer;
+  width: 40px;
+  margin: 5px;
+}
+
+.side-img {
+  width: 100%;
+}
+
+.btn-edit,
+.btn-trash {
+  margin: 5px;
+}
+
+/* Change Mode Button */
+#change-mode {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  background: #ff2525;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#train-container {
+  display: none;
+}
+
+/* Info container */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: gray;
+  opacity: 40%;
+  display: none;
+}
+
+/* #info-container {
+  display: none;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  background: #4158d0;
+  border-radius: 20px;
+  display: none;
+} */
+
+/* Trash */
+/* #trash-container {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-height: 90%;
+  max-width: 500px;
+  padding: 20px;
+  background: #4158d0;
+  border-radius: 20px;
+  overflow: auto;
+  display: none;
+} */
+
+.popup-container {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-height: 90%;
+  max-width: 500px;
+  padding: 20px;
+  background: #a546e4;
+  border-radius: 20px;
+  overflow: auto;
+  display: none;
+}
+
+.trash-element-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.img-case-trash {
+  width: 100%;
+}
+
+.img-container-trash {
+  width: 100px;
+  margin: 20px 0px;
+  /* cursor: pointer; */
+}
+
+.case-number-trash {
+  font-size: 2rem;
+  margin: 20px 0px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100%;
+}
+
+.btn-recover {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Edit Algoritm */
+#editalg-container {
+  display: none;
+}
+
+#editalg-text {
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+#editalg-img-container {
+  width: 110px;
+  margin-bottom: 10px;
+  margin: 0 auto;
+}
+
+#editalg-img {
+  width: 100%;
+}
+
+.editalg-listentry {
+  font-size: 1.3rem;
+  text-align: center;
+  border: solid;
+  border-radius: 8px;
+  margin: 5px 0px;
+  cursor: pointer;
+}
+
+#editalg-customalg {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+#editalg-customalg::placeholder {
+  color: yellow;
+}
+
+.update-cancal-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#editalg-btn {
+  font-size: 1.3rem;
+  background: transparent;
+  border: solid;
+  padding: 3px 15px;
+  border-radius: 8px;
+  margin: 0 3px;
+}
+
+#editalg-btn:hover,
+#editalg-btn:focus {
+  background: chartreuse;
+}
+
+/* Train select */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox__input {
+  display: none;
+}
+
+.checkbox__box {
+  width: 1.25em;
+  height: 1.25em;
+  border: 2px solid #cccccc;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.checkbox__box::after {
+  content: "\2714";
+  color: white;
+  transform: scale(0);
+  transition: transform 0.15s;
+}
+
+.checkbox__input:checked + .checkbox__box {
+  background: #2266dc;
+  border-color: #2266dc;
+}
+
+.checkbox__input:checked + .checkbox__box::after {
+  transform: scale(1);
+}
+
+/* Train cases */
+/* #train-cases-container {
+  display: block;
+} */
+
+#scramble-div {
+  font-size: 5rem;
+}
+
+#hint-div {
+  font-size: 2rem;
+}
+
+#hint-img {
+  visibility: hidden;
+  width: 100px;
+}

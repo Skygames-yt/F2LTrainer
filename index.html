@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Title</title>
+    <link rel="icon" href="images/full_cube.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="side-container">
+      <div class="side-button" id="btn-settings">
+        <img src="./images/settings.svg" alt="Settings" class="side-img" />
+      </div>
+      <div class="side-button" id="btn-trash">
+        <img src="./images/trash.svg" alt="Trash" class="side-img" />
+      </div>
+      <div class="side-button" id="btn-info">
+        <img src="./images/info.svg" alt="Info" class="side-img" />
+      </div>
+    </div>
+
+    <div id="change-mode">Train</div>
+
+    <div id="select-layout">
+      <!-- <div class="div-container">
+        <div class="case-number">1</div>
+        <div class="image-container" id="image-container">
+          <img class="img-case" src="./images/basic_cases/F2L1.svg" />
+        </div>
+        <div class="algorithm">
+          <div class="btn-edit">
+            <img src="./images/edit.svg" class="img-edit-trash" />
+          </div>
+          <div class="div-algorithm">U R U' R'</div>
+          <div class="btn-trash">
+            <img src="./images/trash.svg" class="img-edit-trash" />
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div id="overlay"></div>
+
+    <!-- Info -->
+    <div id="info-container" class="popup-container">
+      <h1>Here some info</h1>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita
+        tempora eaque error nobis commodi aperiam, architecto quas facilis
+        tenetur obcaecati eos neque praesentium rem nesciunt sed quo repellendus
+        exercitationem veritatis deserunt incidunt minima placeat. Corporis
+        minus laboriosam, omnis natus, veniam perferendis dicta dolorum qui et
+        tempore beatae voluptate! Nesciunt, repudiandae.
+      </p>
+    </div>
+
+    <!-- Trash -->
+    <div id="trash-container" class="popup-container">
+      <h1>This is the trash.</h1>
+      <p>Here is only trash, nothing else.</p>
+      <!-- <div class="trash-element-container">
+        <div class="case-number-trash">1</div>
+        <div class="img-container-trash">
+          <img class="img-case-trash" src="./images/basic_cases/F2L1.svg" />
+        </div>
+      </div> -->
+    </div>
+
+    <!-- Edit Algorithm -->
+    <div id="editalg-container" class="popup-container">
+      <div id="editalg-img-container">
+        <img id="editalg-img" src="./images/basic_cases/F2L1.svg" />
+      </div>
+      <div id="editalg-text">Choose algorithm</div>
+      <div id="editalg-list">
+        <!-- <div class="editalg-listentry">U (R U' R)</div> -->
+        <!-- <div class="editalg-listentry">R' F R F'</div> -->
+        <!-- <div class="editalg-listentry">U2 (R U2 R')</div> -->
+        <!-- <div class="editalg-listentry">y' U f R' f'</div> -->
+      </div>
+      <div class="editalg-listentry" onclick="customAlgSelected()">
+        <input
+          type="text"
+          placeholder="Enter Custom Algorithm"
+          id="editalg-customalg"
+        />
+      </div>
+      <div class="update-cancal-buttons">
+        <input
+          type="button"
+          id="editalg-btn"
+          onclick="updateAlg()"
+          value="Update"
+        />
+        <input
+          type="button"
+          id="editalg-btn"
+          onclick="closeOverlays()"
+          value="Cancel"
+        />
+      </div>
+    </div>
+
+    <!-- Train Mode -->
+    <div id="train-container">
+      <div id="scramble-div">Scramble</div>
+      <div id="hint-div">Hint</div>
+      <img
+        id="hint-img"
+        src="./images/basic_cases/F2L1.svg"
+        alt="Image of Case"
+      />
+
+      <div id="train-cases-container" class="popup-container">
+        <label class="checkbox" for="checkboxUnlearnedId">
+          <input
+            type="checkbox"
+            class="checkbox__input"
+            name="checkboxUnlearned"
+            id="checkboxUnlearnedId"
+          />
+          <div class="checkbox__box"></div>
+          Unlearned
+        </label>
+
+        <label class="checkbox" for="checkboxLearningId">
+          <input
+            type="checkbox"
+            class="checkbox__input"
+            name="checkboxLearning"
+            id="checkboxLearningId"
+          />
+          <div class="checkbox__box"></div>
+          Learning
+        </label>
+
+        <label class="checkbox" for="checkboxFinishedId">
+          <input
+            type="checkbox"
+            class="checkbox__input"
+            name="checkboxFinished"
+            id="checkboxFinishedId"
+          />
+          <div class="checkbox__box"></div>
+          Finished
+        </label>
+
+        <div class="update-cancal-buttons">
+          <input
+            type="button"
+            id="editalg-btn"
+            onclick="updateTrainCases()"
+            value="Update"
+          />
+          <input
+            type="button"
+            id="editalg-btn"
+            onclick="closeOverlays()"
+            value="Cancel"
+          />
+        </div>
+      </div>
+
+      <div class="side-button" id="btn-settings-train">
+        <img src="./images/settings.svg" alt="Settings" class="side-img" />
+      </div>
+    </div>
+
+    <script src="./scripts/basic_scrambles.js"></script>
+    <script src="./scripts/basic_algorithms.js"></script>
+    <script src="./scripts/basic_scrambles_back.js"></script>
+    <script src="./scripts/basic_algorithms_back.js"></script>
+    <script src="./scripts/user_saved.js"></script>
+    <script src="./scripts/string_manipulation.js"></script>
+    <script src="./scripts/main.js"></script>
+  </body>
+</html>
