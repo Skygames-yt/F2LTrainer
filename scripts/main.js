@@ -441,3 +441,5 @@ function showHint() {
   }
   hintCounter++;
 }
+
+// something
