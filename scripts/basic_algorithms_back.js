@@ -1,4 +1,4 @@
-const basicAlgorithms = {
+const basicAlgorithmsBack = {
   1: ["r' U' R U M'", "y' U (L U' L')", "y U (R U' R')"],
   2: ["U' (R' U R)"],
   3: ["(R' U' R)"],

@@ -347,3 +347,10 @@ div {
   visibility: hidden;
   width: 100px;
 }
+
+#btn-next-scramble {
+  width: 50px;
+}
+#btn-next-scramble:hover {
+  cursor: pointer;
+}

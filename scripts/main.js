@@ -92,6 +92,7 @@ window.addEventListener("load", () => {
 
     btnEdit.push(document.createElement("div"));
     btnEdit[i].classList.add("btn-edit");
+    btnEdit[i].title = "Edit";
 
     imgEdit.push(document.createElement("img"));
     imgEdit[i].classList.add("img-edit-trash");
@@ -101,6 +102,7 @@ window.addEventListener("load", () => {
 
     btnDelete.push(document.createElement("div"));
     btnDelete[i].classList.add("btn-trash");
+    btnDelete[i].title = "Delete";
 
     imgTrash.push(document.createElement("img"));
     imgTrash[i].classList.add("img-edit-trash");
@@ -360,10 +362,7 @@ function keydown(e) {
 
   if (e.keyCode === 32) {
     // Leertaste
-    hintCounter = 0;
-    hintImg.style.visibility = "hidden";
-    showNewScramble();
-    hintDiv.innerText = "";
+    nextScramble();
   } else if (e.keyCode === 39) {
     // rechte Pfeiltaste
     hintImg.style.visibility = "visible";
@@ -371,7 +370,10 @@ function keydown(e) {
   }
 }
 
-function showNewScramble() {
+function nextScramble() {
+  hintCounter = 0;
+  hintImg.style.visibility = "hidden";
+  hintDiv.innerText = "";
   // Get all indices of selected cases
   let selectedCases = [];
   for (let i = 0; i < basicCaseSelection.length; i++) {
@@ -441,5 +443,3 @@ function showHint() {
   }
   hintCounter++;
 }
-
-// something

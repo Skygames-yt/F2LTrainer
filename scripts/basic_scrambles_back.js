@@ -1,4 +1,4 @@
-const advancedScrambles = {
+const basicScramblesBack = {
   1: [
     "R' F' U F R U'",
     "B L U L' B' U'",
