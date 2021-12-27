@@ -227,7 +227,7 @@ let basicBackAlgorithmSelection = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
 let advancedAlgorithmSelection = [
-  1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
 
@@ -361,8 +361,9 @@ let advandedCustomAlgorithms = [
 // 0 -> unlearned
 // 1 -> learning
 // 2 -> finished
-let trainStateSelectioin = [false, true, false];
-// 0 -> basic cases
-// 1 -> advanced cases
-// 2 -> expert cases
+let trainStateSelection = [false, true, false];
+
+// 0 -> basic
+// 1 -> basic back
+// 2 -> advanced
 let trainGroupSelection = [true, false, false];
