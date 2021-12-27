@@ -341,6 +341,7 @@ function updateAlg() {
   // Save which Alg was selected
   group.algorithmSelection[selectedCase] = selectedAlgNumber;
   closeOverlays();
+  console.log(group.algorithmSelection);
 }
 
 function closeOverlays() {
@@ -402,7 +403,8 @@ function customAlgSelected() {
   // Reset Background of previously selected Alg
   editalgCustomalg.style.background = algColors[1];
   // Set selected Alg to number of selected Alg
-  selectedAlgNumber = basicAlgorithms[selectedCase + 1].length;
+  selectedAlgNumber =
+    groups[selectGroup.selectedIndex].algorithms[selectedCase + 1].length;
 }
 
 function keydown(e) {
