@@ -137,40 +137,81 @@
         title="Next Scramble"
       />
 
+      <!-- Train Settings -->
       <div id="train-cases-container" class="popup-container">
-        <label class="checkbox" for="checkboxUnlearnedId">
-          <input
-            type="checkbox"
-            class="checkbox__input"
-            name="checkboxUnlearned"
-            id="checkboxUnlearnedId"
-          />
-          <div class="checkbox__box"></div>
-          Unlearned
-        </label>
+        <!-- Checkbox: Unlearned, Learning, Finished -->
+        <div>
+          <label class="checkbox" for="checkboxUnlearnedId">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              name="checkboxUnlearned"
+              id="checkboxUnlearnedId"
+            />
+            <div class="checkbox__box"></div>
+            Unlearned
+          </label>
 
-        <label class="checkbox" for="checkboxLearningId">
-          <input
-            type="checkbox"
-            class="checkbox__input"
-            name="checkboxLearning"
-            id="checkboxLearningId"
-          />
-          <div class="checkbox__box"></div>
-          Learning
-        </label>
+          <label class="checkbox" for="checkboxLearningId">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              name="checkboxLearning"
+              id="checkboxLearningId"
+            />
+            <div class="checkbox__box"></div>
+            Learning
+          </label>
 
-        <label class="checkbox" for="checkboxFinishedId">
-          <input
-            type="checkbox"
-            class="checkbox__input"
-            name="checkboxFinished"
-            id="checkboxFinishedId"
-          />
-          <div class="checkbox__box"></div>
-          Finished
-        </label>
+          <label class="checkbox" for="checkboxFinishedId">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              name="checkboxFinished"
+              id="checkboxFinishedId"
+            />
+            <div class="checkbox__box"></div>
+            Finished
+          </label>
+        </div>
 
+        <!-- Checkbox: Groups -->
+        <div>
+          <label class="checkbox" for="checkboxGroupBasicId">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              name="checkboxGroupBasic"
+              id="checkboxGroupBasicId"
+            />
+            <div class="checkbox__box"></div>
+            Basic
+          </label>
+
+          <label class="checkbox" for="checkboxGroupBasicBackId">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              name="checkboxGroupBasicBack"
+              id="checkboxGroupBasicBackId"
+            />
+            <div class="checkbox__box"></div>
+            Basic Back
+          </label>
+
+          <label class="checkbox" for="checkboxGroupAdvancedId">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              name="checkboxGroupAdvanced"
+              id="checkboxGroupAdvancedId"
+            />
+            <div class="checkbox__box"></div>
+            Advanced
+          </label>
+        </div>
+
+        <!-- Buttons: Update, Cancel Settings -->
         <div class="update-cancal-buttons">
           <input
             type="button"
@@ -187,6 +228,7 @@
         </div>
       </div>
 
+      <!-- Button Settings Train -->
       <div class="side-button" id="btn-settings-train">
         <img
           src="./images/settings.svg"
