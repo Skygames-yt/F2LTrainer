@@ -41,6 +41,15 @@ const checkboxUnlerned = document.getElementById("checkboxUnlearnedId");
 const checkboxLearning = document.getElementById("checkboxLearningId");
 const checkboxFinished = document.getElementById("checkboxFinishedId");
 
+const checkboxGroupBasic = document.getElementById("checkboxGroupBasicId");
+const checkboxGroupBasicBack = document.getElementById(
+  "checkboxGroupBasicBackId"
+);
+const checkboxGroupAdvanced = document.getElementById(
+  "checkboxGroupAdvancedId"
+);
+// const selectGroupTrain = document.getElementById("select-train");
+
 const btnSettingsTrain = document.getElementById("btn-settings-train");
 const settingsTrainContainer = document.getElementById("train-cases-container");
 
@@ -53,6 +62,10 @@ let selectedTrainIndex = 0;
 let hintCounter = 0;
 
 let mode = 0; // 0: select, 1: train
+
+// List that contains all the randomly selected cases
+let trainCaseList = [];
+let currentTrainCase = 0;
 
 // Basic, Basic Back, Advanced, Exert
 const selectGroup = document.getElementById("select-group");
@@ -85,7 +98,10 @@ window.addEventListener("load", () => {
   editalgListentry.forEach(function (button, i) {
     button.addEventListener("click", function () {
       // Change Background when selected
-      if (selectedAlgNumber < basicAlgorithms[selectedCase + 1].length) {
+      if (
+        selectedAlgNumber <
+        groups[selectGroup.selectedIndex].algorithms[selectedCase + 1].length
+      ) {
         editalgListentry[selectedAlgNumber].style.background = algColors[0];
       } else {
         editalgCustomalg.style.background = algColors[0];
@@ -106,7 +122,6 @@ window.addEventListener("load", () => {
           group.caseSelection[i] = 0;
         }
         group.divContainer[i].style.background = colors[group.caseSelection[i]];
-        // console.log(basicCaseSelection);
       });
     });
   }
@@ -144,12 +159,14 @@ window.addEventListener("load", () => {
       changeMode.innerHTML = "select cases";
       selectLayout.style.display = "none";
       sideContainer.style.display = "none";
+      selectGroup.style.display = "none";
       trainContainer.style.display = "block";
     } else {
       mode = 0;
       changeMode.innerHTML = "Train";
       selectLayout.style.display = "block";
       sideContainer.style.display = "block";
+      selectGroup.style.display = "block";
       trainContainer.style.display = "none";
     }
   });
@@ -420,12 +437,12 @@ function keydown(e) {
     nextScramble();
   } else if (e.keyCode === 39) {
     // rechte Pfeiltaste
-    hintImg.style.visibility = "visible";
     showHint();
   }
 }
 
-function nextScramble() {
+/*
+function nextScramble___() {
   hintCounter = 0;
   hintImg.style.visibility = "hidden";
   hintDiv.innerText = "";
@@ -434,7 +451,7 @@ function nextScramble() {
   for (let i = 0; i < basicCaseSelection.length; i++) {
     for (let state = 0; state < 3; state++) {
       if (
-        trainStateSelectioin[state] === true &&
+        trainStateSelection[state] === true &&
         basicCaseSelection[i] === state
       ) {
         selectedCases.push(i);
@@ -476,6 +493,7 @@ function nextScramble() {
   // Show scramble
   scrambleDiv.innerText = selectedScramble;
 }
+*/
 
 function showSettingsTrain() {
   settingsTrainContainer.style.display = "block";
@@ -483,15 +501,23 @@ function showSettingsTrain() {
 }
 
 function updateTrainCases() {
-  trainStateSelectioin = [
+  trainStateSelection = [
     checkboxUnlerned.checked,
     checkboxLearning.checked,
     checkboxFinished.checked,
   ];
+  trainGroupSelection = [
+    checkboxGroupBasic.checked,
+    checkboxGroupBasicBack.checked,
+    checkboxGroupAdvanced.checked,
+  ];
   closeOverlays();
+  generateTrainCaseList();
 }
 
 function showHint() {
+  hintImg.style.visibility = "visible";
+
   const algList = algHint.split(" ");
   if (hintCounter < algList.length) {
     hintDiv.innerText = algList.slice(0, hintCounter + 1).join(" ");
@@ -510,4 +536,80 @@ function groupSelected() {
   }
   // Scroll to the top
   window.scrollTo(0, 0);
+}
+
+function generateTrainCaseList() {
+  trainCaseList = [];
+  currentTrainCase = 0;
+
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    const group = groups[indexGroup];
+
+    if (trainGroupSelection[indexGroup] === false) continue;
+
+    for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
+      for (let state = 0; state < trainStateSelection.length; state++) {
+        if (
+          trainStateSelection[state] === true &&
+          group.caseSelection[indexCase] === state
+        ) {
+          const caseToAdd = { indexGroup: indexGroup, indexCase: indexCase };
+
+          trainCaseList.push(caseToAdd);
+          break;
+        }
+      }
+    }
+  }
+
+  // Randomize Cases
+  for (let i = trainCaseList.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = trainCaseList[i];
+    trainCaseList[i] = trainCaseList[j];
+    trainCaseList[j] = temp;
+  }
+
+  // console.log(trainCaseList);
+}
+
+function nextScramble() {
+  hintCounter = 0;
+  hintImg.style.visibility = "hidden";
+  hintDiv.innerText = "";
+  
+  const indexGroup = trainCaseList[currentTrainCase].indexGroup;
+  const caseIndex = trainCaseList[currentTrainCase].indexCase;
+  const group = groups[indexGroup];
+
+  // Set the hint to selected alg
+  algHint =
+    group.algorithms[caseIndex + 1][group.algorithmSelection[caseIndex]];
+
+  hintImg.src = group.imgPath + (caseIndex + 1) + ".svg";
+
+  // let selectedScramble = group.scrambles[caseIndex];
+
+  let selectedScramble =
+    group.scrambles[caseIndex + 1][
+      Math.floor(Math.random() * group.scrambles[caseIndex + 1].length)
+    ];
+
+  // Mirror at random
+  if (Math.floor(Math.random() * 2)) {
+    selectedScramble = mirrorAlg(selectedScramble);
+    algHint = mirrorAlg(algHint);
+  }
+
+  // Add random U move
+  selectedScramble = addRandomUMove(selectedScramble);
+
+  // Show scramble
+  scrambleDiv.innerText = selectedScramble;
+
+  currentTrainCase++;
+
+  if (currentTrainCase >= trainCaseList.length) {
+    generateTrainCaseList();
+  }
 }
