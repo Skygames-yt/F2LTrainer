@@ -354,3 +354,8 @@ div {
 #btn-next-scramble:hover {
   cursor: pointer;
 }
+
+#select-group {
+  position: fixed;
+  top: 60px;
+}
