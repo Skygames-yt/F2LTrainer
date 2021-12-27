@@ -70,106 +70,112 @@ let mode = 0; // 0: select, 1: train
 
 window.addEventListener("load", () => {
   // Create all Entries
-  for (let i = 0; i < numberBasicCases; i++) {
+  for (let indexCase = 0; indexCase < numberBasicCases; indexCase++) {
     // Case Selection Page
-    const caseImgPath = "./images/basic_cases/F2L" + (i + 1) + ".svg";
+    const caseImgPath = "./images/basic_cases/F2L" + (indexCase + 1) + ".svg";
 
     divContainer.push(document.createElement("div"));
-    divContainer[i].classList.add("div-container");
+    divContainer[indexCase].classList.add("div-container");
 
     caseNumber.push(document.createElement("div"));
-    caseNumber[i].classList.add("case-number");
+    caseNumber[indexCase].classList.add("case-number");
 
     imgContainer.push(document.createElement("div"));
-    imgContainer[i].classList.add("image-container");
-    imgContainer[i].id = "image-container-" + i;
+    imgContainer[indexCase].classList.add("image-container");
+    imgContainer[indexCase].id = "image-container-" + indexCase;
 
     imgCase.push(document.createElement("img"));
-    imgCase[i].classList.add("img-case");
+    imgCase[indexCase].classList.add("img-case");
 
     algorithm.push(document.createElement("div"));
-    algorithm[i].classList.add("algorithm");
+    algorithm[indexCase].classList.add("algorithm");
 
     btnEdit.push(document.createElement("div"));
-    btnEdit[i].classList.add("btn-edit");
-    btnEdit[i].title = "Edit";
+    btnEdit[indexCase].classList.add("btn-edit");
+    btnEdit[indexCase].title = "Edit";
 
     imgEdit.push(document.createElement("img"));
-    imgEdit[i].classList.add("img-edit-trash");
+    imgEdit[indexCase].classList.add("img-edit-trash");
 
     divAlgorithm.push(document.createElement("div"));
-    divAlgorithm[i].classList.add("div-algorithm");
+    divAlgorithm[indexCase].classList.add("div-algorithm");
 
     btnDelete.push(document.createElement("div"));
-    btnDelete[i].classList.add("btn-trash");
-    btnDelete[i].title = "Delete";
+    btnDelete[indexCase].classList.add("btn-trash");
+    btnDelete[indexCase].title = "Delete";
 
     imgTrash.push(document.createElement("img"));
-    imgTrash[i].classList.add("img-edit-trash");
+    imgTrash[indexCase].classList.add("img-edit-trash");
 
-    if (i != 36) {
-      caseNumber[i].innerHTML = i + 1;
-      imgCase[i].src = caseImgPath;
+    if (indexCase != 36) {
+      caseNumber[indexCase].innerHTML = indexCase + 1;
+      imgCase[indexCase].src = caseImgPath;
       // Set shown alg
-      if (basicAlgorithmSelection[i] < basicAlgorithms[i + 1].length) {
-        divAlgorithm[i].innerHTML =
-          basicAlgorithms[i + 1][basicAlgorithmSelection[i]];
+      if (
+        basicAlgorithmSelection[indexCase] <
+        basicAlgorithms[indexCase + 1].length
+      ) {
+        divAlgorithm[indexCase].innerHTML =
+          basicAlgorithms[indexCase + 1][basicAlgorithmSelection[indexCase]];
       } else {
-        divAlgorithm[i].innerHTML = basicCustomAlgorithms[i];
+        divAlgorithm[indexCase].innerHTML = basicCustomAlgorithms[indexCase];
       }
 
-      imgEdit[i].src = "./images/edit.svg";
-      imgTrash[i].src = "./images/trash.svg";
+      imgEdit[indexCase].src = "./images/edit.svg";
+      imgTrash[indexCase].src = "./images/trash.svg";
 
-      if (basicTrash[i] == true) {
-        divContainer[i].style.display = "none";
+      if (basicTrash[indexCase] == true) {
+        divContainer[indexCase].style.display = "none";
       }
 
-      divContainer[i].style.background = colors[basicCaseSelection[i]];
+      divContainer[indexCase].style.background =
+        colors[basicCaseSelection[indexCase]];
 
-      divContainer[i].appendChild(caseNumber[i]);
-      divContainer[i].appendChild(imgContainer[i]);
-      imgContainer[i].appendChild(imgCase[i]);
-      divContainer[i].appendChild(algorithm[i]);
-      algorithm[i].appendChild(btnEdit[i]);
-      btnEdit[i].appendChild(imgEdit[i]);
-      algorithm[i].appendChild(divAlgorithm[i]);
-      algorithm[i].appendChild(btnDelete[i]);
-      btnDelete[i].appendChild(imgTrash[i]);
+      divContainer[indexCase].appendChild(caseNumber[indexCase]);
+      divContainer[indexCase].appendChild(imgContainer[indexCase]);
+      imgContainer[indexCase].appendChild(imgCase[indexCase]);
+      divContainer[indexCase].appendChild(algorithm[indexCase]);
+      algorithm[indexCase].appendChild(btnEdit[indexCase]);
+      btnEdit[indexCase].appendChild(imgEdit[indexCase]);
+      algorithm[indexCase].appendChild(divAlgorithm[indexCase]);
+      algorithm[indexCase].appendChild(btnDelete[indexCase]);
+      btnDelete[indexCase].appendChild(imgTrash[indexCase]);
 
-      selectLayout.appendChild(divContainer[i]);
+      selectLayout.appendChild(divContainer[indexCase]);
     }
 
     // Trash
     trashElementContainer.push(document.createElement("div"));
-    trashElementContainer[i].classList.add("trash-element-container");
+    trashElementContainer[indexCase].classList.add("trash-element-container");
 
     caseNumberTrash.push(document.createElement("div"));
-    caseNumberTrash[i].classList.add("case-number-trash");
+    caseNumberTrash[indexCase].classList.add("case-number-trash");
 
     imgContainerTrash.push(document.createElement("div"));
-    imgContainerTrash[i].classList.add("img-container-trash");
+    imgContainerTrash[indexCase].classList.add("img-container-trash");
 
     imgCaseTrash.push(document.createElement("img"));
-    imgCaseTrash[i].classList.add("img-case-trash");
+    imgCaseTrash[indexCase].classList.add("img-case-trash");
 
     btnRecover.push(document.createElement("div"));
-    btnRecover[i].classList.add("btn-recover");
+    btnRecover[indexCase].classList.add("btn-recover");
 
-    if (i != 36) {
-      caseNumberTrash[i].innerHTML = i + 1;
-      imgCaseTrash[i].src = caseImgPath;
-      btnRecover[i].innerHTML = "Recover";
-      if (basicTrash[i] == false) {
-        trashElementContainer[i].style.display = "none";
+    if (indexCase != 36) {
+      caseNumberTrash[indexCase].innerHTML = indexCase + 1;
+      imgCaseTrash[indexCase].src = caseImgPath;
+      btnRecover[indexCase].innerHTML = "Recover";
+      if (basicTrash[indexCase] == false) {
+        trashElementContainer[indexCase].style.display = "none";
       }
 
-      trashElementContainer[i].appendChild(caseNumberTrash[i]);
-      trashElementContainer[i].appendChild(imgContainerTrash[i]);
-      imgContainerTrash[i].appendChild(imgCaseTrash[i]);
-      trashElementContainer[i].appendChild(btnRecover[i]);
+      trashElementContainer[indexCase].appendChild(caseNumberTrash[indexCase]);
+      trashElementContainer[indexCase].appendChild(
+        imgContainerTrash[indexCase]
+      );
+      imgContainerTrash[indexCase].appendChild(imgCaseTrash[indexCase]);
+      trashElementContainer[indexCase].appendChild(btnRecover[indexCase]);
 
-      trashContainer.appendChild(trashElementContainer[i]);
+      trashContainer.appendChild(trashElementContainer[indexCase]);
     }
   }
 
