@@ -1,18 +1,5 @@
 "use strict";
 
-const numberBasicCases = 42;
-const trash = [];
-const divContainer = [];
-const caseNumber = [];
-const imgContainer = [];
-const imgCase = [];
-const algorithm = [];
-const divAlgorithm = [];
-const btnEdit = [];
-const imgEdit = [];
-const btnDelete = [];
-const imgTrash = [];
-
 const htmlElement = document.querySelector("html");
 const bodyElement = document.querySelector("body");
 
@@ -20,12 +7,16 @@ const editalgContainer = document.getElementById("editalg-container");
 const editalgList = document.getElementById("editalg-list");
 const editalgCustomalg = document.getElementById("editalg-customalg");
 const editalgListentry = [];
+
 let selectedCase = 0;
 let selectedAlgNumber = 0;
+
+// Maximum number of algs per Case
 const numberAlgMax = 20;
 const algColors = ["transparent", "yellow"];
 
 const selectLayout = document.getElementById("select-layout");
+const selectLayoutSub = [];
 const sideContainer = document.getElementById("side-container");
 const changeMode = document.getElementById("change-mode");
 const overlay = document.getElementById("overlay");
@@ -41,14 +32,9 @@ const trashContainer = document.getElementById("trash-container");
 const selectState = document.getElementById("select-state");
 const possibleStates = ["Unlearned", "Learning", "Finished", "All"];
 
-const trashElementContainer = [];
-const caseNumberTrash = [];
-const imgContainerTrash = [];
-const imgCaseTrash = [];
-const btnRecover = [];
-
 const colors = ["rgba(0, 0, 0, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)"];
 
+// Train
 const trainContainer = document.getElementById("train-container");
 
 const checkboxUnlerned = document.getElementById("checkboxUnlearnedId");
@@ -68,118 +54,15 @@ let hintCounter = 0;
 
 let mode = 0; // 0: select, 1: train
 
+// Basic, Basic Back, Advanced, Exert
+const selectGroup = document.getElementById("select-group");
+
 window.addEventListener("load", () => {
   // Create all Entries
-  for (let indexCase = 0; indexCase < numberBasicCases; indexCase++) {
-    // Case Selection Page
-    const caseImgPath = "./images/basic_cases/F2L" + (indexCase + 1) + ".svg";
+  addElementsToBOM();
+  addTrashElementsToBOM();
 
-    divContainer.push(document.createElement("div"));
-    divContainer[indexCase].classList.add("div-container");
-
-    caseNumber.push(document.createElement("div"));
-    caseNumber[indexCase].classList.add("case-number");
-
-    imgContainer.push(document.createElement("div"));
-    imgContainer[indexCase].classList.add("image-container");
-    imgContainer[indexCase].id = "image-container-" + indexCase;
-
-    imgCase.push(document.createElement("img"));
-    imgCase[indexCase].classList.add("img-case");
-
-    algorithm.push(document.createElement("div"));
-    algorithm[indexCase].classList.add("algorithm");
-
-    btnEdit.push(document.createElement("div"));
-    btnEdit[indexCase].classList.add("btn-edit");
-    btnEdit[indexCase].title = "Edit";
-
-    imgEdit.push(document.createElement("img"));
-    imgEdit[indexCase].classList.add("img-edit-trash");
-
-    divAlgorithm.push(document.createElement("div"));
-    divAlgorithm[indexCase].classList.add("div-algorithm");
-
-    btnDelete.push(document.createElement("div"));
-    btnDelete[indexCase].classList.add("btn-trash");
-    btnDelete[indexCase].title = "Delete";
-
-    imgTrash.push(document.createElement("img"));
-    imgTrash[indexCase].classList.add("img-edit-trash");
-
-    if (indexCase != 36) {
-      caseNumber[indexCase].innerHTML = indexCase + 1;
-      imgCase[indexCase].src = caseImgPath;
-      // Set shown alg
-      if (
-        basicAlgorithmSelection[indexCase] <
-        basicAlgorithms[indexCase + 1].length
-      ) {
-        divAlgorithm[indexCase].innerHTML =
-          basicAlgorithms[indexCase + 1][basicAlgorithmSelection[indexCase]];
-      } else {
-        divAlgorithm[indexCase].innerHTML = basicCustomAlgorithms[indexCase];
-      }
-
-      imgEdit[indexCase].src = "./images/edit.svg";
-      imgTrash[indexCase].src = "./images/trash.svg";
-
-      if (basicTrash[indexCase] == true) {
-        divContainer[indexCase].style.display = "none";
-      }
-
-      divContainer[indexCase].style.background =
-        colors[basicCaseSelection[indexCase]];
-
-      divContainer[indexCase].appendChild(caseNumber[indexCase]);
-      divContainer[indexCase].appendChild(imgContainer[indexCase]);
-      imgContainer[indexCase].appendChild(imgCase[indexCase]);
-      divContainer[indexCase].appendChild(algorithm[indexCase]);
-      algorithm[indexCase].appendChild(btnEdit[indexCase]);
-      btnEdit[indexCase].appendChild(imgEdit[indexCase]);
-      algorithm[indexCase].appendChild(divAlgorithm[indexCase]);
-      algorithm[indexCase].appendChild(btnDelete[indexCase]);
-      btnDelete[indexCase].appendChild(imgTrash[indexCase]);
-
-      selectLayout.appendChild(divContainer[indexCase]);
-    }
-
-    // Trash
-    trashElementContainer.push(document.createElement("div"));
-    trashElementContainer[indexCase].classList.add("trash-element-container");
-
-    caseNumberTrash.push(document.createElement("div"));
-    caseNumberTrash[indexCase].classList.add("case-number-trash");
-
-    imgContainerTrash.push(document.createElement("div"));
-    imgContainerTrash[indexCase].classList.add("img-container-trash");
-
-    imgCaseTrash.push(document.createElement("img"));
-    imgCaseTrash[indexCase].classList.add("img-case-trash");
-
-    btnRecover.push(document.createElement("div"));
-    btnRecover[indexCase].classList.add("btn-recover");
-
-    if (indexCase != 36) {
-      caseNumberTrash[indexCase].innerHTML = indexCase + 1;
-      imgCaseTrash[indexCase].src = caseImgPath;
-      btnRecover[indexCase].innerHTML = "Recover";
-      if (basicTrash[indexCase] == false) {
-        trashElementContainer[indexCase].style.display = "none";
-      }
-
-      trashElementContainer[indexCase].appendChild(caseNumberTrash[indexCase]);
-      trashElementContainer[indexCase].appendChild(
-        imgContainerTrash[indexCase]
-      );
-      imgContainerTrash[indexCase].appendChild(imgCaseTrash[indexCase]);
-      trashElementContainer[indexCase].appendChild(btnRecover[indexCase]);
-
-      trashContainer.appendChild(trashElementContainer[indexCase]);
-    }
-  }
-
-  // Edit Algorithm Elements
+  // Generate placeholder for algs to select
   for (let i = 0; i < numberAlgMax; i++) {
     editalgListentry.push(document.createElement("div"));
     editalgListentry[i].classList.add("editalg-listentry");
@@ -187,16 +70,21 @@ window.addEventListener("load", () => {
     editalgList.appendChild(editalgListentry[i]);
   }
 
-  //Edit Button Event
-  imgEdit.forEach(function (button, i) {
-    button.addEventListener("click", function () {
-      editAlgs(i);
+  //Edit Button - Click on Edit Button
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    // TEST
+    const group = groups[indexGroup];
+    group.imgEdit.forEach(function (button, indexCase) {
+      button.addEventListener("click", function () {
+        editAlgs(indexGroup, indexCase);
+      });
     });
-  });
+  }
 
-  // Select algorithm
+  // Select algorithm - Click on algorithm
   editalgListentry.forEach(function (button, i) {
     button.addEventListener("click", function () {
+      // Change Background when selected
       if (selectedAlgNumber < basicAlgorithms[selectedCase + 1].length) {
         editalgListentry[selectedAlgNumber].style.background = algColors[0];
       } else {
@@ -207,24 +95,47 @@ window.addEventListener("load", () => {
     });
   });
 
-  // Case selection
-  imgContainer.forEach(function (button, i) {
-    button.addEventListener("click", function () {
-      basicCaseSelection[i]++;
-      if (basicCaseSelection[i] >= 3) {
-        basicCaseSelection[i] = 0;
-      }
-      divContainer[i].style.background = colors[basicCaseSelection[i]];
-      // console.log(basicCaseSelection);
+  // Click Event - Change Case to Unlearned, Learning, Finished
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    // TEST
+    const group = groups[indexGroup];
+    group.imgContainer.forEach(function (button, i) {
+      button.addEventListener("click", function () {
+        group.caseSelection[i]++;
+        if (group.caseSelection[i] >= 3) {
+          group.caseSelection[i] = 0;
+        }
+        group.divContainer[i].style.background = colors[group.caseSelection[i]];
+        // console.log(basicCaseSelection);
+      });
     });
-  });
+  }
 
   // Delete
-  imgTrash.forEach(function (button, i) {
-    button.addEventListener("click", function () {
-      deleteCase(i);
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    // TEST
+    const group = groups[indexGroup];
+    group.imgTrash.forEach(function (button, indexCase) {
+      button.addEventListener("click", function () {
+        group.trash[indexCase] = true;
+        group.divContainer[indexCase].style.display = "none";
+        group.trashElementContainer[indexCase].style.display = "flex";
+      });
     });
-  });
+  }
+
+  // Recover
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    // TEST
+    const group = groups[indexGroup];
+    group.btnRecover.forEach(function (button, indexCase) {
+      button.addEventListener("click", function () {
+        group.trash[indexCase] = false;
+        group.divContainer[indexCase].style.display = "flex";
+        group.trashElementContainer[indexCase].style.display = "none";
+      });
+    });
+  }
 
   // Change Mode
   changeMode.addEventListener("click", function () {
@@ -260,37 +171,175 @@ window.addEventListener("load", () => {
     overlay.style.display = "block";
   });
 
-  // Recover
-  btnRecover.forEach(function (button, i) {
-    button.addEventListener("click", function () {
-      basicTrash[i] = false;
-      divContainer[i].style.display = "flex";
-      trashElementContainer[i].style.display = "none";
-    });
-  });
-
   // Settings Train
   btnSettingsTrain.addEventListener("click", showSettingsTrain);
 
   document.addEventListener("keydown", keydown);
+
+  // Run this function to only show basic cases in the beginning
+  groupSelected();
 });
+
+function addElementsToBOM() {
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    // TEST
+    const group = groups[indexGroup];
+    selectLayoutSub.push(document.createElement("div"));
+
+    for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
+      // Case Selection Page
+      const caseImgPath = group.imgPath + (indexCase + 1) + ".svg";
+
+      group.divContainer.push(document.createElement("div"));
+      group.divContainer[indexCase].classList.add("div-container");
+
+      group.caseNumber.push(document.createElement("div"));
+      group.caseNumber[indexCase].classList.add("case-number");
+
+      group.imgContainer.push(document.createElement("div"));
+      group.imgContainer[indexCase].classList.add("image-container");
+      group.imgContainer[indexCase].id = "image-container-" + indexCase;
+
+      group.imgCase.push(document.createElement("img"));
+      group.imgCase[indexCase].classList.add("img-case");
+
+      group.algorithm.push(document.createElement("div"));
+      group.algorithm[indexCase].classList.add("algorithm");
+
+      group.btnEdit.push(document.createElement("div"));
+      group.btnEdit[indexCase].classList.add("btn-edit");
+      group.btnEdit[indexCase].title = "Edit";
+
+      group.imgEdit.push(document.createElement("img"));
+      group.imgEdit[indexCase].classList.add("img-edit-trash");
+
+      group.divAlgorithm.push(document.createElement("div"));
+      group.divAlgorithm[indexCase].classList.add("div-algorithm");
+
+      group.btnDelete.push(document.createElement("div"));
+      group.btnDelete[indexCase].classList.add("btn-trash");
+      group.btnDelete[indexCase].title = "Delete";
+
+      group.imgTrash.push(document.createElement("img"));
+      group.imgTrash[indexCase].classList.add("img-edit-trash");
+
+      if (indexCase != 36) {
+        group.caseNumber[indexCase].innerHTML = indexCase + 1;
+        group.imgCase[indexCase].src = caseImgPath;
+        // Set shown alg
+        if (
+          group.algorithmSelection[indexCase] <
+          group.algorithms[indexCase + 1].length
+        ) {
+          group.divAlgorithm[indexCase].innerHTML =
+            group.algorithms[indexCase + 1][
+              group.algorithmSelection[indexCase]
+            ];
+        } else {
+          group.divAlgorithm[indexCase].innerHTML =
+            group.customAlgorithms[indexCase];
+        }
+
+        group.imgEdit[indexCase].src = "./images/edit.svg";
+        group.imgTrash[indexCase].src = "./images/trash.svg";
+
+        if (group.trash[indexCase] == true) {
+          group.divContainer[indexCase].style.display = "none";
+        }
+
+        group.divContainer[indexCase].style.background =
+          colors[group.caseSelection[indexCase]];
+
+        group.divContainer[indexCase].appendChild(group.caseNumber[indexCase]);
+        group.divContainer[indexCase].appendChild(
+          group.imgContainer[indexCase]
+        );
+        group.imgContainer[indexCase].appendChild(group.imgCase[indexCase]);
+        group.divContainer[indexCase].appendChild(group.algorithm[indexCase]);
+        group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
+        group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
+        group.algorithm[indexCase].appendChild(group.divAlgorithm[indexCase]);
+        group.algorithm[indexCase].appendChild(group.btnDelete[indexCase]);
+        group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
+
+        selectLayoutSub[indexGroup].appendChild(group.divContainer[indexCase]);
+      }
+    }
+    selectLayout.appendChild(selectLayoutSub[indexGroup]);
+  }
+}
+
+function addTrashElementsToBOM() {
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    // TEST
+    const group = groups[indexGroup];
+
+    for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
+      // Case Selection Page
+      const caseImgPath = group.imgPath + (indexCase + 1) + ".svg";
+
+      group.trashElementContainer.push(document.createElement("div"));
+      group.trashElementContainer[indexCase].classList.add(
+        "trash-element-container"
+      );
+
+      group.caseNumberTrash.push(document.createElement("div"));
+      group.caseNumberTrash[indexCase].classList.add("case-number-trash");
+
+      group.imgContainerTrash.push(document.createElement("div"));
+      group.imgContainerTrash[indexCase].classList.add("img-container-trash");
+
+      group.imgCaseTrash.push(document.createElement("img"));
+      group.imgCaseTrash[indexCase].classList.add("img-case-trash");
+
+      group.btnRecover.push(document.createElement("div"));
+      group.btnRecover[indexCase].classList.add("btn-recover");
+
+      if (indexCase != 36) {
+        group.caseNumberTrash[indexCase].innerHTML = indexCase + 1;
+        group.imgCaseTrash[indexCase].src = caseImgPath;
+        group.btnRecover[indexCase].innerHTML = "Recover";
+        if (basicTrash[indexCase] == false) {
+          group.trashElementContainer[indexCase].style.display = "none";
+        }
+
+        group.trashElementContainer[indexCase].appendChild(
+          group.caseNumberTrash[indexCase]
+        );
+        group.trashElementContainer[indexCase].appendChild(
+          group.imgContainerTrash[indexCase]
+        );
+        group.imgContainerTrash[indexCase].appendChild(
+          group.imgCaseTrash[indexCase]
+        );
+        group.trashElementContainer[indexCase].appendChild(
+          group.btnRecover[indexCase]
+        );
+
+        trashContainer.appendChild(group.trashElementContainer[indexCase]);
+      }
+    }
+  }
+}
 
 function updateAlg() {
   // Update Alg button clicked
+  const group = groups[selectGroup.selectedIndex];
 
   // Read text in custom Alg Textbox
-  basicCustomAlgorithms[selectedCase] = editalgCustomalg.value;
+  group.customAlgorithms[selectedCase] = editalgCustomalg.value;
   // Check if selected alg is default or custom
-  if (selectedAlgNumber < basicAlgorithms[selectedCase + 1].length) {
+  if (selectedAlgNumber < group.algorithms[selectedCase + 1].length) {
     // If selected Alg is default
-    divAlgorithm[selectedCase].innerHTML =
-      basicAlgorithms[selectedCase + 1][selectedAlgNumber];
+    group.divAlgorithm[selectedCase].innerHTML =
+      group.algorithms[selectedCase + 1][selectedAlgNumber];
   } else {
     // If selected Alg is custom
-    divAlgorithm[selectedCase].innerHTML = basicCustomAlgorithms[selectedCase];
+    group.divAlgorithm[selectedCase].innerHTML =
+      group.customAlgorithms[selectedCase];
   }
   // Save which Alg was selected
-  basicAlgorithmSelection[selectedCase] = selectedAlgNumber;
+  group.algorithmSelection[selectedCase] = selectedAlgNumber;
   closeOverlays();
 }
 
@@ -304,14 +353,18 @@ function closeOverlays() {
   // bodyElement.style.overflow = "visible";
 }
 
-function editAlgs(i) {
-  selectedCase = i;
-  selectedAlgNumber = basicAlgorithmSelection[selectedCase];
+function editAlgs(indexGroup, indexCase) {
+  console.log(indexGroup);
+  selectedCase = indexCase;
+  const group = groups[indexGroup];
+  selectedAlgNumber = group.algorithmSelection[selectedCase];
   // Iterate through all algorithms
+  console.log(numberAlgMax);
   for (let alg = 0; alg < numberAlgMax; alg++) {
-    if (alg < basicAlgorithms[selectedCase + 1].length) {
+    if (alg < group.algorithms[selectedCase + 1].length) {
       // Set Text to Alg
-      editalgListentry[alg].innerHTML = basicAlgorithms[selectedCase + 1][alg];
+      editalgListentry[alg].innerHTML = group.algorithms[selectedCase + 1][alg];
+      console.log(group.algorithms[selectedCase + 1][alg]);
       // Make all used elements visible
       editalgListentry[alg].style.display = "block";
     } else {
@@ -322,9 +375,9 @@ function editAlgs(i) {
     editalgListentry[alg].style.background = algColors[0];
   }
   // Check if previously saved alg is default of custom
-  if (selectedAlgNumber < basicAlgorithms[selectedCase + 1].length) {
+  if (selectedAlgNumber < group.algorithms[selectedCase + 1].length) {
     // If alg is default set color of selected alg
-    editalgListentry[basicAlgorithmSelection[selectedCase]].style.background =
+    editalgListentry[group.algorithmSelection[selectedCase]].style.background =
       algColors[1];
     // and reset color of custom
     editalgCustomalg.style.background = algColors[0];
@@ -334,17 +387,11 @@ function editAlgs(i) {
   }
 
   // Set text in Textbox to saved value
-  editalgCustomalg.value = basicCustomAlgorithms[selectedCase];
+  editalgCustomalg.value = group.customAlgorithms[selectedCase];
   // Make container visible
   editalgContainer.style.display = "block";
   // Make overlay visible
   overlay.style.display = "block";
-}
-
-function deleteCase(caseNumber) {
-  basicTrash[caseNumber] = true;
-  divContainer[caseNumber].style.display = "none";
-  trashElementContainer[caseNumber].style.display = "flex";
 }
 
 function customAlgSelected() {
@@ -448,4 +495,17 @@ function showHint() {
     hintDiv.innerText = algList.slice(0, hintCounter + 1).join(" ");
   }
   hintCounter++;
+}
+
+function groupSelected() {
+  // Make only selected Group visible
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    if (selectGroup.selectedIndex === indexGroup) {
+      selectLayoutSub[indexGroup].style.display = "block";
+    } else {
+      selectLayoutSub[indexGroup].style.display = "none";
+    }
+  }
+  // Scroll to the top
+  window.scrollTo(0, 0);
 }
