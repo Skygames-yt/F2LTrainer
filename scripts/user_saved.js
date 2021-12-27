@@ -42,7 +42,6 @@ let basicTrash = [
   false,
   false,
 ];
-
 let basicBackTrash = [
   false,
   false,
@@ -50,6 +49,44 @@ let basicBackTrash = [
   false,
   false,
   false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+];
+let advancedTrash = [
   false,
   false,
   false,
@@ -132,7 +169,6 @@ let basicCaseSelection = [
   0,
   0,
 ]; // 0: unlearned, 1: learning, 2: finished
-
 let basicBackCaseSelection = [
   0,
   0,
@@ -177,15 +213,22 @@ let basicBackCaseSelection = [
   0,
   0,
 ]; // 0: unlearned, 1: learning, 2: finished
+let advancedCaseSelection = [
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+]; // 0: unlearned, 1: learning, 2: finished
 
 let basicAlgorithmSelection = [
   1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
-
 let basicBackAlgorithmSelection = [
-  1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+];
+let advancedAlgorithmSelection = [
+  1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
 
 let basicCustomAlgorithms = [
@@ -232,14 +275,51 @@ let basicCustomAlgorithms = [
   "",
   "",
 ];
-
-let basicCustomBackAlgorithms = [
+let basicBackCustomAlgorithms = [
   "",
   "",
   "",
   "",
   "",
   "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+];
+let advandedCustomAlgorithms = [
   "",
   "",
   "",
