@@ -34,6 +34,12 @@
 
     <div id="change-mode">Train</div>
 
+    <select id="select-group" onchange="groupSelected()">
+      <option value="basic" selected>Basic</option>
+      <option value="basicBack">Basic Back</option>
+      <option value="advanced">Advanced</option>
+    </select>
+
     <div id="select-layout">
       <!-- <div class="div-container">
         <div class="case-number">1</div>
@@ -205,6 +211,7 @@
 
     <!-- Other -->
     <script src="./scripts/user_saved.js"></script>
+    <script src="./scripts/groups.js"></script>
     <script src="./scripts/string_manipulation.js"></script>
     <script src="./scripts/main.js"></script>
   </body>
