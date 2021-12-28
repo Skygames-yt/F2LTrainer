@@ -71,6 +71,8 @@ let currentTrainCase = 0;
 const selectGroup = document.getElementById("select-group");
 
 window.addEventListener("load", () => {
+  // Load User saved Data
+  loadUserData();
   // Create all Entries
   addElementsToBOM();
   addTrashElementsToBOM();
@@ -438,6 +440,23 @@ function keydown(e) {
   } else if (e.keyCode === 39) {
     // rechte Pfeiltaste
     showHint();
+  } else if (e.keyCode === 37) {
+    // linke Pfeiltaste
+  } else if (e.keyCode === 83) {
+    // S
+    saveUserData();
+  } else if (e.keyCode === 76) {
+    // L
+    loadUserData();
+  } else if (e.keyCode === 67) {
+    // C
+    clearUserData();
+  } else if (e.keyCode === 71) {
+    // G
+    // Log Local Storage
+    console.log(localStorage);
+  } else {
+    console.log("Key pressed: " + e.keyCode);
   }
 }
 
@@ -577,7 +596,7 @@ function nextScramble() {
   hintCounter = 0;
   hintImg.style.visibility = "hidden";
   hintDiv.innerText = "";
-  
+
   const indexGroup = trainCaseList[currentTrainCase].indexGroup;
   const caseIndex = trainCaseList[currentTrainCase].indexCase;
   const group = groups[indexGroup];
