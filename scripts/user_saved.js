@@ -417,34 +417,51 @@ function loadUserData() {
 
   // Load trainStateSelection
   for (let i = 0; i < trainStateSelection.length; i++) {
-    trainStateSelection[i] = localStorage.getItem("trainStateSelection" + i);
+    const temp = localStorage.getItem("trainStateSelection" + i);
+    if (temp !== null) {
+      trainStateSelection[i] = temp;
+    }
   }
   // Load trainGroupSelection
   for (let i = 0; i < trainGroupSelection.length; i++) {
-    trainGroupSelection[i] = localStorage.getItem("trainGroupSelection" + i);
+    const temp = localStorage.getItem("trainGroupSelection" + i);
+    if (temp !== null) {
+      trainGroupSelection[i] = temp;
+    }
   }
 
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
     // console.log(group);
+    let temp = 0;
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       // Load Trash
-      group.trash[indexCase] = localStorage.getItem(
-        group.saveName + "trash" + indexCase
-      );
+      temp = localStorage.getItem(group.saveName + "trash" + indexCase);
+      if (temp !== null) {
+        group.trash[indexCase] = temp;
+      }
+
       // Load Case Selection
-      group.caseSelection[indexCase] = localStorage.getItem(
-        group.saveName + "caseSelection" + indexCase
-      );
+      temp = localStorage.getItem(group.saveName + "caseSelection" + indexCase);
+      if (temp !== null) {
+        group.caseSelection[indexCase] = temp;
+      }
       // Load Custom Algorithms
-      group.customAlgorithms[indexCase] = localStorage.getItem(
+      temp = localStorage.getItem(
         group.saveName + "customAlgorithms" + indexCase
       );
+      if (temp !== null) {
+        group.customAlgorithms[indexCase] = temp;
+      }
+
       // Load Algorithm Selection
-      group.algorithmSelection[indexCase] = localStorage.getItem(
+      temp = localStorage.getItem(
         group.saveName + "algorithmSelection" + indexCase
       );
+      if (temp !== null) {
+        group.algorithmSelection[indexCase] = temp;
+      }
     }
   }
 }
