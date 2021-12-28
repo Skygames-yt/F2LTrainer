@@ -647,11 +647,13 @@ function nextScramble() {
 
   divDebug.innerHTML =
     "Group: " +
-    indexGroup +
+    groups[indexGroup].name +
     ", Case: " +
-    indexCase +
+    (indexCase + 1) +
     ", Scramble: " +
-    selectedScrambleIndex;
+    selectedScrambleIndex +
+    ", Algorithm: " +
+    groups[indexGroup].algorithmSelection[indexCase];
 
   currentTrainCase++;
 
