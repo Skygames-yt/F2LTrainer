@@ -77,6 +77,8 @@ const checkboxGroupContainer = document.getElementById(
 const labelGroupCheckbox = [];
 const groupCheckbox = [];
 
+const divDebug = document.getElementById("div-debug-info");
+
 window.addEventListener("load", () => {
   // Load User saved Data
   loadUserData();
@@ -215,7 +217,6 @@ window.addEventListener("load", () => {
 
 function addElementsToBOM() {
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
-    // TEST
     const group = groups[indexGroup];
     selectLayoutSub.push(document.createElement("div"));
 
@@ -582,13 +583,13 @@ function generateTrainCaseList() {
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
 
-    if (trainGroupSelection[indexGroup] === false) continue;
+    if (trainGroupSelection[indexGroup] == false) continue;
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       for (let state = 0; state < trainStateSelection.length; state++) {
         if (
-          trainStateSelection[state] === true &&
-          group.caseSelection[indexCase] === state
+          trainStateSelection[state] == true &&
+          group.caseSelection[indexCase] == state
         ) {
           const caseToAdd = { indexGroup: indexGroup, indexCase: indexCase };
 
@@ -612,25 +613,25 @@ function generateTrainCaseList() {
 
 function nextScramble() {
   hintCounter = 0;
-  hintImg.style.visibility = "hidden";
+  // hintImg.style.visibility = "hidden";
   hintDiv.innerText = "";
 
   const indexGroup = trainCaseList[currentTrainCase].indexGroup;
-  const caseIndex = trainCaseList[currentTrainCase].indexCase;
+  const indexCase = trainCaseList[currentTrainCase].indexCase;
   const group = groups[indexGroup];
 
   // Set the hint to selected alg
   algHint =
-    group.algorithms[caseIndex + 1][group.algorithmSelection[caseIndex]];
+    group.algorithms[indexCase + 1][group.algorithmSelection[indexCase]];
 
-  hintImg.src = group.imgPath + (caseIndex + 1) + ".svg";
+  hintImg.src = group.imgPath + (indexCase + 1) + ".svg";
 
   // let selectedScramble = group.scrambles[caseIndex];
+  const selectedScrambleIndex = Math.floor(
+    Math.random() * group.scrambles[indexCase + 1].length
+  );
 
-  let selectedScramble =
-    group.scrambles[caseIndex + 1][
-      Math.floor(Math.random() * group.scrambles[caseIndex + 1].length)
-    ];
+  let selectedScramble = group.scrambles[indexCase + 1][selectedScrambleIndex];
 
   // Mirror at random
   if (Math.floor(Math.random() * 2)) {
@@ -643,6 +644,14 @@ function nextScramble() {
 
   // Show scramble
   scrambleDiv.innerText = selectedScramble;
+
+  divDebug.innerHTML =
+    "Group: " +
+    indexGroup +
+    ", Case: " +
+    indexCase +
+    ", Scramble: " +
+    selectedScrambleIndex;
 
   currentTrainCase++;
 
