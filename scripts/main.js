@@ -70,12 +70,20 @@ let currentTrainCase = 0;
 // Basic, Basic Back, Advanced, Exert
 const selectGroup = document.getElementById("select-group");
 
+const checkboxGroupContainer = document.getElementById(
+  "checkbox-group-container"
+);
+
+const labelGroupCheckbox = [];
+const groupCheckbox = [];
+
 window.addEventListener("load", () => {
   // Load User saved Data
   loadUserData();
   // Create all Entries
   addElementsToBOM();
   addTrashElementsToBOM();
+  // addSelectGroupTrain();
 
   // Generate placeholder for algs to select
   for (let i = 0; i < numberAlgMax; i++) {
@@ -124,24 +132,27 @@ window.addEventListener("load", () => {
           group.caseSelection[i] = 0;
         }
         group.divContainer[i].style.background = colors[group.caseSelection[i]];
+        // Save
+        saveUserData();
       });
     });
   }
 
-  // Delete
+  // Click Event - Delete Button clicked
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
-    // TEST
     const group = groups[indexGroup];
     group.imgTrash.forEach(function (button, indexCase) {
       button.addEventListener("click", function () {
         group.trash[indexCase] = true;
         group.divContainer[indexCase].style.display = "none";
         group.trashElementContainer[indexCase].style.display = "flex";
+        // Save
+        saveUserData();
       });
     });
   }
 
-  // Recover
+  // Click Event - Recover
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     // TEST
     const group = groups[indexGroup];
@@ -150,6 +161,9 @@ window.addEventListener("load", () => {
         group.trash[indexCase] = false;
         group.divContainer[indexCase].style.display = "flex";
         group.trashElementContainer[indexCase].style.display = "none";
+
+        // Save
+        saveUserData();
       });
     });
   }
@@ -178,13 +192,13 @@ window.addEventListener("load", () => {
     closeOverlays();
   });
 
-  // Info
+  // Click Event - Info
   btnInfo.addEventListener("click", function () {
     infoContainer.style.display = "block";
     overlay.style.display = "block";
   });
 
-  // Trash
+  // Click Event - Open Trash
   btnTrash.addEventListener("click", function () {
     trashContainer.style.display = "block";
     overlay.style.display = "block";
@@ -361,6 +375,9 @@ function updateAlg() {
   group.algorithmSelection[selectedCase] = selectedAlgNumber;
   closeOverlays();
   console.log(group.algorithmSelection);
+
+  // Save
+  saveUserData();
 }
 
 function closeOverlays() {
@@ -532,6 +549,7 @@ function updateTrainCases() {
   ];
   closeOverlays();
   generateTrainCaseList();
+  saveUserData();
 }
 
 function showHint() {
@@ -630,5 +648,58 @@ function nextScramble() {
 
   if (currentTrainCase >= trainCaseList.length) {
     generateTrainCaseList();
+  }
+}
+
+function addSelectGroupTrain() {
+  // labelGroupCheckbox
+  // groupCheckbox
+
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    const group = groups[indexGroup];
+
+    //   groupCheckbox.push(document.createElement("input"));
+    //   groupCheckbox[indexGroup].type = "checkbox";
+    //   groupCheckbox[indexGroup].classList.add("checkbox__input");
+    //   groupCheckbox[indexGroup].name = "checkboxGroup" + group.idName;
+    //   groupCheckbox[indexGroup].id = "checkboxGroup" + group.idName + "Id";
+
+    //   labelGroupCheckbox.push(document.createElement("label"));
+    //   labelGroupCheckbox[indexGroup].classList.add("checkbox");
+    //   labelGroupCheckbox[indexGroup].htmlFor =
+    //     "checkboxGroup" + group.idName + "Id";
+    //
+
+    //labelGroupCheckbox[indexGroup].appendChild(groupCheckbox[indexGroup]);
+
+    //labelGroupCheckbox[indexGroup].innerHTML = group.name;
+
+    groupCheckbox.push(document.createElement("input"));
+
+    groupCheckbox[indexGroup].type = "checkbox";
+    groupCheckbox[indexGroup].classList.add("checkbox__input");
+    groupCheckbox[indexGroup].name = "checkboxGroup" + group.idName;
+    groupCheckbox[indexGroup].id = "checkboxGroup" + group.idName + "Id";
+
+    // creating label for checkbox
+    labelGroupCheckbox.push(document.createElement("label"));
+
+    labelGroupCheckbox[indexGroup].classList.add("checkbox");
+
+    labelGroupCheckbox[indexGroup].htmlFor =
+      "checkboxGroup" + group.idName + "Id";
+
+    const difAfter = document.createElement("div");
+    difAfter.classList.add("checkbox__box");
+
+    // labelGroupCheckbox[indexGroup].appendChild(
+    //   document.createTextNode(group.name)
+    // );
+
+    labelGroupCheckbox[indexGroup].appendChild(groupCheckbox[indexGroup]);
+    labelGroupCheckbox[indexGroup].appendChild(difAfter);
+    labelGroupCheckbox[indexGroup].innerHTML = group.name;
+
+    checkboxGroupContainer.appendChild(labelGroupCheckbox[indexGroup]);
   }
 }
