@@ -1,6 +1,7 @@
 const basicCollection = {
   saveName: "basic_",
   name: "Basic Cases",
+  idName: "Basic",
   scrambles: basicScrambles,
   algorithms: basicAlgorithms,
   // User saved
@@ -32,6 +33,7 @@ const basicCollection = {
 const basicBackCollection = {
   saveName: "basicBack_",
   name: "Basic Cases Backslot",
+  idName: "BasicBack",
   scrambles: basicScramblesBack,
   algorithms: basicAlgorithmsBack,
   // User saved
@@ -63,6 +65,7 @@ const basicBackCollection = {
 const advancedCollection = {
   saveName: "advanced_",
   name: "Advanced Cases",
+  idName: "Advanced",
   scrambles: advancedScrambles,
   algorithms: advancedAlgorithms,
   // User saved
