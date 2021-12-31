@@ -43,7 +43,7 @@ const basicAlgorithms = {
     "y' R' U' F' U2 F U' R",
   ],
   9: [
-    "U' R U' R' d R' U' R",
+    "U' (R U' R') d (R' U' R)",
     "d (R' U' R U') (R' U' R)",
     "y2 U' (L U' L') d (L' U' L)",
     "U r U R' U' R2 r' U' R'",
