@@ -363,12 +363,12 @@ let advandedCustomAlgorithms = [
 // 0 -> unlearned
 // 1 -> learning
 // 2 -> finished
-let trainStateSelection = [false, false, false];
+let trainStateSelection = [false, true, false];
 
 // 0 -> basic
 // 1 -> basic back
 // 2 -> advanced
-let trainGroupSelection = [false, false, false];
+let trainGroupSelection = [true, true, true];
 
 // Save - Load Functions
 function saveUserData() {
