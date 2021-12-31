@@ -560,8 +560,8 @@ function updateTrainCases() {
 
 function showHint() {
   hintImg.style.visibility = "visible";
-
-  const algList = algHint.split(" ");
+  // Get algorithm and convert to list
+  const algList = generatedScrambles[currentTrainCase].algHint.split(" ");
   if (hintCounter < algList.length) {
     hintDiv.innerText = algList.slice(0, hintCounter + 1).join(" ");
   }
@@ -638,7 +638,8 @@ function generateTrainCaseList() {
   }
 
   generatedScrambles = generatedScrambles.concat(trainCaseList);
-  // console.log(trainCaseList);
+
+  // console.log(generatedScrambles);
 }
 
 function nextScramble(nextPrevious) {
