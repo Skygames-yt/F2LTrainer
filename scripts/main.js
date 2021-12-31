@@ -4,6 +4,7 @@ const htmlElement = document.querySelector("html");
 const bodyElement = document.querySelector("body");
 
 const editalgContainer = document.getElementById("editalg-container");
+const editalgImg = document.getElementById("editalg-img");
 const editalgList = document.getElementById("editalg-list");
 const editalgCustomalg = document.getElementById("editalg-customalg");
 const editalgListentry = [];
@@ -65,7 +66,7 @@ let mode = 0; // 0: select, 1: train
 
 // List that contains all the randomly selected cases
 let trainCaseList = [];
-let currentTrainCase = 0;
+let currentTrainCase = -1;
 
 // Basic, Basic Back, Advanced, Exert
 const selectGroup = document.getElementById("select-group");
@@ -78,6 +79,8 @@ const labelGroupCheckbox = [];
 const groupCheckbox = [];
 
 const divDebug = document.getElementById("div-debug-info");
+
+let generatedScrambles = [];
 
 window.addEventListener("load", () => {
   // Load User saved Data
@@ -375,7 +378,6 @@ function updateAlg() {
   // Save which Alg was selected
   group.algorithmSelection[selectedCase] = selectedAlgNumber;
   closeOverlays();
-  console.log(group.algorithmSelection);
 
   // Save
   saveUserData();
@@ -392,17 +394,18 @@ function closeOverlays() {
 }
 
 function editAlgs(indexGroup, indexCase) {
-  console.log(indexGroup);
   selectedCase = indexCase;
   const group = groups[indexGroup];
   selectedAlgNumber = group.algorithmSelection[selectedCase];
+
+  // Set image
+  editalgImg.src = group.imgPath + (selectedCase + 1) + ".svg";
+
   // Iterate through all algorithms
-  console.log(numberAlgMax);
   for (let alg = 0; alg < numberAlgMax; alg++) {
     if (alg < group.algorithms[selectedCase + 1].length) {
       // Set Text to Alg
       editalgListentry[alg].innerHTML = group.algorithms[selectedCase + 1][alg];
-      console.log(group.algorithms[selectedCase + 1][alg]);
       // Make all used elements visible
       editalgListentry[alg].style.display = "block";
     } else {
@@ -454,7 +457,7 @@ function keydown(e) {
 
   if (e.keyCode === 32) {
     // Leertaste
-    nextScramble();
+    nextScramble(1);
   } else if (e.keyCode === 39) {
     // rechte Pfeiltaste
     showHint();
@@ -548,6 +551,8 @@ function updateTrainCases() {
     checkboxGroupBasicBack.checked,
     checkboxGroupAdvanced.checked,
   ];
+  currentTrainCase = -1;
+  generatedScrambles = [];
   closeOverlays();
   generateTrainCaseList();
   saveUserData();
@@ -578,7 +583,7 @@ function groupSelected() {
 
 function generateTrainCaseList() {
   trainCaseList = [];
-  currentTrainCase = 0;
+  // currentTrainCase = 0;
 
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
@@ -591,7 +596,31 @@ function generateTrainCaseList() {
           trainStateSelection[state] == true &&
           group.caseSelection[indexCase] == state
         ) {
-          const caseToAdd = { indexGroup: indexGroup, indexCase: indexCase };
+          const indexScramble = parseInt(
+            Math.random() * group.scrambles[indexCase + 1].length
+          );
+          const mirroring = parseInt(Math.floor(Math.random() * 2));
+          let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
+          algHint =
+            group.algorithms[indexCase + 1][
+              group.algorithmSelection[indexCase]
+            ];
+          // Mirror at random
+          if (mirroring) {
+            selectedScramble = mirrorAlg(selectedScramble);
+            algHint = mirrorAlg(algHint);
+          }
+          // Add random U move
+          selectedScramble = addRandomUMove(selectedScramble);
+
+          const caseToAdd = {
+            indexGroup: indexGroup,
+            indexCase: indexCase,
+            indexScramble: indexScramble,
+            mirroring: mirroring,
+            selectedScramble: selectedScramble,
+            algHint: algHint,
+          };
 
           trainCaseList.push(caseToAdd);
           break;
@@ -608,39 +637,52 @@ function generateTrainCaseList() {
     trainCaseList[j] = temp;
   }
 
+  generatedScrambles = generatedScrambles.concat(trainCaseList);
   // console.log(trainCaseList);
 }
 
-function nextScramble() {
+function nextScramble(nextPrevious) {
   hintCounter = 0;
   // hintImg.style.visibility = "hidden";
   hintDiv.innerText = "";
 
-  const indexGroup = trainCaseList[currentTrainCase].indexGroup;
-  const indexCase = trainCaseList[currentTrainCase].indexCase;
+  if (nextPrevious) {
+    currentTrainCase++;
+    if (currentTrainCase >= generatedScrambles.length) {
+      generateTrainCaseList();
+      if (generatedScrambles.length <= 0) {
+        return;
+      }
+    }
+  } else if (currentTrainCase > 0) {
+    currentTrainCase--;
+  }
+
+  const indexGroup = generatedScrambles[currentTrainCase].indexGroup;
+  const indexCase = generatedScrambles[currentTrainCase].indexCase;
+  const indexScramble = generatedScrambles[currentTrainCase].indexScramble;
+  const mirroring = generatedScrambles[currentTrainCase].mirroring;
+  const selectedScramble =
+    generatedScrambles[currentTrainCase].selectedScramble;
+  const algHint = generatedScrambles[currentTrainCase].algHint;
+
   const group = groups[indexGroup];
 
   // Set the hint to selected alg
-  algHint =
-    group.algorithms[indexCase + 1][group.algorithmSelection[indexCase]];
+  // algHint = group.algorithms[indexCase + 1][group.algorithmSelection[indexCase]];
 
   hintImg.src = group.imgPath + (indexCase + 1) + ".svg";
 
-  // let selectedScramble = group.scrambles[caseIndex];
-  const selectedScrambleIndex = Math.floor(
-    Math.random() * group.scrambles[indexCase + 1].length
-  );
-
-  let selectedScramble = group.scrambles[indexCase + 1][selectedScrambleIndex];
+  // let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
 
   // Mirror at random
-  if (Math.floor(Math.random() * 2)) {
-    selectedScramble = mirrorAlg(selectedScramble);
-    algHint = mirrorAlg(algHint);
-  }
+  // if (Math.floor(Math.random() * 2)) {
+  //   selectedScramble = mirrorAlg(selectedScramble);
+  //   algHint = mirrorAlg(algHint);
+  // }
 
   // Add random U move
-  selectedScramble = addRandomUMove(selectedScramble);
+  // selectedScramble = addRandomUMove(selectedScramble);
 
   // Show scramble
   scrambleDiv.innerText = selectedScramble;
@@ -651,15 +693,11 @@ function nextScramble() {
     ", Case: " +
     (indexCase + 1) +
     ", Scramble: " +
-    selectedScrambleIndex +
+    indexScramble +
     ", Algorithm: " +
-    groups[indexGroup].algorithmSelection[indexCase];
-
-  currentTrainCase++;
-
-  if (currentTrainCase >= trainCaseList.length) {
-    generateTrainCaseList();
-  }
+    groups[indexGroup].algorithmSelection[indexCase] +
+    ", mirrored: " +
+    mirroring;
 }
 
 function addSelectGroupTrain() {
