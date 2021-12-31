@@ -30,6 +30,9 @@ function mirrorAlg(alg) {
           algList[indexAlg] = algList[indexAlg].replace("'", "");
         } else if (!moveAlg.includes("2")) {
           algList[indexAlg] = algList[indexAlg] + "'";
+          if (moveAlg.includes(")")) {
+            algList[indexAlg] = algList[indexAlg].replace(")", "") + ")";
+          }
         }
         break;
       }
