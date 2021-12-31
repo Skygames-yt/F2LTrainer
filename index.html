@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Title</title>
+    <title>F2L Trainer</title>
     <link rel="icon" href="images/full_cube.svg" />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -131,10 +131,17 @@
       />
       <img
         src="./images/arrow_right.svg"
-        onclick="nextScramble()"
+        onclick="nextScramble(1)"
         alt="next scramble"
         id="btn-next-scramble"
         title="Next Scramble"
+      />
+      <img
+        src="./images/arrow_left.svg"
+        onclick="nextScramble(0)"
+        alt="previous scramble"
+        id="btn-next-scramble"
+        title="Previous Scramble"
       />
       <div id="div-debug-info"></div>
 
