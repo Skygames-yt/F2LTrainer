@@ -596,15 +596,26 @@ function generateTrainCaseList() {
           trainStateSelection[state] == true &&
           group.caseSelection[indexCase] == state
         ) {
+          // Get scramble index
           const indexScramble = parseInt(
             Math.random() * group.scrambles[indexCase + 1].length
           );
           const mirroring = parseInt(Math.floor(Math.random() * 2));
           let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
-          algHint =
-            group.algorithms[indexCase + 1][
-              group.algorithmSelection[indexCase]
-            ];
+          
+          // Get hint algorithm
+          if (
+            group.algorithmSelection[indexCase] >=
+            group.algorithms[indexCase + 1].length
+          ) {
+            algHint = group.customAlgorithms[indexCase];
+          } else {
+            algHint =
+              group.algorithms[indexCase + 1][
+                group.algorithmSelection[indexCase]
+              ];
+          }
+          
           // Mirror at random
           if (mirroring) {
             selectedScramble = mirrorAlg(selectedScramble);
