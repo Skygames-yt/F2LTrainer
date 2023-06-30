@@ -53,7 +53,7 @@ div {
   border-radius: 20px;
   max-width: 700px;
   border: solid;
-  width:auto;
+  width: auto;
 }
 
 .case-number {
@@ -111,10 +111,12 @@ div {
 /* Side Buttons */
 #side-container {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   /* display: none; */
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  left: 0;
+  left: 0; */
 }
 
 .side-button {
@@ -134,16 +136,21 @@ div {
   width: 20px;
 }
 
+#btn-settings-train {
+  display: none;
+}
+
 /* Change Mode Button */
 #change-mode {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  font-size: 2rem;
+  /* position: fixed; */
+  /* top: 10px;
+  right: 10px; */
+  font-size: 1.5rem;
   background: #ff2525;
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
+  width: fit-content;
 }
 
 #train-container {
@@ -304,9 +311,28 @@ div {
 }
 
 /* Train select */
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-container > h3 {
+  margin-bottom: 1px;
+}
+
+#train-cases-container {
+  display: none;
+  flex-direction: column;
+}
+
+#train-cases-container > h2 {
+  margin: 0px;
+}
+
 .checkbox {
   display: inline-flex;
   align-items: center;
+  margin: 5px;
   cursor: pointer;
 }
 
@@ -348,17 +374,49 @@ div {
   display: block;
 } */
 
-#scramble-div {
-  font-size: 5rem;
+#scramble-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 800px;
 }
 
-#hint-div {
-  font-size: 2rem;
+/* #scramble-container > * {
+  display: flex;
+} */
+
+#scramble-container > img {
+  width: 30px;
+}
+
+#scramble-div {
+  display: flex;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 5px;
+}
+
+#div-hint-img {
+  display: flex;
+  justify-content: center;
 }
 
 #hint-img {
-  visibility: hidden;
-  width: 100px;
+  width: 150px;
+}
+
+#hint-div {
+  display: flex;
+  justify-content: center;
+  border: solid;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-size: 1.5rem;
+  max-width: 400px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 #btn-next-scramble {
@@ -369,8 +427,12 @@ div {
 }
 
 #select-group {
-  position: fixed;
-  top: 60px;
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+}
+#select-group option {
+  background-color: #b6d6ba;
 }
 
 #div-debug-info {
@@ -394,7 +456,19 @@ div {
   .all-alg-container {
     flex-direction: row;
   }
-  .div-container{
+  .div-container {
     width: fit-content;
+  }
+  #scramble-div {
+    font-size: 3rem;
+  }
+  #hint-img {
+    width: 200px;
+  }
+  #select-group {
+    font-size: 1.5rem;
+  }
+  #hint-div {
+    font-size: 2rem;
   }
 }

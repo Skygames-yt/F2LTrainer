@@ -370,6 +370,8 @@ let trainStateSelection = [false, true, false];
 // 2 -> advanced
 let trainGroupSelection = [true, true, true];
 
+let hintSelection = true;
+
 // Save - Load Functions
 function saveUserData() {
   console.log("Saving User Data");
@@ -382,6 +384,8 @@ function saveUserData() {
   for (let i = 0; i < trainGroupSelection.length; i++) {
     localStorage.setItem("trainGroupSelection" + i, trainGroupSelection[i]);
   }
+  // Saving hint settings
+  localStorage.setItem("hintSelection", hintSelection);
 
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
@@ -410,6 +414,7 @@ function saveUserData() {
       );
     }
   }
+  updateHintVisibility();
 }
 
 function loadUserData() {
@@ -419,20 +424,37 @@ function loadUserData() {
   for (let i = 0; i < trainStateSelection.length; i++) {
     const temp = localStorage.getItem("trainStateSelection" + i);
     if (temp !== null) {
-      trainStateSelection[i] = temp;
+      if (temp == "true") {
+        trainStateSelection[i] = true;
+      } else {
+        trainStateSelection[i] = false;
+      }
     }
   }
+
   // Load trainGroupSelection
   for (let i = 0; i < trainGroupSelection.length; i++) {
     const temp = localStorage.getItem("trainGroupSelection" + i);
     if (temp !== null) {
-      trainGroupSelection[i] = temp;
+      if (temp == "true") {
+        trainGroupSelection[i] = true;
+      } else {
+        trainGroupSelection[i] = false;
+      }
+    }
+  }
+
+  const temp = localStorage.getItem("hintSelection");
+  if (temp != null) {
+    if (temp == "true") {
+      hintSelection = true;
+    } else {
+      hintSelection = false;
     }
   }
 
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
-    // console.log(group);
     let temp = 0;
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
@@ -464,6 +486,9 @@ function loadUserData() {
       }
     }
   }
+
+  updateCheckboxStatus();
+  updateHintVisibility();
 }
 
 function clearUserData() {

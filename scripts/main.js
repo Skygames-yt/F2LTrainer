@@ -49,7 +49,8 @@ const checkboxGroupBasicBack = document.getElementById(
 const checkboxGroupAdvanced = document.getElementById(
   "checkboxGroupAdvancedId"
 );
-// const selectGroupTrain = document.getElementById("select-train");
+
+const checkboxShowHint = document.getElementById("checkboxShowHintId");
 
 const btnSettingsTrain = document.getElementById("btn-settings-train");
 const settingsTrainContainer = document.getElementById("train-cases-container");
@@ -144,51 +145,54 @@ window.addEventListener("load", () => {
   }
 
   // Click Event - Delete Button clicked
-  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
-    const group = groups[indexGroup];
-    group.imgTrash.forEach(function (button, indexCase) {
-      button.addEventListener("click", function () {
-        group.trash[indexCase] = true;
-        group.divContainer[indexCase].style.display = "none";
-        group.trashElementContainer[indexCase].style.display = "flex";
-        // Save
-        saveUserData();
-      });
-    });
-  }
+  // for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+  //   const group = groups[indexGroup];
+  //   group.imgTrash.forEach(function (button, indexCase) {
+  //     button.addEventListener("click", function () {
+  //       group.trash[indexCase] = true;
+  //       group.divContainer[indexCase].style.display = "none";
+  //       group.trashElementContainer[indexCase].style.display = "flex";
+  //       // Save
+  //       saveUserData();
+  //     });
+  //   });
+  // }
 
   // Click Event - Recover
-  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
-    // TEST
-    const group = groups[indexGroup];
-    group.btnRecover.forEach(function (button, indexCase) {
-      button.addEventListener("click", function () {
-        group.trash[indexCase] = false;
-        group.divContainer[indexCase].style.display = "flex";
-        group.trashElementContainer[indexCase].style.display = "none";
+  // for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+  //   // TEST
+  //   const group = groups[indexGroup];
+  //   group.btnRecover.forEach(function (button, indexCase) {
+  //     button.addEventListener("click", function () {
+  //       group.trash[indexCase] = false;
+  //       group.divContainer[indexCase].style.display = "flex";
+  //       group.trashElementContainer[indexCase].style.display = "none";
 
-        // Save
-        saveUserData();
-      });
-    });
-  }
+  //       // Save
+  //       saveUserData();
+  //     });
+  //   });
+  // }
 
   // Change Mode
   changeMode.addEventListener("click", function () {
     if (mode == 0) {
       mode = 1;
-      changeMode.innerHTML = "select cases";
+      nextScramble(1);
+      changeMode.innerHTML = "Select cases";
       selectLayout.style.display = "none";
-      sideContainer.style.display = "none";
+      // sideContainer.style.display = "none";
       selectGroup.style.display = "none";
       trainContainer.style.display = "block";
+      btnSettingsTrain.style.display = "flex";
     } else {
       mode = 0;
       changeMode.innerHTML = "Train";
       selectLayout.style.display = "block";
-      sideContainer.style.display = "block";
+      // sideContainer.style.display = "block";
       selectGroup.style.display = "block";
       trainContainer.style.display = "none";
+      btnSettingsTrain.style.display = "none";
     }
   });
 
@@ -204,13 +208,10 @@ window.addEventListener("load", () => {
   });
 
   // Click Event - Open Trash
-  btnTrash.addEventListener("click", function () {
-    trashContainer.style.display = "block";
-    overlay.style.display = "block";
-  });
-
-  // Settings Train
-  btnSettingsTrain.addEventListener("click", showSettingsTrain);
+  // btnTrash.addEventListener("click", function () {
+  //   trashContainer.style.display = "block";
+  //   overlay.style.display = "block";
+  // });
 
   document.addEventListener("keydown", keydown);
 
@@ -219,6 +220,7 @@ window.addEventListener("load", () => {
 });
 
 function addElementsToBOM() {
+  // Iterate "Basic", "Basic Back", "Advanced"
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
     selectLayoutSub.push(document.createElement("div"));
@@ -298,7 +300,7 @@ function addElementsToBOM() {
         group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
         group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
         group.algorithm[indexCase].appendChild(group.divAlgorithm[indexCase]);
-        group.algorithm[indexCase].appendChild(group.btnDelete[indexCase]);
+        // group.algorithm[indexCase].appendChild(group.btnDelete[indexCase]);
         group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
 
         selectLayoutSub[indexGroup].appendChild(group.divContainer[indexCase]);
@@ -539,6 +541,7 @@ function nextScramble___() {
 */
 
 function showSettingsTrain() {
+  updateCheckboxStatus();
   settingsTrainContainer.style.display = "block";
   overlay.style.display = "block";
 }
@@ -554,15 +557,18 @@ function updateTrainCases() {
     checkboxGroupBasicBack.checked,
     checkboxGroupAdvanced.checked,
   ];
+  hintSelection = checkboxShowHint.checked;
+
   currentTrainCase = -1;
   generatedScrambles = [];
   closeOverlays();
   generateTrainCaseList();
   saveUserData();
+  nextScramble(1);
 }
 
 function showHint() {
-  hintImg.style.visibility = "visible";
+  hintImg.style.opacity = 100;
   // Get algorithm and convert to list
   const algList = generatedScrambles[currentTrainCase].algHint.split(" ");
   if (hintCounter < algList.length) {
@@ -590,13 +596,12 @@ function generateTrainCaseList() {
 
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
-
-    if (trainGroupSelection[indexGroup] == false) continue;
+    if (!trainGroupSelection[indexGroup]) continue;
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       for (let state = 0; state < trainStateSelection.length; state++) {
         if (
-          trainStateSelection[state] == true &&
+          trainStateSelection[state] &&
           group.caseSelection[indexCase] == state
         ) {
           // Get scramble index
@@ -657,9 +662,10 @@ function generateTrainCaseList() {
 }
 
 function nextScramble(nextPrevious) {
+  updateHintVisibility();
   hintCounter = 0;
   // hintImg.style.visibility = "hidden";
-  hintDiv.innerText = "";
+  hintDiv.innerText = "Press to show hint";
 
   if (nextPrevious) {
     currentTrainCase++;
@@ -705,7 +711,7 @@ function nextScramble(nextPrevious) {
 
   // Show scramble
   scrambleDiv.innerText = selectedScramble;
-
+  /*
   divDebug.innerHTML =
     "Group: " +
     groups[indexGroup].name +
@@ -717,6 +723,7 @@ function nextScramble(nextPrevious) {
     groups[indexGroup].algorithmSelection[indexCase] +
     ", mirrored: " +
     mirroring;
+    */
 }
 
 function addSelectGroupTrain() {
@@ -769,5 +776,23 @@ function addSelectGroupTrain() {
     labelGroupCheckbox[indexGroup].innerHTML = group.name;
 
     checkboxGroupContainer.appendChild(labelGroupCheckbox[indexGroup]);
+  }
+}
+
+function updateCheckboxStatus() {
+  checkboxUnlerned.checked = trainStateSelection[0];
+  checkboxLearning.checked = trainStateSelection[1];
+  checkboxFinished.checked = trainStateSelection[2];
+  checkboxGroupBasic.checked = trainGroupSelection[0];
+  checkboxGroupBasicBack.checked = trainGroupSelection[1];
+  checkboxGroupAdvanced.checked = trainGroupSelection[2];
+  checkboxShowHint.checked = hintSelection;
+}
+
+function updateHintVisibility() {
+  if (hintSelection) {
+    hintImg.style.opacity = 100;
+  } else {
+    hintImg.style.opacity = 0;
   }
 }

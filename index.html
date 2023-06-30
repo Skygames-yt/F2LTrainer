@@ -11,7 +11,39 @@
 
   <body>
     <div id="side-container">
-      <div class="side-button" id="btn-settings">
+      <!-- <div class="side-button" id="btn-settings">
+        <img
+          src="./images/settings.svg"
+          alt="Settings"
+          class="side-img"
+          title="Settings"
+        />
+      </div> -->
+      <!-- <div class="side-button" id="btn-trash">
+        <img
+          src="./images/trash.svg"
+          alt="Trash"
+          class="side-img"
+          title="Trash"
+        />
+      </div> -->
+      <div class="side-button" id="btn-info">
+        <img src="./images/info.svg" alt="Info" class="side-img" title="Info" />
+      </div>
+
+      <select id="select-group" onchange="groupSelected()">
+        <option value="basic" selected>Basic Cases</option>
+        <option value="basicBack">Basic Cases Backslot</option>
+        <option value="advanced">Advanced Cases</option>
+      </select>
+
+      <!-- Button Settings Train -->
+      <div
+        class="side-button"
+        id="btn-settings-train"
+        ,
+        onclick="showSettingsTrain()"
+      >
         <img
           src="./images/settings.svg"
           alt="Settings"
@@ -19,27 +51,11 @@
           title="Settings"
         />
       </div>
-      <div class="side-button" id="btn-trash">
-        <img
-          src="./images/trash.svg"
-          alt="Trash"
-          class="side-img"
-          title="Trash"
-        />
-      </div>
-      <div class="side-button" id="btn-info">
-        <img src="./images/info.svg" alt="Info" class="side-img" title="Info" />
-      </div>
+
+      <div id="change-mode">Train</div>
     </div>
 
-    <div id="change-mode">Train</div>
-
-    <select id="select-group" onchange="groupSelected()">
-      <option value="basic" selected>Basic</option>
-      <option value="basicBack">Basic Back</option>
-      <option value="advanced">Advanced</option>
-    </select>
-
+    <!-- All the Cases will be listed here -->
     <div id="select-layout">
       <!-- <div class="div-container">
         <div class="case-number">1</div>
@@ -88,7 +104,7 @@
     <!-- Edit Algorithm -->
     <div id="editalg-container" class="popup-container">
       <div id="editalg-img-container">
-        <img id="editalg-img" src="./images/basic_cases/F2L1.svg" />
+        <img id="editalg-img" src="./images/basic_cases/right/F2L1.svg" />
       </div>
       <div id="editalg-text">Choose algorithm</div>
       <div id="editalg-list">
@@ -122,33 +138,42 @@
 
     <!-- Train Mode -->
     <div id="train-container">
-      <div id="scramble-div">Scramble</div>
-      <div id="hint-div">Hint</div>
-      <img
-        id="hint-img"
-        src="./images/basic_cases/F2L1.svg"
-        alt="Image of Case"
-      />
-      <img
-        src="./images/arrow_right.svg"
-        onclick="nextScramble(1)"
-        alt="next scramble"
-        id="btn-next-scramble"
-        title="Next Scramble"
-      />
-      <img
-        src="./images/arrow_left.svg"
-        onclick="nextScramble(0)"
-        alt="previous scramble"
-        id="btn-next-scramble"
-        title="Previous Scramble"
-      />
+      <div id="scramble-container">
+        <img
+          src="./images/arrow_left.svg"
+          onclick="nextScramble(0)"
+          alt="previous scramble"
+          id="btn-next-scramble"
+          title="Previous Scramble"
+        />
+        <div id="scramble-div">Scramble</div>
+        <img
+          src="./images/arrow_right.svg"
+          onclick="nextScramble(1)"
+          alt="next scramble"
+          id="btn-next-scramble"
+          title="Next Scramble"
+        />
+      </div>
+
+      <div id="div-hint-img">
+        <img
+          id="hint-img"
+          src="./images/basic_cases/right/F2L1.svg"
+          alt="Image of F2L Case"
+          onclick="nextScramble(1)"
+        />
+      </div>
+      <div id="hint-div" onclick="showHint()">Hint</div>
+
       <div id="div-debug-info"></div>
 
       <!-- Train Settings -->
       <div id="train-cases-container" class="popup-container">
+        <h2>Algorithms to learn</h2>
         <!-- Checkbox: Unlearned, Learning, Finished -->
-        <div>
+        <div class="checkbox-container">
+          <h3>Status</h3>
           <label class="checkbox" for="checkboxUnlearnedId">
             <input
               type="checkbox"
@@ -184,7 +209,8 @@
         </div>
 
         <!-- Checkbox: Groups -->
-        <div id="checkbox-group-container">
+        <div class="checkbox-container">
+          <h3>Group</h3>
           <label class="checkbox" for="checkboxGroupBasicId">
             <input
               type="checkbox"
@@ -219,6 +245,20 @@
           </label>
         </div>
 
+        <div class="checkbox-container">
+          <h3>Hint Settings</h3>
+          <label class="checkbox" for="checkboxShowHintId">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              name="checkboxShowHint"
+              id="checkboxShowHintId"
+            />
+            <div class="checkbox__box"></div>
+            Show Image
+          </label>
+        </div>
+
         <!-- Buttons: Update, Cancel Settings -->
         <div class="update-cancal-buttons">
           <input
@@ -235,18 +275,9 @@
           />
         </div>
       </div>
-
-      <!-- Button Settings Train -->
-      <div class="side-button" id="btn-settings-train">
-        <img
-          src="./images/settings.svg"
-          alt="Settings"
-          class="side-img"
-          title="Settings"
-        />
-      </div>
     </div>
 
+    <!-- Scripts -->
     <!-- Basic -->
     <script src="./scripts/scrambles/basic_scrambles.js"></script>
     <script src="./scripts/algorithms/basic_algorithms.js"></script>

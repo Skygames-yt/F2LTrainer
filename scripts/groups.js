@@ -13,6 +13,24 @@ const basicCollection = {
   imgPath: "./images/basic_cases/",
   numberCases: 42,
 
+  numberCategories: 6,
+  categoryNames: [
+    "Corner on top, white facing up",
+    "Corner on top, white facing front",
+    "Corner on top, white facing up",
+    "Corner in correct slot, white facing front",
+    "Corner in correct slot, white facing side",
+    "Corner solved",
+  ],
+  categoryCases: [
+    [2, 4, 6, 8, 10, 12, 14, 16, 34, 36],
+    [1, 3, 5, 7, 9, 11, 13, 15, 33, 35],
+    [17, 18, 19, 20, 21, 22, 23, 24, 31, 32],
+    [27, 29, 39, 41],
+    [28, 30, 40, 42],
+    [25, 26, 38],
+  ],
+
   divContainer: [],
   caseNumber: [],
   imgContainer: [],
@@ -45,6 +63,24 @@ const basicBackCollection = {
   imgPath: "./images/basic_cases_back/",
   numberCases: 42,
 
+  numberCategories: 6,
+  categoryNames: [
+    "Corner on top, white facing up",
+    "Corner on top, white facing front",
+    "Corner on top, white facing up",
+    "Corner in correct slot, white facing front",
+    "Corner in correct slot, white facing side",
+    "Corner solved",
+  ],
+  categoryCases: [
+    [2, 4, 6, 8, 10, 12, 14, 16, 34, 36],
+    [1, 3, 5, 7, 9, 11, 13, 15, 33, 35],
+    [17, 18, 19, 20, 21, 22, 23, 24, 31, 32],
+    [27, 29, 39, 41],
+    [28, 30, 40, 42],
+    [25, 26, 38],
+  ],
+
   divContainer: [],
   caseNumber: [],
   imgContainer: [],
@@ -76,6 +112,16 @@ const advancedCollection = {
   //
   imgPath: "./images/advanced_cases/",
   numberCases: 36,
+
+  numberCategories: 2,
+  categoryNames: [
+    "Corner on top, white facing up",
+    "Corner on top, white facing front",
+  ],
+  categoryCases: [
+    [2, 4, 6, 8, 10, 12, 14, 16, 34, 36],
+    [1, 3, 5, 7, 9, 11, 13, 15, 33, 35],
+  ],
 
   divContainer: [],
   caseNumber: [],
