@@ -83,7 +83,7 @@ const divDebug = document.getElementById("div-debug-info");
 let generatedScrambles = [];
 
 window.addEventListener("load", () => {
-  // Load User saved Data
+  // Load User saved Data (user_saved.js)
   loadUserData();
   // Create all Entries
   addElementsToBOM();
@@ -222,10 +222,12 @@ function addElementsToBOM() {
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
     selectLayoutSub.push(document.createElement("div"));
+    selectLayoutSub[indexGroup].classList.add("all-alg-container");
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       // Case Selection Page
-      const caseImgPath = group.imgPath + (indexCase + 1) + ".svg";
+      const caseImgPath =
+        group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
 
       group.divContainer.push(document.createElement("div"));
       group.divContainer[indexCase].classList.add("div-container");
@@ -287,7 +289,7 @@ function addElementsToBOM() {
         group.divContainer[indexCase].style.background =
           colors[group.caseSelection[indexCase]];
 
-        group.divContainer[indexCase].appendChild(group.caseNumber[indexCase]);
+        group.divContainer[indexCase].appendChild(group.caseNumber[indexCase]); // Don't show case number
         group.divContainer[indexCase].appendChild(
           group.imgContainer[indexCase]
         );
@@ -313,7 +315,8 @@ function addTrashElementsToBOM() {
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       // Case Selection Page
-      const caseImgPath = group.imgPath + (indexCase + 1) + ".svg";
+      const caseImgPath =
+        group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
 
       group.trashElementContainer.push(document.createElement("div"));
       group.trashElementContainer[indexCase].classList.add(
@@ -399,7 +402,7 @@ function editAlgs(indexGroup, indexCase) {
   selectedAlgNumber = group.algorithmSelection[selectedCase];
 
   // Set image
-  editalgImg.src = group.imgPath + (selectedCase + 1) + ".svg";
+  editalgImg.src = group.imgPath + "right/F2L" + (selectedCase + 1) + ".svg";
 
   // Iterate through all algorithms
   for (let alg = 0; alg < numberAlgMax; alg++) {
@@ -572,7 +575,7 @@ function groupSelected() {
   // Make only selected Group visible
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     if (selectGroup.selectedIndex === indexGroup) {
-      selectLayoutSub[indexGroup].style.display = "block";
+      selectLayoutSub[indexGroup].style.display = "flex";
     } else {
       selectLayoutSub[indexGroup].style.display = "none";
     }
@@ -602,7 +605,7 @@ function generateTrainCaseList() {
           );
           const mirroring = parseInt(Math.floor(Math.random() * 2));
           let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
-          
+
           // Get hint algorithm
           if (
             group.algorithmSelection[indexCase] >=
@@ -615,7 +618,7 @@ function generateTrainCaseList() {
                 group.algorithmSelection[indexCase]
               ];
           }
-          
+
           // Mirror at random
           if (mirroring) {
             selectedScramble = mirrorAlg(selectedScramble);
@@ -683,7 +686,11 @@ function nextScramble(nextPrevious) {
   // Set the hint to selected alg
   // algHint = group.algorithms[indexCase + 1][group.algorithmSelection[indexCase]];
 
-  hintImg.src = group.imgPath + (indexCase + 1) + ".svg";
+  if (!mirroring) {
+    hintImg.src = group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
+  } else {
+    hintImg.src = group.imgPath + "left/F2L" + (indexCase + 1) + ".svg";
+  }
 
   // let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
 

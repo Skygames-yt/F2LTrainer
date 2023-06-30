@@ -10,7 +10,7 @@ const basicCollection = {
   customAlgorithms: basicCustomAlgorithms,
   trash: basicTrash,
   //
-  imgPath: "./images/basic_cases/F2L",
+  imgPath: "./images/basic_cases/",
   numberCases: 42,
 
   divContainer: [],
@@ -42,7 +42,7 @@ const basicBackCollection = {
   customAlgorithms: basicBackCustomAlgorithms,
   trash: basicTrash,
   //
-  imgPath: "./images/basic_cases_back/F2L",
+  imgPath: "./images/basic_cases_back/",
   numberCases: 42,
 
   divContainer: [],
@@ -74,7 +74,7 @@ const advancedCollection = {
   customAlgorithms: advandedCustomAlgorithms,
   trash: advancedTrash,
   //
-  imgPath: "./images/advanced_cases/F2L",
+  imgPath: "./images/advanced_cases/",
   numberCases: 36,
 
   divContainer: [],
