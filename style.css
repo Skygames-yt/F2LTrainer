@@ -81,14 +81,14 @@ div {
   /* height: 110px; */
   height: 100%;
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-align: center;
   vertical-align: middle;
   justify-content: flex-start;
   /* margin: auto; */
 }
 
-.algorithm:hover .img-edit-trash {
+.div-container:hover .img-edit-trash {
   visibility: visible;
 }
 
@@ -106,6 +106,7 @@ div {
   vertical-align: middle;
   line-height: normal;
   margin: auto;
+  margin-left: 10px;
 }
 
 /* Side Buttons */
@@ -132,7 +133,7 @@ div {
 .btn-edit,
 .btn-trash {
   flex-shrink: 0;
-  margin: 2px;
+  margin: 5px;
   width: 20px;
 }
 
@@ -271,11 +272,13 @@ div {
 }
 
 .editalg-listentry {
-  font-size: 1.3rem;
+  font-size: 1rem;
   text-align: center;
   border: solid;
   border-radius: 8px;
   margin: 5px 0px;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
   cursor: pointer;
 }
 
@@ -283,7 +286,7 @@ div {
   width: 100%;
   background: transparent;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1rem;
   text-align: center;
 }
 
@@ -294,6 +297,7 @@ div {
 .update-cancal-buttons {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 #editalg-btn {
@@ -310,10 +314,20 @@ div {
   background: chartreuse;
 }
 
-/* Train select */
+/* Train Settings */
+#div-algs-to-learn {
+  display: flex;
+}
+
+.div-centering {
+  display: flex;
+  justify-content: center;
+}
+
 .checkbox-container {
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
 }
 
 .checkbox-container > h3 {
@@ -436,7 +450,18 @@ div {
 }
 
 #div-debug-info {
-  font-size: 2rem;
+  display: none;
+  font-size: 1rem;
+}
+
+#btn-show-hide-debug-info {
+  font-size: 1rem;
+  padding: 10px;
+  margin: 10px;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  size: 50px;
 }
 
 /* Media Query */
@@ -470,5 +495,17 @@ div {
   }
   #hint-div {
     font-size: 2rem;
+  }
+  .editalg-listentry {
+    font-size: 1.5rem;
+  }
+  #editalg-customalg {
+    font-size: 1.5rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .img-edit-trash {
+    visibility: visible;
   }
 }

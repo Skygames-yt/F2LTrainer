@@ -42,6 +42,10 @@ const checkboxUnlerned = document.getElementById("checkboxUnlearnedId");
 const checkboxLearning = document.getElementById("checkboxLearningId");
 const checkboxFinished = document.getElementById("checkboxFinishedId");
 
+// checkboxUnlerned.style.backgroundColor = colors[0]; // not working
+// checkboxLearning.style.backgroundColor = colors[1]; // not working
+// checkboxFinished.style.backgroundColor = colors[2]; // not working
+
 const checkboxGroupBasic = document.getElementById("checkboxGroupBasicId");
 const checkboxGroupBasicBack = document.getElementById(
   "checkboxGroupBasicBackId"
@@ -79,6 +83,10 @@ const checkboxGroupContainer = document.getElementById(
 const labelGroupCheckbox = [];
 const groupCheckbox = [];
 
+let boolShowDebugInfo = false;
+const btnShowHideDebugInfo = document.getElementById(
+  "btn-show-hide-debug-info"
+);
 const divDebug = document.getElementById("div-debug-info");
 
 let generatedScrambles = [];
@@ -297,11 +305,13 @@ function addElementsToBOM() {
         );
         group.imgContainer[indexCase].appendChild(group.imgCase[indexCase]);
         group.divContainer[indexCase].appendChild(group.algorithm[indexCase]);
+        // group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
+        // group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
+        group.algorithm[indexCase].appendChild(group.divAlgorithm[indexCase]);
         group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
         group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
-        group.algorithm[indexCase].appendChild(group.divAlgorithm[indexCase]);
         // group.algorithm[indexCase].appendChild(group.btnDelete[indexCase]);
-        group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
+        //group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
 
         selectLayoutSub[indexGroup].appendChild(group.divContainer[indexCase]);
       }
@@ -664,7 +674,6 @@ function generateTrainCaseList() {
 function nextScramble(nextPrevious) {
   updateHintVisibility();
   hintCounter = 0;
-  // hintImg.style.visibility = "hidden";
   hintDiv.innerText = "Press to show hint";
 
   if (nextPrevious) {
@@ -711,7 +720,7 @@ function nextScramble(nextPrevious) {
 
   // Show scramble
   scrambleDiv.innerText = selectedScramble;
-  /*
+
   divDebug.innerHTML =
     "Group: " +
     groups[indexGroup].name +
@@ -723,7 +732,6 @@ function nextScramble(nextPrevious) {
     groups[indexGroup].algorithmSelection[indexCase] +
     ", mirrored: " +
     mirroring;
-    */
 }
 
 function addSelectGroupTrain() {
@@ -794,5 +802,17 @@ function updateHintVisibility() {
     hintImg.style.opacity = 100;
   } else {
     hintImg.style.opacity = 0;
+  }
+}
+
+function showHideDebugInfo() {
+  if (boolShowDebugInfo) {
+    boolShowDebugInfo = false;
+    btnShowHideDebugInfo.innerHTML = "> Show info";
+    divDebug.style.display = "none";
+  } else {
+    boolShowDebugInfo = true;
+    btnShowHideDebugInfo.innerHTML = "> Hide info";
+    divDebug.style.display = "block";
   }
 }
