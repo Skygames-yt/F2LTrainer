@@ -51,6 +51,7 @@ div {
 .img-collapse-category {
   /* height: 1rem;
   align-content: center; */
+  height: auto;
 }
 
 .div-category-container {
@@ -62,7 +63,9 @@ div {
 }
 
 .heading-category-name {
+  display: flex;
   margin: 5px;
+  align-items: center;
 }
 
 /* Selection */
@@ -150,7 +153,6 @@ div {
 .side-button {
   cursor: pointer;
   width: 40px;
-  margin: 5px;
 }
 
 .side-img {
@@ -187,6 +189,8 @@ div {
   display: none;
   flex-direction: column;
   align-items: center;
+  margin-top: 10px;
+  border-top: dotted;
 }
 
 /* Info container */
@@ -246,7 +250,7 @@ div {
   max-height: 90%;
   max-width: 500px;
   padding: 20px;
-  background: #a546e4;
+  background: #46e46d;
   border-radius: 20px;
   overflow: auto;
   display: none;
