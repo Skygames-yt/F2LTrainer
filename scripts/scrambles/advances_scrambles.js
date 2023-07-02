@@ -354,10 +354,6 @@ const advancedScrambles = {
     "L F' U' L F L' U2 L'",
   ],
   19: [
-    "L' U L R U' R' U'",
-    "L' R U L U' R' U'",
-    "L' U' L R U R' U'",
-    "L' U' R U R' U' L",
     "R U' L' U L U' R' U'",
     "R U2 L' U L U' R' U'",
     "R U L' U L U' R' U'",
@@ -385,7 +381,6 @@ const advancedScrambles = {
   21: [
     "L' U L U2 F' U F",
     "L' U' R U' L U' R' U2",
-    "L' U L U' R U R' U2",
     "F U F' U2 F R' F' R",
     "F U2 F' U F R' F' R",
     "F U' L F L' R' F' R",
