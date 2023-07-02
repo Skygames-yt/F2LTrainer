@@ -3,24 +3,28 @@ let basicTrash = [];
 let basicCaseSelection = [];
 let basicAlgorithmSelection = [];
 let basicCustomAlgorithms = [];
+let basicCollapse = [];
 
 // Basic Back
 let basicBackTrash = [];
 let basicBackCaseSelection = [];
 let basicBackAlgorithmSelection = [];
 let basicBackCustomAlgorithms = [];
+let basicBackCollapse = [];
 
 // Advanced
 let advancedTrash = [];
 let advancedCaseSelection = [];
 let advancedAlgorithmSelection = [];
 let advandedCustomAlgorithms = [];
+let advancedCollapse = [];
 
 // Expert
 let expertTrash = [];
 let expertCaseSelection = [];
 let expertAlgorithmSelection = [];
 let expertCustomAlgorithms = [];
+let expertCollapse = [];
 
 // 0 -> unlearned
 // 1 -> learning
@@ -61,6 +65,26 @@ function saveUserData() {
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
     // console.log(group);
+    for (
+      let indexCategory = 0;
+      indexCategory < group.categoryCases.length;
+      indexCategory++
+    ) {
+      /*console.log(
+        "saveName: " +
+          group.saveName +
+          "collapse" +
+          indexCategory +
+          "\ngroup.collapse[" +
+          indexCategory +
+          "]: " +
+          group.collapse[indexCategory]
+      );*/
+      localStorage.setItem(
+        group.saveName + "collapse" + indexCategory,
+        group.collapse[indexCategory]
+      );
+    }
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       // Save Trash
@@ -146,7 +170,19 @@ function loadUserData() {
 
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
-    let temp = 0;
+
+    for (
+      let indexCategory = 0;
+      indexCategory < group.categoryCases.length;
+      indexCategory++
+    ) {
+      temp = localStorage.getItem(group.saveName + "collapse" + indexCategory);
+      if (temp !== null && temp == "true") {
+        group.collapse.push(true);
+      } else {
+        group.collapse.push(false);
+      }
+    }
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       // Load Trash
@@ -162,7 +198,12 @@ function loadUserData() {
       if (temp !== null) {
         group.caseSelection.push(temp);
       } else {
-        group.caseSelection.push(0);
+        // If site visited first time - set basic cases -> category 1 to "Learning"
+        if (indexGroup == 0 && group.categoryCases[0].includes(indexCase + 1)) {
+          group.caseSelection.push(1);
+        } else {
+          group.caseSelection.push(0);
+        }
       }
 
       // Load Custom Algorithms

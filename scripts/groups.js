@@ -9,6 +9,7 @@ const basicCollection = {
   caseSelection: basicCaseSelection,
   customAlgorithms: basicCustomAlgorithms,
   trash: basicTrash,
+  collapse: basicCollapse,
   //
   imgPath: "./images/basic_cases/",
   numberCases: 42,
@@ -61,6 +62,7 @@ const basicBackCollection = {
   caseSelection: basicBackCaseSelection,
   customAlgorithms: basicBackCustomAlgorithms,
   trash: basicTrash,
+  collapse: basicBackCollapse,
   //
   imgPath: "./images/basic_cases_back/",
   numberCases: 42,
@@ -113,6 +115,7 @@ const advancedCollection = {
   caseSelection: advancedCaseSelection,
   customAlgorithms: advandedCustomAlgorithms,
   trash: advancedTrash,
+  collapse: advancedCollapse,
   //
   imgPath: "./images/advanced_cases/",
   numberCases: 36,
@@ -166,6 +169,7 @@ const expertCollection = {
   caseSelection: expertCaseSelection,
   customAlgorithms: expertCustomAlgorithms,
   trash: expertTrash,
+  collapse: expertCollapse,
   //
   imgPath: "./images/expert_cases/",
   numberCases: 17,

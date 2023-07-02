@@ -166,10 +166,13 @@ window.addEventListener("load", () => {
         if (group.categoryContainer[i].style.display == "none") {
           group.categoryContainer[i].style.display = "flex";
           group.categoryCollapseImg[i].src = imgPathDownArrow;
+          group.collapse[i] = false;
         } else {
           group.categoryContainer[i].style.display = "none";
           group.categoryCollapseImg[i].src = imgPathRightArrow;
+          group.collapse[i] = true;
         }
+        saveUserData();
       });
     });
   }
@@ -267,6 +270,7 @@ function addElementsToBOM() {
       group.categoryContainer[indexCategory].classList.add(
         "div-category-container"
       );
+
       group.collapseContainer.push(document.createElement("div"));
       group.collapseContainer[indexCategory].classList.add(
         "collapse-container"
@@ -276,7 +280,13 @@ function addElementsToBOM() {
       group.categoryCollapseImg[indexCategory].classList.add(
         "img-collapse-category"
       );
-      group.categoryCollapseImg[indexCategory].src = imgPathDownArrow;
+
+      if (group.collapse[indexCategory]) {
+        group.categoryContainer[indexCategory].style.display = "none";
+        group.categoryCollapseImg[indexCategory].src = imgPathRightArrow;
+      }else{
+        group.categoryCollapseImg[indexCategory].src = imgPathDownArrow;
+      }
       //selectLayoutSub[indexGroup].appendChild(group.categoryCollapseImg[indexCategory]);
 
       group.headingCategoryName.push(document.createElement("h2"));
@@ -379,7 +389,9 @@ function addElementsToBOM() {
           group.divContainer[indexCase].style.background =
             colors[group.caseSelection[indexCase]];
 
-          // group.divContainer[indexCase].appendChild(group.caseNumber[indexCase]); // Don't show case number
+          group.divContainer[indexCase].appendChild(
+            group.caseNumber[indexCase]
+          ); // Don't show case number
 
           group.divContainer[indexCase].appendChild(
             group.imgContainer[indexCase]
