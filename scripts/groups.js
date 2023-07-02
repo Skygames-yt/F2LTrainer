@@ -13,11 +13,10 @@ const basicCollection = {
   imgPath: "./images/basic_cases/",
   numberCases: 42,
 
-  numberCategories: 6,
   categoryNames: [
-    "Corner on top, white facing up",
+    "Corner on top, white facing side",
     "Corner on top, white facing front",
-    "Corner on top, white facing up",
+    "Edge on top, white facing up",
     "Corner in correct slot, white facing front",
     "Corner in correct slot, white facing side",
     "Corner solved",
@@ -30,7 +29,10 @@ const basicCollection = {
     [28, 30, 40, 42],
     [25, 26, 38],
   ],
-
+  categoryContainer: [],
+  collapseContainer: [],
+  categoryCollapseImg: [],
+  headingCategoryName: [],
   divContainer: [],
   caseNumber: [],
   imgContainer: [],
@@ -63,7 +65,6 @@ const basicBackCollection = {
   imgPath: "./images/basic_cases_back/",
   numberCases: 42,
 
-  numberCategories: 6,
   categoryNames: [
     "Corner on top, white facing up",
     "Corner on top, white facing front",
@@ -80,7 +81,10 @@ const basicBackCollection = {
     [28, 30, 40, 42],
     [25, 26, 38],
   ],
-
+  categoryContainer: [],
+  collapseContainer: [],
+  categoryCollapseImg: [],
+  headingCategoryName: [],
   divContainer: [],
   caseNumber: [],
   imgContainer: [],
@@ -113,16 +117,27 @@ const advancedCollection = {
   imgPath: "./images/advanced_cases/",
   numberCases: 36,
 
-  numberCategories: 2,
   categoryNames: [
-    "Corner on top, white facing up",
-    "Corner on top, white facing front",
+    "White facing up",
+    "White facing front",
+    "White facing side",
+    "Corner in right slot",
+    "Corner in left slot",
+    "Corner in opposite slot",
   ],
   categoryCases: [
-    [2, 4, 6, 8, 10, 12, 14, 16, 34, 36],
-    [1, 3, 5, 7, 9, 11, 13, 15, 33, 35],
+    [1, 3, 2, 4, 5, 6],
+    [9, 10, 13, 14, 17, 18],
+    [7, 8, 11, 12, 15, 16],
+    [19, 20, 21, 22, 23, 24],
+    [25, 26, 27, 28, 29, 30],
+    [31, 32, 33, 34, 35, 36],
   ],
 
+  categoryContainer: [],
+  collapseContainer: [],
+  categoryCollapseImg: [],
+  headingCategoryName: [],
   divContainer: [],
   caseNumber: [],
   imgContainer: [],
@@ -140,4 +155,58 @@ const advancedCollection = {
   btnRecover: [],
 };
 
-const groups = [basicCollection, basicBackCollection, advancedCollection];
+const expertCollection = {
+  saveName: "expert_",
+  name: "Expert Cases",
+  idName: "Expert",
+  scrambles: expertScrambles,
+  algorithms: expertAlgorithms,
+  // User saved
+  algorithmSelection: expertAlgorithmSelection,
+  caseSelection: expertCaseSelection,
+  customAlgorithms: expertCustomAlgorithms,
+  trash: expertTrash,
+  //
+  imgPath: "./images/expert_cases/",
+  numberCases: 17,
+
+  categoryNames: [
+    "Corner is solved",
+    "Pair in wron slot",
+    "Flipped edge & corner in adjacent slot",
+    "Other easy cases",
+  ],
+  categoryCases: [
+    [1, 2, 3, 4, 5, 6],
+    [7, 8, 9],
+    [10, 11, 12, 13, 14, 15],
+    [16, 17],
+  ],
+
+  categoryContainer: [],
+  collapseContainer: [],
+  categoryCollapseImg: [],
+  headingCategoryName: [],
+  divContainer: [],
+  caseNumber: [],
+  imgContainer: [],
+  imgCase: [],
+  algorithm: [],
+  divAlgorithm: [],
+  btnEdit: [],
+  imgEdit: [],
+  btnDelete: [],
+  imgTrash: [],
+  trashElementContainer: [],
+  caseNumberTrash: [],
+  imgContainerTrash: [],
+  imgCaseTrash: [],
+  btnRecover: [],
+};
+
+const groups = [
+  basicCollection,
+  basicBackCollection,
+  advancedCollection,
+  expertCollection,
+];

@@ -17,7 +17,7 @@ const numberAlgMax = 20;
 const algColors = ["transparent", "yellow"];
 
 const selectLayout = document.getElementById("select-layout");
-const selectLayoutSub = [];
+const selectLayoutSub = Array(groups.length);
 const sideContainer = document.getElementById("side-container");
 const changeMode = document.getElementById("change-mode");
 const overlay = document.getElementById("overlay");
@@ -34,6 +34,9 @@ const selectState = document.getElementById("select-state");
 const possibleStates = ["Unlearned", "Learning", "Finished", "All"];
 
 const colors = ["rgba(0, 0, 0, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)"];
+
+const imgPathRightArrow = "./images/arrow_collapse_right.svg";
+const imgPathDownArrow = "./images/arrow_collapse_down.svg";
 
 // Train
 const trainContainer = document.getElementById("train-container");
@@ -53,6 +56,10 @@ const checkboxGroupBasicBack = document.getElementById(
 const checkboxGroupAdvanced = document.getElementById(
   "checkboxGroupAdvancedId"
 );
+const checkboxGroupExpert = document.getElementById("checkboxGroupExpertId");
+
+const checkboxLeft = document.getElementById("checkboxLeftId");
+const checkboxRigt = document.getElementById("checkboxRightId");
 
 const checkboxShowHint = document.getElementById("checkboxShowHintId");
 
@@ -137,7 +144,6 @@ window.addEventListener("load", () => {
 
   // Click Event - Change Case to Unlearned, Learning, Finished
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
-    // TEST
     const group = groups[indexGroup];
     group.imgContainer.forEach(function (button, i) {
       button.addEventListener("click", function () {
@@ -148,6 +154,22 @@ window.addEventListener("load", () => {
         group.divContainer[i].style.background = colors[group.caseSelection[i]];
         // Save
         saveUserData();
+      });
+    });
+  }
+
+  // Click Event - Collapse Category
+  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
+    const group = groups[indexGroup];
+    group.collapseContainer.forEach(function (button, i) {
+      button.addEventListener("click", function () {
+        if (group.categoryContainer[i].style.display == "none") {
+          group.categoryContainer[i].style.display = "flex";
+          group.categoryCollapseImg[i].src = imgPathDownArrow;
+        } else {
+          group.categoryContainer[i].style.display = "none";
+          group.categoryCollapseImg[i].src = imgPathRightArrow;
+        }
       });
     });
   }
@@ -191,11 +213,11 @@ window.addEventListener("load", () => {
       selectLayout.style.display = "none";
       // sideContainer.style.display = "none";
       selectGroup.style.display = "none";
-      trainContainer.style.display = "block";
+      trainContainer.style.display = "flex";
       btnSettingsTrain.style.display = "flex";
     } else {
       mode = 0;
-      changeMode.innerHTML = "Train";
+      changeMode.innerHTML = "Training Mode";
       selectLayout.style.display = "block";
       // sideContainer.style.display = "block";
       selectGroup.style.display = "block";
@@ -231,90 +253,155 @@ function addElementsToBOM() {
   // Iterate "Basic", "Basic Back", "Advanced"
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
-    selectLayoutSub.push(document.createElement("div"));
+    // selectLayoutSub.push(document.createElement("div"));
+    selectLayoutSub[indexGroup] = document.createElement("div");
     selectLayoutSub[indexGroup].classList.add("all-alg-container");
 
-    for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
-      // Case Selection Page
-      const caseImgPath =
-        group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
+    for (
+      let indexCategory = 0;
+      indexCategory < group.categoryCases.length;
+      indexCategory++
+    ) {
+      let categoryItems = group.categoryCases[indexCategory];
+      group.categoryContainer[indexCategory] = document.createElement("div");
+      group.categoryContainer[indexCategory].classList.add(
+        "div-category-container"
+      );
+      group.collapseContainer.push(document.createElement("div"));
+      group.collapseContainer[indexCategory].classList.add(
+        "collapse-container"
+      );
 
-      group.divContainer.push(document.createElement("div"));
-      group.divContainer[indexCase].classList.add("div-container");
+      group.categoryCollapseImg.push(document.createElement("img"));
+      group.categoryCollapseImg[indexCategory].classList.add(
+        "img-collapse-category"
+      );
+      group.categoryCollapseImg[indexCategory].src = imgPathDownArrow;
+      //selectLayoutSub[indexGroup].appendChild(group.categoryCollapseImg[indexCategory]);
 
-      group.caseNumber.push(document.createElement("div"));
-      group.caseNumber[indexCase].classList.add("case-number");
+      group.headingCategoryName.push(document.createElement("h2"));
+      group.headingCategoryName[indexCategory].classList.add(
+        "heading-category-name"
+      );
 
-      group.imgContainer.push(document.createElement("div"));
-      group.imgContainer[indexCase].classList.add("image-container");
-      group.imgContainer[indexCase].id = "image-container-" + indexCase;
+      group.headingCategoryName[indexCategory].innerHTML =
+        group.categoryNames[indexCategory];
+      //selectLayoutSub[indexGroup].appendChild(group.headingCategoryName[indexCategory]);
 
-      group.imgCase.push(document.createElement("img"));
-      group.imgCase[indexCase].classList.add("img-case");
+      group.collapseContainer[indexCategory].appendChild(
+        group.categoryCollapseImg[indexCategory]
+      );
+      group.collapseContainer[indexCategory].appendChild(
+        group.headingCategoryName[indexCategory]
+      );
+      selectLayoutSub[indexGroup].appendChild(
+        group.collapseContainer[indexCategory]
+      );
 
-      group.algorithm.push(document.createElement("div"));
-      group.algorithm[indexCase].classList.add("algorithm");
+      for (
+        let indexCategoryItem = 0;
+        indexCategoryItem < categoryItems.length;
+        indexCategoryItem++
+      ) {
+        let indexCase = categoryItems[indexCategoryItem] - 1;
 
-      group.btnEdit.push(document.createElement("div"));
-      group.btnEdit[indexCase].classList.add("btn-edit");
-      group.btnEdit[indexCase].title = "Edit";
+        // Case Selection Page
+        const caseImgPath =
+          group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
 
-      group.imgEdit.push(document.createElement("img"));
-      group.imgEdit[indexCase].classList.add("img-edit-trash");
+        // group.divContainer.push(document.createElement("div"));
+        group.divContainer[indexCase] = document.createElement("div");
+        group.divContainer[indexCase].classList.add("div-container");
 
-      group.divAlgorithm.push(document.createElement("div"));
-      group.divAlgorithm[indexCase].classList.add("div-algorithm");
+        // group.caseNumber.push(document.createElement("div"));
+        group.caseNumber[indexCase] = document.createElement("div");
+        group.caseNumber[indexCase].classList.add("case-number");
 
-      group.btnDelete.push(document.createElement("div"));
-      group.btnDelete[indexCase].classList.add("btn-trash");
-      group.btnDelete[indexCase].title = "Delete";
+        // group.imgContainer.push(document.createElement("div"));
+        group.imgContainer[indexCase] = document.createElement("div");
+        group.imgContainer[indexCase].classList.add("image-container");
+        group.imgContainer[indexCase].id = "image-container-" + indexCase;
 
-      group.imgTrash.push(document.createElement("img"));
-      group.imgTrash[indexCase].classList.add("img-edit-trash");
+        // group.imgCase.push(document.createElement("img"));
+        group.imgCase[indexCase] = document.createElement("img");
+        group.imgCase[indexCase].classList.add("img-case");
 
-      if (indexCase != 36) {
-        group.caseNumber[indexCase].innerHTML = indexCase + 1;
-        group.imgCase[indexCase].src = caseImgPath;
-        // Set shown alg
-        if (
-          group.algorithmSelection[indexCase] <
-          group.algorithms[indexCase + 1].length
-        ) {
-          group.divAlgorithm[indexCase].innerHTML =
-            group.algorithms[indexCase + 1][
-              group.algorithmSelection[indexCase]
-            ];
-        } else {
-          group.divAlgorithm[indexCase].innerHTML =
-            group.customAlgorithms[indexCase];
+        // group.algorithm.push(document.createElement("div"));
+        group.algorithm[indexCase] = document.createElement("div");
+        group.algorithm[indexCase].classList.add("algorithm");
+
+        // group.btnEdit.push(document.createElement("div"));
+        group.btnEdit[indexCase] = document.createElement("div");
+        group.btnEdit[indexCase].classList.add("btn-edit");
+        group.btnEdit[indexCase].title = "Edit";
+
+        // group.imgEdit.push(document.createElement("img"));
+        group.imgEdit[indexCase] = document.createElement("img");
+        group.imgEdit[indexCase].classList.add("img-edit-trash");
+
+        // group.divAlgorithm.push(document.createElement("div"));
+        group.divAlgorithm[indexCase] = document.createElement("div");
+        group.divAlgorithm[indexCase].classList.add("div-algorithm");
+
+        // group.btnDelete.push(document.createElement("div"));
+        group.btnDelete[indexCase] = document.createElement("div");
+        group.btnDelete[indexCase].classList.add("btn-trash");
+        group.btnDelete[indexCase].title = "Delete";
+
+        // group.imgTrash.push(document.createElement("img"));
+        group.imgTrash[indexCase] = document.createElement("img");
+        group.imgTrash[indexCase].classList.add("img-edit-trash");
+
+        if (indexCase != 36) {
+          group.caseNumber[indexCase].innerHTML = indexCase + 1;
+          group.imgCase[indexCase].src = caseImgPath;
+          // Set shown alg
+          if (
+            group.algorithmSelection[indexCase] <
+            group.algorithms[indexCase + 1].length
+          ) {
+            group.divAlgorithm[indexCase].innerHTML =
+              group.algorithms[indexCase + 1][
+                group.algorithmSelection[indexCase]
+              ];
+          } else {
+            group.divAlgorithm[indexCase].innerHTML =
+              group.customAlgorithms[indexCase];
+          }
+
+          group.imgEdit[indexCase].src = "./images/edit.svg";
+          group.imgTrash[indexCase].src = "./images/trash.svg";
+
+          if (group.trash[indexCase] == true) {
+            group.divContainer[indexCase].style.display = "none";
+          }
+
+          group.divContainer[indexCase].style.background =
+            colors[group.caseSelection[indexCase]];
+
+          // group.divContainer[indexCase].appendChild(group.caseNumber[indexCase]); // Don't show case number
+
+          group.divContainer[indexCase].appendChild(
+            group.imgContainer[indexCase]
+          );
+          group.imgContainer[indexCase].appendChild(group.imgCase[indexCase]);
+          group.divContainer[indexCase].appendChild(group.algorithm[indexCase]);
+          // group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
+          // group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
+          group.algorithm[indexCase].appendChild(group.divAlgorithm[indexCase]);
+          group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
+          group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
+          // group.algorithm[indexCase].appendChild(group.btnDelete[indexCase]);
+          //group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
+
+          group.categoryContainer[indexCategory].appendChild(
+            group.divContainer[indexCase]
+          );
         }
-
-        group.imgEdit[indexCase].src = "./images/edit.svg";
-        group.imgTrash[indexCase].src = "./images/trash.svg";
-
-        if (group.trash[indexCase] == true) {
-          group.divContainer[indexCase].style.display = "none";
-        }
-
-        group.divContainer[indexCase].style.background =
-          colors[group.caseSelection[indexCase]];
-
-        group.divContainer[indexCase].appendChild(group.caseNumber[indexCase]); // Don't show case number
-        group.divContainer[indexCase].appendChild(
-          group.imgContainer[indexCase]
-        );
-        group.imgContainer[indexCase].appendChild(group.imgCase[indexCase]);
-        group.divContainer[indexCase].appendChild(group.algorithm[indexCase]);
-        // group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
-        // group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
-        group.algorithm[indexCase].appendChild(group.divAlgorithm[indexCase]);
-        group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
-        group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
-        // group.algorithm[indexCase].appendChild(group.btnDelete[indexCase]);
-        //group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
-
-        selectLayoutSub[indexGroup].appendChild(group.divContainer[indexCase]);
       }
+      selectLayoutSub[indexGroup].appendChild(
+        group.categoryContainer[indexCategory]
+      );
     }
     selectLayout.appendChild(selectLayoutSub[indexGroup]);
   }
@@ -566,7 +653,10 @@ function updateTrainCases() {
     checkboxGroupBasic.checked,
     checkboxGroupBasicBack.checked,
     checkboxGroupAdvanced.checked,
+    checkboxGroupExpert.checked,
   ];
+  leftSelection = checkboxLeft.checked;
+  rightSelection = checkboxRigt.checked;
   hintSelection = checkboxShowHint.checked;
 
   currentTrainCase = -1;
@@ -618,7 +708,6 @@ function generateTrainCaseList() {
           const indexScramble = parseInt(
             Math.random() * group.scrambles[indexCase + 1].length
           );
-          const mirroring = parseInt(Math.floor(Math.random() * 2));
           let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
 
           // Get hint algorithm
@@ -634,7 +723,15 @@ function generateTrainCaseList() {
               ];
           }
 
-          // Mirror at random
+          // Mirror if wanted
+          let mirroring;
+          if (rightSelection && leftSelection) {
+            mirroring = parseInt(Math.floor(Math.random() * 2));
+          } else if (rightSelection && !leftSelection) {
+            mirroring = 0;
+          } else if (!rightSelection && leftSelection) {
+            mirroring = 1;
+          }
           if (mirroring) {
             selectedScramble = mirrorAlg(selectedScramble);
             algHint = mirrorAlg(algHint);
@@ -794,6 +891,9 @@ function updateCheckboxStatus() {
   checkboxGroupBasic.checked = trainGroupSelection[0];
   checkboxGroupBasicBack.checked = trainGroupSelection[1];
   checkboxGroupAdvanced.checked = trainGroupSelection[2];
+  checkboxGroupExpert.checked = trainGroupSelection[3];
+  checkboxLeft.checked = leftSelection;
+  checkboxRigt.checked = rightSelection;
   checkboxShowHint.checked = hintSelection;
 }
 

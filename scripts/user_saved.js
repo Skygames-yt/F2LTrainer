@@ -1,364 +1,26 @@
 // Basic
-let basicTrash = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-];
-let basicCaseSelection = [
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  NaN,
-  0,
-  0,
-  0,
-  0,
-  0,
-]; // 0: unlearned, 1: learning, 2: finished
-let basicAlgorithmSelection = [
-  1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-];
-let basicCustomAlgorithms = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-];
+let basicTrash = [];
+let basicCaseSelection = [];
+let basicAlgorithmSelection = [];
+let basicCustomAlgorithms = [];
 
 // Basic Back
-let basicBackTrash = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-];
-let basicBackCaseSelection = [
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  NaN,
-  0,
-  0,
-  0,
-  0,
-  0,
-]; // 0: unlearned, 1: learning, 2: finished
-let basicBackAlgorithmSelection = [
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-];
-let basicBackCustomAlgorithms = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-];
+let basicBackTrash = [];
+let basicBackCaseSelection = [];
+let basicBackAlgorithmSelection = [];
+let basicBackCustomAlgorithms = [];
 
 // Advanced
-let advancedTrash = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-];
-let advancedCaseSelection = [
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-]; // 0: unlearned, 1: learning, 2: finished
-let advancedAlgorithmSelection = [
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-];
-let advandedCustomAlgorithms = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-];
+let advancedTrash = [];
+let advancedCaseSelection = [];
+let advancedAlgorithmSelection = [];
+let advandedCustomAlgorithms = [];
+
+// Expert
+let expertTrash = [];
+let expertCaseSelection = [];
+let expertAlgorithmSelection = [];
+let expertCustomAlgorithms = [];
 
 // 0 -> unlearned
 // 1 -> learning
@@ -368,11 +30,15 @@ let trainStateSelection = [false, true, false];
 // 0 -> basic
 // 1 -> basic back
 // 2 -> advanced
-let trainGroupSelection = [true, true, true];
+// 3 -> expert
+let trainGroupSelection = [true, true, true, true];
+
+let leftSelection = true;
+let rightSelection = true;
 
 let hintSelection = true;
 
-// Save - Load Functions
+// Save
 function saveUserData() {
   console.log("Saving User Data");
 
@@ -384,6 +50,11 @@ function saveUserData() {
   for (let i = 0; i < trainGroupSelection.length; i++) {
     localStorage.setItem("trainGroupSelection" + i, trainGroupSelection[i]);
   }
+
+  // Saving left right train selection
+  localStorage.setItem("leftSelection", leftSelection);
+  localStorage.setItem("rightSelection", rightSelection);
+
   // Saving hint settings
   localStorage.setItem("hintSelection", hintSelection);
 
@@ -417,8 +88,10 @@ function saveUserData() {
   updateHintVisibility();
 }
 
+// Load
 function loadUserData() {
   console.log("Loading User Data");
+  let temp;
 
   // Load trainStateSelection
   for (let i = 0; i < trainStateSelection.length; i++) {
@@ -444,7 +117,25 @@ function loadUserData() {
     }
   }
 
-  const temp = localStorage.getItem("hintSelection");
+  temp = localStorage.getItem("leftSelection");
+  if (temp != null) {
+    if (temp == "true") {
+      leftSelection = true;
+    } else {
+      leftSelection = false;
+    }
+  }
+
+  temp = localStorage.getItem("rightSelection");
+  if (temp != null) {
+    if (temp == "true") {
+      rightSelection = true;
+    } else {
+      rightSelection = false;
+    }
+  }
+
+  temp = localStorage.getItem("hintSelection");
   if (temp != null) {
     if (temp == "true") {
       hintSelection = true;
@@ -461,20 +152,27 @@ function loadUserData() {
       // Load Trash
       temp = localStorage.getItem(group.saveName + "trash" + indexCase);
       if (temp !== null) {
-        group.trash[indexCase] = temp;
+        group.trash.push(temp);
+      } else {
+        group.trash.push(false);
       }
 
       // Load Case Selection
       temp = localStorage.getItem(group.saveName + "caseSelection" + indexCase);
       if (temp !== null) {
-        group.caseSelection[indexCase] = temp;
+        group.caseSelection.push(temp);
+      } else {
+        group.caseSelection.push(0);
       }
+
       // Load Custom Algorithms
       temp = localStorage.getItem(
         group.saveName + "customAlgorithms" + indexCase
       );
       if (temp !== null) {
-        group.customAlgorithms[indexCase] = temp;
+        group.customAlgorithms.push(temp);
+      } else {
+        group.customAlgorithms.push("");
       }
 
       // Load Algorithm Selection
@@ -482,7 +180,9 @@ function loadUserData() {
         group.saveName + "algorithmSelection" + indexCase
       );
       if (temp !== null) {
-        group.algorithmSelection[indexCase] = temp;
+        group.algorithmSelection.push(temp);
+      } else {
+        group.algorithmSelection.push(0);
       }
     }
   }
@@ -494,5 +194,5 @@ function loadUserData() {
 function clearUserData() {
   console.log("Clearing");
   localStorage.clear();
-  console.log(localStorage);
+  console.log("localStorage: " + localStorage);
 }
