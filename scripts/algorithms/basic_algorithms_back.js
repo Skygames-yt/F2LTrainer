@@ -1,5 +1,5 @@
 const basicAlgorithmsBack = {
-  1: ["r' U' R U M'", "f R' f'", "y' U (L U' L')", "y U (R U' R')"],
+  1: ["r' U' R U M'", "U f R' f'", "y' U (L U' L')", "y U (R U' R')"],
   2: ["U' (R' U R)"],
   3: ["(R' U' R)"],
   4: ["y' (L U L')", "y (R U R')"],
