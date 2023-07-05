@@ -80,26 +80,23 @@
     <!-- Info -->
     <div id="info-container" class="popup-container">
       <h1>Here some info</h1>
-      <h3>Categorize Cases</h3>
+      <h3>How to use the F2L Trainer</h3>
       <p>
-        Click on the Rubiks Cube to change this case to "Unlearned", "Learing"
-        or "Finished".
+        Select the F2L cases you want to train by pressing the <b>cube</b>.
+        There are three categories: Unlearned, Learning and Finished. Press
+        <b>Train</b> to switch to the training view.
       </p>
-      <h3>Keyboard shortcuts</h3>
-      <p>
-        [Space] ... next scramble<br />
-        [Right arrow key] ... next hint
-      </p>
-
       <h3>Bugs</h3>
-      If you find a bug please create a issue on
-      <a
-        href="https://github.com/Dave2ooo/F2LTrainer/issues"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Github</a
-      >
-      and report the bug.
+      <p>
+        If you find a bug please create a issue on
+        <a
+          href="https://github.com/Dave2ooo/F2LTrainer/issues"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Github</a
+        >
+        and report the bug.
+      </p>
     </div>
 
     <!-- Trash -->
@@ -158,6 +155,7 @@
             onclick="nextScramble(0)"
             alt="previous scramble"
             id="btn-next-scramble"
+            class="btn-next-prev"
             title="Previous Scramble"
           />
           <div id="scramble-div">Scramble</div>
@@ -166,6 +164,7 @@
             onclick="nextScramble(1)"
             alt="next scramble"
             id="btn-next-scramble"
+            class="btn-next-prev"
             title="Next Scramble"
           />
         </div>
