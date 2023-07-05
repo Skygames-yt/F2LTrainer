@@ -33,7 +33,9 @@ const trashContainer = document.getElementById("trash-container");
 const selectState = document.getElementById("select-state");
 const possibleStates = ["Unlearned", "Learning", "Finished", "All"];
 
-const colors = ["rgba(0, 0, 0, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)"];
+// const colors = ["rgba(0, 0, 0, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)"];
+const colors = ["rgba(0, 0, 0, 0)", "rgb(236 236 0)", "rgb(0 196 0)"];
+const colorsText = ["rgb(255 255 255)", "rgb(0 0 0)", "rgb(255 255 255)"];
 
 const imgPathRightArrow = "./images/arrow_collapse_right.svg";
 const imgPathDownArrow = "./images/arrow_collapse_down.svg";
@@ -152,6 +154,7 @@ window.addEventListener("load", () => {
           group.caseSelection[i] = 0;
         }
         group.divContainer[i].style.background = colors[group.caseSelection[i]];
+        group.divContainer[i].style.color = colorsText[group.caseSelection[i]];
         // Save
         saveUserData();
       });
@@ -220,7 +223,7 @@ window.addEventListener("load", () => {
       btnSettingsTrain.style.display = "flex";
     } else {
       mode = 0;
-      changeMode.innerHTML = "Training Mode";
+      changeMode.innerHTML = "Train";
       selectLayout.style.display = "block";
       // sideContainer.style.display = "block";
       selectGroup.style.display = "block";
@@ -284,7 +287,7 @@ function addElementsToBOM() {
       if (group.collapse[indexCategory]) {
         group.categoryContainer[indexCategory].style.display = "none";
         group.categoryCollapseImg[indexCategory].src = imgPathRightArrow;
-      }else{
+      } else {
         group.categoryCollapseImg[indexCategory].src = imgPathDownArrow;
       }
       //selectLayoutSub[indexGroup].appendChild(group.categoryCollapseImg[indexCategory]);
