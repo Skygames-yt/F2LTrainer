@@ -296,7 +296,6 @@ const basicAlgorithms = {
     "U2 (R' F R F') U2 (R U R')",
     "y' U (R' U' R U') y (R U R')",
   ],
-  37: {},
   38: [
     "(R U' R') d (R' U2 R) U2' (R' U R)",
     "(R' F R F') (R U' R' U) (R U' R' U2) (R U' R')",
