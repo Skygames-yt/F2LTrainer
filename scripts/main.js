@@ -14,7 +14,7 @@ let selectedAlgNumber = 0;
 
 // Maximum number of algs per Case
 const numberAlgMax = 20;
-const algColors = ["transparent", "yellow"];
+const algColors = ["transparent", "#009900"];
 
 const selectLayout = document.getElementById("select-layout");
 const selectLayoutSub = Array(groups.length);
@@ -33,7 +33,6 @@ const trashContainer = document.getElementById("trash-container");
 const selectState = document.getElementById("select-state");
 const possibleStates = ["Unlearned", "Learning", "Finished", "All"];
 
-// const colors = ["rgba(0, 0, 0, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)"];
 const colors = ["rgba(0, 0, 0, 0)", "rgb(236 236 0)", "rgb(0 196 0)"];
 const colorsText = ["rgb(255 255 255)", "rgb(0 0 0)", "rgb(255 255 255)"];
 
@@ -52,12 +51,8 @@ const checkboxFinished = document.getElementById("checkboxFinishedId");
 // checkboxFinished.style.backgroundColor = colors[2]; // not working
 
 const checkboxGroupBasic = document.getElementById("checkboxGroupBasicId");
-const checkboxGroupBasicBack = document.getElementById(
-  "checkboxGroupBasicBackId"
-);
-const checkboxGroupAdvanced = document.getElementById(
-  "checkboxGroupAdvancedId"
-);
+const checkboxGroupBasicBack = document.getElementById("checkboxGroupBasicBackId");
+const checkboxGroupAdvanced = document.getElementById("checkboxGroupAdvancedId");
 const checkboxGroupExpert = document.getElementById("checkboxGroupExpertId");
 
 const checkboxLeft = document.getElementById("checkboxLeftId");
@@ -85,17 +80,13 @@ let currentTrainCase = -1;
 // Basic, Basic Back, Advanced, Exert
 const selectGroup = document.getElementById("select-group");
 
-const checkboxGroupContainer = document.getElementById(
-  "checkbox-group-container"
-);
+const checkboxGroupContainer = document.getElementById("checkbox-group-container");
 
 const labelGroupCheckbox = [];
 const groupCheckbox = [];
 
 let boolShowDebugInfo = false;
-const btnShowHideDebugInfo = document.getElementById(
-  "btn-show-hide-debug-info"
-);
+const btnShowHideDebugInfo = document.getElementById("btn-show-hide-debug-info");
 const divDebug = document.getElementById("div-debug-info");
 
 let generatedScrambles = [];
@@ -131,10 +122,7 @@ window.addEventListener("load", () => {
   editalgListentry.forEach(function (button, i) {
     button.addEventListener("click", function () {
       // Change Background when selected
-      if (
-        selectedAlgNumber <
-        groups[selectGroup.selectedIndex].algorithms[selectedCase + 1].length
-      ) {
+      if (selectedAlgNumber < groups[selectGroup.selectedIndex].algorithms[selectedCase + 1].length) {
         editalgListentry[selectedAlgNumber].style.background = algColors[0];
       } else {
         editalgCustomalg.style.background = algColors[0];
@@ -259,30 +247,20 @@ function addElementsToBOM() {
   // Iterate "Basic", "Basic Back", "Advanced"
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
-    // selectLayoutSub.push(document.createElement("div"));
     selectLayoutSub[indexGroup] = document.createElement("div");
     selectLayoutSub[indexGroup].classList.add("all-alg-container");
 
-    for (
-      let indexCategory = 0;
-      indexCategory < group.categoryCases.length;
-      indexCategory++
-    ) {
+    // Iterate over all cases
+    for (let indexCategory = 0; indexCategory < group.categoryCases.length; indexCategory++) {
       let categoryItems = group.categoryCases[indexCategory];
       group.categoryContainer[indexCategory] = document.createElement("div");
-      group.categoryContainer[indexCategory].classList.add(
-        "div-category-container"
-      );
+      group.categoryContainer[indexCategory].classList.add("div-category-container");
 
       group.collapseContainer.push(document.createElement("div"));
-      group.collapseContainer[indexCategory].classList.add(
-        "collapse-container"
-      );
+      group.collapseContainer[indexCategory].classList.add("collapse-container");
 
       group.categoryCollapseImg.push(document.createElement("img"));
-      group.categoryCollapseImg[indexCategory].classList.add(
-        "img-collapse-category"
-      );
+      group.categoryCollapseImg[indexCategory].classList.add("img-collapse-category");
 
       if (group.collapse[indexCategory]) {
         group.categoryContainer[indexCategory].style.display = "none";
@@ -293,130 +271,97 @@ function addElementsToBOM() {
       //selectLayoutSub[indexGroup].appendChild(group.categoryCollapseImg[indexCategory]);
 
       group.headingCategoryName.push(document.createElement("h2"));
-      group.headingCategoryName[indexCategory].classList.add(
-        "heading-category-name"
-      );
+      group.headingCategoryName[indexCategory].classList.add("heading-category-name");
 
-      group.headingCategoryName[indexCategory].innerHTML =
-        group.categoryNames[indexCategory];
+      group.headingCategoryName[indexCategory].innerHTML = group.categoryNames[indexCategory];
       //selectLayoutSub[indexGroup].appendChild(group.headingCategoryName[indexCategory]);
 
-      group.collapseContainer[indexCategory].appendChild(
-        group.categoryCollapseImg[indexCategory]
-      );
-      group.collapseContainer[indexCategory].appendChild(
-        group.headingCategoryName[indexCategory]
-      );
-      selectLayoutSub[indexGroup].appendChild(
-        group.collapseContainer[indexCategory]
-      );
+      group.collapseContainer[indexCategory].appendChild(group.categoryCollapseImg[indexCategory]);
+      group.collapseContainer[indexCategory].appendChild(group.headingCategoryName[indexCategory]);
+      selectLayoutSub[indexGroup].appendChild(group.collapseContainer[indexCategory]);
 
-      for (
-        let indexCategoryItem = 0;
-        indexCategoryItem < categoryItems.length;
-        indexCategoryItem++
-      ) {
+      for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
         let indexCase = categoryItems[indexCategoryItem] - 1;
-
+        // Check if selected algorithm is valid
+        if (group.algorithms[indexCase + 1] == undefined) {
+          console.warn("Trying to access invalid Case\nindexGroup: " + indexGroup + "\nindexCase: " + indexCase);
+          continue;
+        }
         // Case Selection Page
-        const caseImgPath =
-          group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
+        const caseImgPath = group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
 
-        // group.divContainer.push(document.createElement("div"));
         group.divContainer[indexCase] = document.createElement("div");
         group.divContainer[indexCase].classList.add("div-container");
+        group.divContainer[indexCase].style.background = colors[group.caseSelection[indexCase]];
+        group.divContainer[indexCase].style.color = colorsText[group.caseSelection[indexCase]];
 
-        // group.caseNumber.push(document.createElement("div"));
         group.caseNumber[indexCase] = document.createElement("div");
         group.caseNumber[indexCase].classList.add("case-number");
 
-        // group.imgContainer.push(document.createElement("div"));
         group.imgContainer[indexCase] = document.createElement("div");
         group.imgContainer[indexCase].classList.add("image-container");
         group.imgContainer[indexCase].id = "image-container-" + indexCase;
 
-        // group.imgCase.push(document.createElement("img"));
         group.imgCase[indexCase] = document.createElement("img");
         group.imgCase[indexCase].classList.add("img-case");
 
-        // group.algorithm.push(document.createElement("div"));
         group.algorithm[indexCase] = document.createElement("div");
         group.algorithm[indexCase].classList.add("algorithm");
 
-        // group.btnEdit.push(document.createElement("div"));
         group.btnEdit[indexCase] = document.createElement("div");
         group.btnEdit[indexCase].classList.add("btn-edit");
         group.btnEdit[indexCase].title = "Edit";
 
-        // group.imgEdit.push(document.createElement("img"));
         group.imgEdit[indexCase] = document.createElement("img");
         group.imgEdit[indexCase].classList.add("img-edit-trash");
 
-        // group.divAlgorithm.push(document.createElement("div"));
         group.divAlgorithm[indexCase] = document.createElement("div");
         group.divAlgorithm[indexCase].classList.add("div-algorithm");
 
-        // group.btnDelete.push(document.createElement("div"));
         group.btnDelete[indexCase] = document.createElement("div");
         group.btnDelete[indexCase].classList.add("btn-trash");
         group.btnDelete[indexCase].title = "Delete";
 
-        // group.imgTrash.push(document.createElement("img"));
         group.imgTrash[indexCase] = document.createElement("img");
         group.imgTrash[indexCase].classList.add("img-edit-trash");
 
-        if (indexCase != 36) {
-          group.caseNumber[indexCase].innerHTML = indexCase + 1;
-          group.imgCase[indexCase].src = caseImgPath;
-          // Set shown alg
-          if (
-            group.algorithmSelection[indexCase] <
-            group.algorithms[indexCase + 1].length
-          ) {
-            group.divAlgorithm[indexCase].innerHTML =
-              group.algorithms[indexCase + 1][
-                group.algorithmSelection[indexCase]
-              ];
-          } else {
-            group.divAlgorithm[indexCase].innerHTML =
-              group.customAlgorithms[indexCase];
-          }
-
-          group.imgEdit[indexCase].src = "./images/edit.svg";
-          group.imgTrash[indexCase].src = "./images/trash.svg";
-
-          if (group.trash[indexCase] == true) {
-            group.divContainer[indexCase].style.display = "none";
-          }
-
-          group.divContainer[indexCase].style.background =
-            colors[group.caseSelection[indexCase]];
-
-          group.divContainer[indexCase].appendChild(
-            group.caseNumber[indexCase]
-          ); // Don't show case number
-
-          group.divContainer[indexCase].appendChild(
-            group.imgContainer[indexCase]
-          );
-          group.imgContainer[indexCase].appendChild(group.imgCase[indexCase]);
-          group.divContainer[indexCase].appendChild(group.algorithm[indexCase]);
-          // group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
-          // group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
-          group.algorithm[indexCase].appendChild(group.divAlgorithm[indexCase]);
-          group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
-          group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
-          // group.algorithm[indexCase].appendChild(group.btnDelete[indexCase]);
-          //group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
-
-          group.categoryContainer[indexCategory].appendChild(
-            group.divContainer[indexCase]
-          );
+        //if (indexCase != 36) {
+        group.caseNumber[indexCase].innerHTML = indexCase + 1;
+        group.imgCase[indexCase].src = caseImgPath;
+        // Set shown alg
+        if (group.algorithmSelection[indexCase] < group.algorithms[indexCase + 1].length) {
+          group.divAlgorithm[indexCase].innerHTML =
+            group.algorithms[indexCase + 1][group.algorithmSelection[indexCase]];
+        } else {
+          group.divAlgorithm[indexCase].innerHTML = group.customAlgorithms[indexCase];
         }
+
+        group.imgEdit[indexCase].src = "./images/edit.svg";
+        group.imgTrash[indexCase].src = "./images/trash.svg";
+
+        if (group.trash[indexCase] == true) {
+          group.divContainer[indexCase].style.display = "none";
+        }
+
+        group.divContainer[indexCase].style.background = colors[group.caseSelection[indexCase]];
+
+        group.divContainer[indexCase].appendChild(group.caseNumber[indexCase]); // Don't show case number
+
+        group.divContainer[indexCase].appendChild(group.imgContainer[indexCase]);
+        group.imgContainer[indexCase].appendChild(group.imgCase[indexCase]);
+        group.divContainer[indexCase].appendChild(group.algorithm[indexCase]);
+        // group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
+        // group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
+        group.algorithm[indexCase].appendChild(group.divAlgorithm[indexCase]);
+        group.algorithm[indexCase].appendChild(group.btnEdit[indexCase]);
+        group.btnEdit[indexCase].appendChild(group.imgEdit[indexCase]);
+        // group.algorithm[indexCase].appendChild(group.btnDelete[indexCase]);
+        //group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
+
+        group.categoryContainer[indexCategory].appendChild(group.divContainer[indexCase]);
+        //}
       }
-      selectLayoutSub[indexGroup].appendChild(
-        group.categoryContainer[indexCategory]
-      );
+      selectLayoutSub[indexGroup].appendChild(group.categoryContainer[indexCategory]);
     }
     selectLayout.appendChild(selectLayoutSub[indexGroup]);
   }
@@ -429,13 +374,10 @@ function addTrashElementsToBOM() {
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       // Case Selection Page
-      const caseImgPath =
-        group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
+      const caseImgPath = group.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
 
       group.trashElementContainer.push(document.createElement("div"));
-      group.trashElementContainer[indexCase].classList.add(
-        "trash-element-container"
-      );
+      group.trashElementContainer[indexCase].classList.add("trash-element-container");
 
       group.caseNumberTrash.push(document.createElement("div"));
       group.caseNumberTrash[indexCase].classList.add("case-number-trash");
@@ -457,18 +399,10 @@ function addTrashElementsToBOM() {
           group.trashElementContainer[indexCase].style.display = "none";
         }
 
-        group.trashElementContainer[indexCase].appendChild(
-          group.caseNumberTrash[indexCase]
-        );
-        group.trashElementContainer[indexCase].appendChild(
-          group.imgContainerTrash[indexCase]
-        );
-        group.imgContainerTrash[indexCase].appendChild(
-          group.imgCaseTrash[indexCase]
-        );
-        group.trashElementContainer[indexCase].appendChild(
-          group.btnRecover[indexCase]
-        );
+        group.trashElementContainer[indexCase].appendChild(group.caseNumberTrash[indexCase]);
+        group.trashElementContainer[indexCase].appendChild(group.imgContainerTrash[indexCase]);
+        group.imgContainerTrash[indexCase].appendChild(group.imgCaseTrash[indexCase]);
+        group.trashElementContainer[indexCase].appendChild(group.btnRecover[indexCase]);
 
         trashContainer.appendChild(group.trashElementContainer[indexCase]);
       }
@@ -485,12 +419,10 @@ function updateAlg() {
   // Check if selected alg is default or custom
   if (selectedAlgNumber < group.algorithms[selectedCase + 1].length) {
     // If selected Alg is default
-    group.divAlgorithm[selectedCase].innerHTML =
-      group.algorithms[selectedCase + 1][selectedAlgNumber];
+    group.divAlgorithm[selectedCase].innerHTML = group.algorithms[selectedCase + 1][selectedAlgNumber];
   } else {
     // If selected Alg is custom
-    group.divAlgorithm[selectedCase].innerHTML =
-      group.customAlgorithms[selectedCase];
+    group.divAlgorithm[selectedCase].innerHTML = group.customAlgorithms[selectedCase];
   }
   // Save which Alg was selected
   group.algorithmSelection[selectedCase] = selectedAlgNumber;
@@ -535,8 +467,7 @@ function editAlgs(indexGroup, indexCase) {
   // Check if previously saved alg is default of custom
   if (selectedAlgNumber < group.algorithms[selectedCase + 1].length) {
     // If alg is default set color of selected alg
-    editalgListentry[group.algorithmSelection[selectedCase]].style.background =
-      algColors[1];
+    editalgListentry[group.algorithmSelection[selectedCase]].style.background = algColors[1];
     // and reset color of custom
     editalgCustomalg.style.background = algColors[0];
   } else {
@@ -560,8 +491,7 @@ function customAlgSelected() {
   // Reset Background of previously selected Alg
   editalgCustomalg.style.background = algColors[1];
   // Set selected Alg to number of selected Alg
-  selectedAlgNumber =
-    groups[selectGroup.selectedIndex].algorithms[selectedCase + 1].length;
+  selectedAlgNumber = groups[selectGroup.selectedIndex].algorithms[selectedCase + 1].length;
 }
 
 function keydown(e) {
@@ -659,11 +589,7 @@ function showSettingsTrain() {
 }
 
 function updateTrainCases() {
-  trainStateSelection = [
-    checkboxUnlerned.checked,
-    checkboxLearning.checked,
-    checkboxFinished.checked,
-  ];
+  trainStateSelection = [checkboxUnlerned.checked, checkboxLearning.checked, checkboxFinished.checked];
   trainGroupSelection = [
     checkboxGroupBasic.checked,
     checkboxGroupBasicBack.checked,
@@ -707,64 +633,67 @@ function groupSelected() {
 
 function generateTrainCaseList() {
   trainCaseList = [];
-  // currentTrainCase = 0;
 
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
     if (!trainGroupSelection[indexGroup]) continue;
+    for (let indexCategory = 0; indexCategory < group.categoryCases.length; indexCategory++) {
+      let categoryItems = group.categoryCases[indexCategory];
+      for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
+        let indexCase = categoryItems[indexCategoryItem] - 1;
+        //for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
+        for (let state = 0; state < trainStateSelection.length; state++) {
+          if (trainStateSelection[state] && group.caseSelection[indexCase] == state) {
+            if (group.scrambles[indexCase + 1] == undefined)
+              console.warn(
+                "group.scrambles[indexCase + 1] == undefined\nindexGroup: " +
+                  indexGroup +
+                  "\nindexCase: " +
+                  indexCase +
+                  "\ngroup.scrambles: " +
+                  group.scrambles
+              );
 
-    for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
-      for (let state = 0; state < trainStateSelection.length; state++) {
-        if (
-          trainStateSelection[state] &&
-          group.caseSelection[indexCase] == state
-        ) {
-          // Get scramble index
-          const indexScramble = parseInt(
-            Math.random() * group.scrambles[indexCase + 1].length
-          );
-          let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
+            // Get scramble index
+            const indexScramble = parseInt(Math.random() * group.scrambles[indexCase + 1].length);
+            let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
 
-          // Get hint algorithm
-          if (
-            group.algorithmSelection[indexCase] >=
-            group.algorithms[indexCase + 1].length
-          ) {
-            algHint = group.customAlgorithms[indexCase];
-          } else {
-            algHint =
-              group.algorithms[indexCase + 1][
-                group.algorithmSelection[indexCase]
-              ];
+            // Get hint algorithm
+            if (group.algorithmSelection[indexCase] >= group.algorithms[indexCase + 1].length) {
+              algHint = group.customAlgorithms[indexCase];
+            } else {
+              algHint = group.algorithms[indexCase + 1][group.algorithmSelection[indexCase]];
+            }
+
+            // Mirror if wanted
+            let mirroring;
+            if (rightSelection && leftSelection) {
+              mirroring = parseInt(Math.floor(Math.random() * 2));
+            } else if (rightSelection && !leftSelection) {
+              mirroring = 0;
+            } else if (!rightSelection && leftSelection) {
+              mirroring = 1;
+            }
+            if (mirroring) {
+              selectedScramble = mirrorAlg(selectedScramble);
+              algHint = mirrorAlg(algHint);
+            }
+
+            // Add U move if wanted
+            if (aufSelection) selectedScramble = addRandomUMove(selectedScramble);
+
+            const caseToAdd = {
+              indexGroup: indexGroup,
+              indexCase: indexCase,
+              indexScramble: indexScramble,
+              mirroring: mirroring,
+              selectedScramble: selectedScramble,
+              algHint: algHint,
+            };
+
+            trainCaseList.push(caseToAdd);
+            break;
           }
-
-          // Mirror if wanted
-          let mirroring;
-          if (rightSelection && leftSelection) {
-            mirroring = parseInt(Math.floor(Math.random() * 2));
-          } else if (rightSelection && !leftSelection) {
-            mirroring = 0;
-          } else if (!rightSelection && leftSelection) {
-            mirroring = 1;
-          }
-          if (mirroring) {
-            selectedScramble = mirrorAlg(selectedScramble);
-            algHint = mirrorAlg(algHint);
-          }
-          // Add random U move
-          selectedScramble = addRandomUMove(selectedScramble);
-
-          const caseToAdd = {
-            indexGroup: indexGroup,
-            indexCase: indexCase,
-            indexScramble: indexScramble,
-            mirroring: mirroring,
-            selectedScramble: selectedScramble,
-            algHint: algHint,
-          };
-
-          trainCaseList.push(caseToAdd);
-          break;
         }
       }
     }
@@ -804,8 +733,7 @@ function nextScramble(nextPrevious) {
   const indexCase = generatedScrambles[currentTrainCase].indexCase;
   const indexScramble = generatedScrambles[currentTrainCase].indexScramble;
   const mirroring = generatedScrambles[currentTrainCase].mirroring;
-  const selectedScramble =
-    generatedScrambles[currentTrainCase].selectedScramble;
+  const selectedScramble = generatedScrambles[currentTrainCase].selectedScramble;
   const algHint = generatedScrambles[currentTrainCase].algHint;
 
   const group = groups[indexGroup];
@@ -818,17 +746,6 @@ function nextScramble(nextPrevious) {
   } else {
     hintImg.src = group.imgPath + "left/F2L" + (indexCase + 1) + ".svg";
   }
-
-  // let selectedScramble = group.scrambles[indexCase + 1][indexScramble];
-
-  // Mirror at random
-  // if (Math.floor(Math.random() * 2)) {
-  //   selectedScramble = mirrorAlg(selectedScramble);
-  //   algHint = mirrorAlg(algHint);
-  // }
-
-  // Add random U move
-  // selectedScramble = addRandomUMove(selectedScramble);
 
   // Show scramble
   scrambleDiv.innerText = selectedScramble;
@@ -881,8 +798,7 @@ function addSelectGroupTrain() {
 
     labelGroupCheckbox[indexGroup].classList.add("checkbox");
 
-    labelGroupCheckbox[indexGroup].htmlFor =
-      "checkboxGroup" + group.idName + "Id";
+    labelGroupCheckbox[indexGroup].htmlFor = "checkboxGroup" + group.idName + "Id";
 
     const difAfter = document.createElement("div");
     difAfter.classList.add("checkbox__box");

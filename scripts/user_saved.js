@@ -39,7 +39,7 @@ let trainGroupSelection = [true, true, true, true];
 
 let leftSelection = true;
 let rightSelection = true;
-
+let aufSelection = true;
 let hintSelection = true;
 
 // Save
@@ -58,6 +58,9 @@ function saveUserData() {
   // Saving left right train selection
   localStorage.setItem("leftSelection", leftSelection);
   localStorage.setItem("rightSelection", rightSelection);
+
+  // Saving AUF selection
+  localStorage.setItem("AUF", aufSelection);
 
   // Saving hint settings
   localStorage.setItem("hintSelection", hintSelection);
@@ -119,54 +122,40 @@ function loadUserData() {
 
   // Load trainStateSelection
   for (let i = 0; i < trainStateSelection.length; i++) {
-    const temp = localStorage.getItem("trainStateSelection" + i);
-    if (temp !== null) {
-      if (temp == "true") {
-        trainStateSelection[i] = true;
-      } else {
-        trainStateSelection[i] = false;
-      }
-    }
+    // const temp = localStorage.getItem("trainStateSelection" + i);
+    // if (temp !== null) {
+    //   if (temp == "true") {
+    //     trainStateSelection[i] = true;
+    //   } else {
+    //     trainStateSelection[i] = false;
+    //   }
+    // }
+    trainStateSelection[i] = loadBoolean(
+      "trainStateSelection" + i,
+      trainStateSelection[i]
+    );
   }
 
   // Load trainGroupSelection
   for (let i = 0; i < trainGroupSelection.length; i++) {
-    const temp = localStorage.getItem("trainGroupSelection" + i);
-    if (temp !== null) {
-      if (temp == "true") {
-        trainGroupSelection[i] = true;
-      } else {
-        trainGroupSelection[i] = false;
-      }
-    }
+    // const temp = localStorage.getItem("trainGroupSelection" + i);
+    // if (temp !== null) {
+    //   if (temp == "true") {
+    //     trainGroupSelection[i] = true;
+    //   } else {
+    //     trainGroupSelection[i] = false;
+    //   }
+    // }
+    trainGroupSelection[i] = loadBoolean(
+      "trainGroupSelection" + i,
+      trainGroupSelection[i]
+    );
   }
 
-  temp = localStorage.getItem("leftSelection");
-  if (temp != null) {
-    if (temp == "true") {
-      leftSelection = true;
-    } else {
-      leftSelection = false;
-    }
-  }
-
-  temp = localStorage.getItem("rightSelection");
-  if (temp != null) {
-    if (temp == "true") {
-      rightSelection = true;
-    } else {
-      rightSelection = false;
-    }
-  }
-
-  temp = localStorage.getItem("hintSelection");
-  if (temp != null) {
-    if (temp == "true") {
-      hintSelection = true;
-    } else {
-      hintSelection = false;
-    }
-  }
+  leftSelection = loadBoolean("leftSelection", leftSelection);
+  rightSelection = loadBoolean("rightSelection", rightSelection);
+  aufSelection = loadBoolean("aufSelection", aufSelection);
+  hintSelection = loadBoolean("hintSelection", hintSelection);
 
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
@@ -230,6 +219,19 @@ function loadUserData() {
 
   updateCheckboxStatus();
   updateHintVisibility();
+}
+
+function loadBoolean(saveName, varName) {
+  const temp = localStorage.getItem(saveName);
+  if (temp != null) {
+    if (temp == "true") {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return varName;
+  }
 }
 
 function clearUserData() {
