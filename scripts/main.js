@@ -91,6 +91,7 @@ const divDebug = document.getElementById("div-debug-info");
 
 let generatedScrambles = [];
 
+// ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
   // Load User saved Data (user_saved.js)
   loadUserData();
@@ -109,10 +110,10 @@ window.addEventListener("load", () => {
 
   //Edit Button - Click on Edit Button
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
-    // TEST
     const group = groups[indexGroup];
     group.imgEdit.forEach(function (button, indexCase) {
       button.addEventListener("click", function () {
+        console.log("indexGroup: " + indexGroup + "\nindexCase: " + indexCase);
         editAlgs(indexGroup, indexCase);
       });
     });
@@ -314,6 +315,7 @@ function addElementsToBOM() {
 
         group.imgEdit[indexCase] = document.createElement("img");
         group.imgEdit[indexCase].classList.add("img-edit-trash");
+        // console.log("Creating:\nindexGroup: " + indexGroup + "\nindexCase: " + indexCase);
 
         group.divAlgorithm[indexCase] = document.createElement("div");
         group.divAlgorithm[indexCase].classList.add("div-algorithm");

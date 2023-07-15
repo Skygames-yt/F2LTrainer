@@ -68,11 +68,7 @@ function saveUserData() {
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
     // console.log(group);
-    for (
-      let indexCategory = 0;
-      indexCategory < group.categoryCases.length;
-      indexCategory++
-    ) {
+    for (let indexCategory = 0; indexCategory < group.categoryCases.length; indexCategory++) {
       /*console.log(
         "saveName: " +
           group.saveName +
@@ -83,33 +79,18 @@ function saveUserData() {
           "]: " +
           group.collapse[indexCategory]
       );*/
-      localStorage.setItem(
-        group.saveName + "collapse" + indexCategory,
-        group.collapse[indexCategory]
-      );
+      localStorage.setItem(group.saveName + "collapse" + indexCategory, group.collapse[indexCategory]);
     }
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
       // Save Trash
-      localStorage.setItem(
-        group.saveName + "trash" + indexCase,
-        group.trash[indexCase]
-      );
+      localStorage.setItem(group.saveName + "trash" + indexCase, group.trash[indexCase]);
       // Save Case Selection
-      localStorage.setItem(
-        group.saveName + "caseSelection" + indexCase,
-        group.caseSelection[indexCase]
-      );
+      localStorage.setItem(group.saveName + "caseSelection" + indexCase, group.caseSelection[indexCase]);
       // Save Custom Algorithms
-      localStorage.setItem(
-        group.saveName + "customAlgorithms" + indexCase,
-        group.customAlgorithms[indexCase]
-      );
+      localStorage.setItem(group.saveName + "customAlgorithms" + indexCase, group.customAlgorithms[indexCase]);
       // Save Algorithm Selection
-      localStorage.setItem(
-        group.saveName + "algorithmSelection" + indexCase,
-        group.algorithmSelection[indexCase]
-      );
+      localStorage.setItem(group.saveName + "algorithmSelection" + indexCase, group.algorithmSelection[indexCase]);
     }
   }
   updateHintVisibility();
@@ -122,34 +103,12 @@ function loadUserData() {
 
   // Load trainStateSelection
   for (let i = 0; i < trainStateSelection.length; i++) {
-    // const temp = localStorage.getItem("trainStateSelection" + i);
-    // if (temp !== null) {
-    //   if (temp == "true") {
-    //     trainStateSelection[i] = true;
-    //   } else {
-    //     trainStateSelection[i] = false;
-    //   }
-    // }
-    trainStateSelection[i] = loadBoolean(
-      "trainStateSelection" + i,
-      trainStateSelection[i]
-    );
+    trainStateSelection[i] = loadBoolean("trainStateSelection" + i, trainStateSelection[i]);
   }
 
   // Load trainGroupSelection
   for (let i = 0; i < trainGroupSelection.length; i++) {
-    // const temp = localStorage.getItem("trainGroupSelection" + i);
-    // if (temp !== null) {
-    //   if (temp == "true") {
-    //     trainGroupSelection[i] = true;
-    //   } else {
-    //     trainGroupSelection[i] = false;
-    //   }
-    // }
-    trainGroupSelection[i] = loadBoolean(
-      "trainGroupSelection" + i,
-      trainGroupSelection[i]
-    );
+    trainGroupSelection[i] = loadBoolean("trainGroupSelection" + i, trainGroupSelection[i]);
   }
 
   leftSelection = loadBoolean("leftSelection", leftSelection);
@@ -160,11 +119,7 @@ function loadUserData() {
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     const group = groups[indexGroup];
 
-    for (
-      let indexCategory = 0;
-      indexCategory < group.categoryCases.length;
-      indexCategory++
-    ) {
+    for (let indexCategory = 0; indexCategory < group.categoryCases.length; indexCategory++) {
       temp = localStorage.getItem(group.saveName + "collapse" + indexCategory);
       if (temp !== null && temp == "true") {
         group.collapse.push(true);
@@ -196,9 +151,7 @@ function loadUserData() {
       }
 
       // Load Custom Algorithms
-      temp = localStorage.getItem(
-        group.saveName + "customAlgorithms" + indexCase
-      );
+      temp = localStorage.getItem(group.saveName + "customAlgorithms" + indexCase);
       if (temp !== null) {
         group.customAlgorithms.push(temp);
       } else {
@@ -206,9 +159,7 @@ function loadUserData() {
       }
 
       // Load Algorithm Selection
-      temp = localStorage.getItem(
-        group.saveName + "algorithmSelection" + indexCase
-      );
+      temp = localStorage.getItem(group.saveName + "algorithmSelection" + indexCase);
       if (temp !== null) {
         group.algorithmSelection.push(temp);
       } else {
