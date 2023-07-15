@@ -5,7 +5,6 @@ const advancedScrambles = {
     "U' F R2 F' R2 U",
     "U2 F R2 F' R2 U",
     "U F R2 F' R2 U",
-    "R U R2 U' R U",
     "R U2 R2 U2 R U",
     "B F' U2 B' F U",
     "F' U' B U' B' F",
