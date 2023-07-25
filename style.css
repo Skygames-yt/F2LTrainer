@@ -6,7 +6,7 @@
   --var-filter-img: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
   --var-filter-white: invert(14%) sepia(59%) saturate(4183%) hue-rotate(353deg) brightness(90%) contrast(125%);
   --var-color-img: #00ee00;
-  --var-color-popup: #3d3396;
+  --var-color-popup: #1f3d52;
   --var-color-btn-hover: #140553;
   --var-color-overlay: gray;
 }
@@ -40,6 +40,12 @@ body {
   height: 100%;
   overflow: hidden;
 } */
+
+button {
+  background-color: transparent;
+  border: none;
+  color: var(--var-color-text);
+}
 
 .side-img,
 .img-collapse-category,
