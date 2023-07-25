@@ -24,9 +24,8 @@ const overlay = document.getElementById("overlay");
 const infoContainer = document.getElementById("info-container");
 
 // side buttons
-const btnSetting = document.getElementById("btn-settings");
-const btnTrash = document.getElementById("btn-trash");
-const btnInfo = document.getElementById("btn-info");
+// const btnSetting = document.getElementById("btn-settings");
+// const btnTrash = document.getElementById("btn-trash");
 
 const trashContainer = document.getElementById("trash-container");
 
@@ -57,6 +56,8 @@ const checkboxGroupExpert = document.getElementById("checkboxGroupExpertId");
 
 const checkboxLeft = document.getElementById("checkboxLeftId");
 const checkboxRigt = document.getElementById("checkboxRightId");
+
+const checkboxAddAuf = document.getElementById("checkboxAUFId");
 
 const checkboxShowHint = document.getElementById("checkboxShowHintId");
 
@@ -97,7 +98,7 @@ window.addEventListener("load", () => {
   loadUserData();
   // Create all Entries
   addElementsToBOM();
-  addTrashElementsToBOM();
+  // addTrashElementsToBOM();
   // addSelectGroupTrain();
 
   // Generate placeholder for algs to select
@@ -226,12 +227,6 @@ window.addEventListener("load", () => {
     closeOverlays();
   });
 
-  // Click Event - Info
-  btnInfo.addEventListener("click", function () {
-    infoContainer.style.display = "block";
-    overlay.style.display = "block";
-  });
-
   // Click Event - Open Trash
   // btnTrash.addEventListener("click", function () {
   //   trashContainer.style.display = "block";
@@ -257,7 +252,8 @@ function addElementsToBOM() {
       group.categoryContainer[indexCategory] = document.createElement("div");
       group.categoryContainer[indexCategory].classList.add("div-category-container");
 
-      group.collapseContainer.push(document.createElement("div"));
+      group.collapseContainer.push(document.createElement("button"));
+      group.collapseContainer[indexCategory].type = "button";
       group.collapseContainer[indexCategory].classList.add("collapse-container");
 
       group.categoryCollapseImg.push(document.createElement("img"));
@@ -299,9 +295,11 @@ function addElementsToBOM() {
         group.caseNumber[indexCase] = document.createElement("div");
         group.caseNumber[indexCase].classList.add("case-number");
 
-        group.imgContainer[indexCase] = document.createElement("div");
+        group.imgContainer[indexCase] = document.createElement("button");
         group.imgContainer[indexCase].classList.add("image-container");
-        group.imgContainer[indexCase].id = "image-container-" + indexCase;
+        // group.imgContainer[indexCase].id = "image-container-" + indexCase;
+
+        // console.log(group.imgContainer[indexCase]);
 
         group.imgCase[indexCase] = document.createElement("img");
         group.imgCase[indexCase].classList.add("img-case");
@@ -327,7 +325,6 @@ function addElementsToBOM() {
         group.imgTrash[indexCase] = document.createElement("img");
         group.imgTrash[indexCase].classList.add("img-edit-trash");
 
-        //if (indexCase != 36) {
         group.caseNumber[indexCase].innerHTML = indexCase + 1;
         group.imgCase[indexCase].src = caseImgPath;
         // Set shown alg
@@ -361,7 +358,6 @@ function addElementsToBOM() {
         //group.btnDelete[indexCase].appendChild(group.imgTrash[indexCase]);
 
         group.categoryContainer[indexCategory].appendChild(group.divContainer[indexCase]);
-        //}
       }
       selectLayoutSub[indexGroup].appendChild(group.categoryContainer[indexCategory]);
     }
@@ -369,6 +365,7 @@ function addElementsToBOM() {
   }
 }
 
+/*
 function addTrashElementsToBOM() {
   for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
     // TEST
@@ -411,6 +408,7 @@ function addTrashElementsToBOM() {
     }
   }
 }
+*/
 
 function updateAlg() {
   // Update Alg button clicked
@@ -600,6 +598,7 @@ function updateTrainCases() {
   ];
   leftSelection = checkboxLeft.checked;
   rightSelection = checkboxRigt.checked;
+  aufSelection = checkboxAddAuf.checked;
   hintSelection = checkboxShowHint.checked;
 
   currentTrainCase = -1;
@@ -611,9 +610,10 @@ function updateTrainCases() {
 }
 
 function showHint() {
-  hintImg.style.opacity = 100;
+  if (generatedScrambles.length == 0) return;
   // Get algorithm and convert to list
   const algList = generatedScrambles[currentTrainCase].algHint.split(" ");
+  hintImg.style.opacity = 100;
   if (hintCounter < algList.length) {
     hintDiv.innerText = algList.slice(0, hintCounter + 1).join(" ");
   }
@@ -700,6 +700,9 @@ function generateTrainCaseList() {
       }
     }
   }
+
+  // Exit if no cases are selected
+  if (trainCaseList.length == 0) scrambleDiv.innerHTML = "no case selected";
 
   // Randomize Cases
   for (let i = trainCaseList.length - 1; i > 0; i--) {
@@ -827,6 +830,7 @@ function updateCheckboxStatus() {
   checkboxGroupExpert.checked = trainGroupSelection[3];
   checkboxLeft.checked = leftSelection;
   checkboxRigt.checked = rightSelection;
+  checkboxAddAuf.checked = aufSelection;
   checkboxShowHint.checked = hintSelection;
 }
 
@@ -848,4 +852,9 @@ function showHideDebugInfo() {
     btnShowHideDebugInfo.innerHTML = "> Hide info";
     divDebug.style.display = "block";
   }
+}
+
+function showInfo() {
+  infoContainer.style.display = "block";
+  overlay.style.display = "block";
 }
