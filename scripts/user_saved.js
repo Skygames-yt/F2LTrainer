@@ -60,7 +60,7 @@ function saveUserData() {
   localStorage.setItem("rightSelection", rightSelection);
 
   // Saving AUF selection
-  localStorage.setItem("AUF", aufSelection);
+  localStorage.setItem("aufSelection", aufSelection);
 
   // Saving hint settings
   localStorage.setItem("hintSelection", hintSelection);
@@ -80,18 +80,29 @@ function saveUserData() {
           group.collapse[indexCategory]
       );*/
       localStorage.setItem(group.saveName + "collapse" + indexCategory, group.collapse[indexCategory]);
+
+      let categoryItems = group.categoryCases[indexCategory];
+      for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
+        let indexCase = categoryItems[indexCategoryItem] - 1;
+      }
+
+      for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
+        let indexCase = categoryItems[indexCategoryItem] - 1;
+
+        // Save Trash
+        localStorage.setItem(group.saveName + "trash" + indexCase, group.trash[indexCase]);
+        // Save Case Selection
+        localStorage.setItem(group.saveName + "caseSelection" + indexCase, group.caseSelection[indexCase]);
+        // Save Custom Algorithms
+        localStorage.setItem(group.saveName + "customAlgorithms" + indexCase, group.customAlgorithms[indexCase]);
+        // Save Algorithm Selection
+        localStorage.setItem(group.saveName + "algorithmSelection" + indexCase, group.algorithmSelection[indexCase]);
+      }
     }
 
-    for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
-      // Save Trash
-      localStorage.setItem(group.saveName + "trash" + indexCase, group.trash[indexCase]);
-      // Save Case Selection
-      localStorage.setItem(group.saveName + "caseSelection" + indexCase, group.caseSelection[indexCase]);
-      // Save Custom Algorithms
-      localStorage.setItem(group.saveName + "customAlgorithms" + indexCase, group.customAlgorithms[indexCase]);
-      // Save Algorithm Selection
-      localStorage.setItem(group.saveName + "algorithmSelection" + indexCase, group.algorithmSelection[indexCase]);
-    }
+    // for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
+
+    // }
   }
   updateHintVisibility();
 }
@@ -126,6 +137,11 @@ function loadUserData() {
       } else {
         group.collapse.push(false);
       }
+
+      // let categoryItems = group.categoryCases[indexCategory];
+      // for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
+      //   let indexCase = categoryItems[indexCategoryItem] - 1;
+      // }
     }
 
     for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
