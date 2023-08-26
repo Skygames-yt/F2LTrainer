@@ -33,6 +33,7 @@ const selectState = document.getElementById("select-state");
 const possibleStates = ["Unlearned", "Learning", "Finished", "All"];
 
 const colors = ["rgba(0, 0, 0, 0)", "rgb(236 236 0)", "rgb(0 196 0)"];
+const borders = ["dashed", "dashed solid", "solid"];
 const colorsText = ["rgb(255 255 255)", "rgb(0 0 0)", "rgb(255 255 255)"];
 
 const imgPathRightArrow = "./images/arrow_collapse_right.svg";
@@ -145,6 +146,7 @@ window.addEventListener("load", () => {
         }
         group.divContainer[i].style.background = colors[group.caseSelection[i]];
         group.divContainer[i].style.color = colorsText[group.caseSelection[i]];
+        group.divContainer[i].style.borderStyle = borders[group.caseSelection[i]];
         // Save
         saveUserData();
       });
@@ -291,6 +293,7 @@ function addElementsToBOM() {
         group.divContainer[indexCase].classList.add("div-container");
         group.divContainer[indexCase].style.background = colors[group.caseSelection[indexCase]];
         group.divContainer[indexCase].style.color = colorsText[group.caseSelection[indexCase]];
+        group.divContainer[indexCase].style.borderStyle = borders[group.caseSelection[indexCase]];
 
         group.caseNumber[indexCase] = document.createElement("div");
         group.caseNumber[indexCase].classList.add("case-number");
