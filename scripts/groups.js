@@ -151,7 +151,7 @@ const advancedCollection = {
   ],
   categoryCases: [
     [1, 2, 3, 4],
-    [9, 10, 13, 14],
+    [9, 10, 13, 14], // 2. 10
     [7, 8, 11, 12],
     [19, 20, 21, 22, 23, 24],
     [25, 26, 27, 28, 29, 10],
@@ -198,7 +198,7 @@ const expertCollection = {
 
   categoryNames: [
     "Corner is solved",
-    "Pair in wron slot",
+    "Pair in wrong slot",
     "Flipped edge & corner in adjacent slot",
     "Other easy cases",
   ],
@@ -230,9 +230,4 @@ const expertCollection = {
   btnRecover: [],
 };
 
-const groups = [
-  basicCollection,
-  basicBackCollection,
-  advancedCollection,
-  expertCollection,
-];
+const groups = [basicCollection, basicBackCollection, advancedCollection, expertCollection];
