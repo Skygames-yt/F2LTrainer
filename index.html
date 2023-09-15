@@ -71,16 +71,38 @@
     <!-- Info -->
     <div id="info-container" class="popup-container">
       <h1>Here some info</h1>
-      <h3>How to use the F2L Trainer</h3>
+      <h2>How to use the F2L Trainer</h2>
+      <p>1. Press the image of a <b>cube</b> to change their status to</p>
+      <ul>
+        <li class="color-transparent">UNLEARNED</li>
+        <li class="color-yellow">LEARNING</li>
+        <li class="color-green">FINISHED</li>
+      </ul>
       <p>
-        Select the F2L cases you want to train by pressing the <b>cube</b>. There are three categories: Unlearned,
-        Learning and Finished. Press <b>Train</b> to switch to the training view.
+        2. Press
+        <img src="./images/edit.svg" alt="Edit" class="img-inline" />
+        to select your prefered algorithm.<br />
+        3. Press <span class="border-inline">Train</span> to switch to train mode.<br />
+        4. Press
+        <img src="./images/settings.svg" alt="Setings" class="img-inline" />
+        to set your preferences.<br />
+        5. <b>Scramble</b> your cube according to the displayed scramble.<br />
+        6. <b>Solve</b> the first two layers fully.
       </p>
-      <h3>Bugs</h3>
+
+      <h2>Hotkeys</h2>
+      <p>Hotkeys only work in <b>Train</b> mode</p>
+      <ul>
+        <li>Space - Next Scramble</li>
+        <li>Right Arrow - Get Hint</li>
+        <li>C - Clear all Data</li>
+      </ul>
+
+      <h2>Further Help</h2>
       <p>
-        If you find a bug please create a issue on
+        Feel free to contact me on
         <a href="https://github.com/Dave2ooo/F2LTrainer/issues" target="_blank" rel="noopener noreferrer">Github</a>
-        and report the bug.
+        if you need <b>help</b>, have ideas for <b>improvement</b> or find any <b>bugs</b>.
       </p>
     </div>
 
@@ -130,7 +152,8 @@
             class="btn-next-prev"
             title="Previous Scramble"
           />
-          <div id="scramble">no case selected</div> <!--renamed from scramble-div-->
+          <div id="scramble">no case selected</div>
+          <!--renamed from scramble-div-->
           <img
             src="./images/arrow_right.svg"
             onclick="nextScramble(1)"
@@ -154,7 +177,8 @@
       <!-- <button type="button" id="hint" onclick="showHint()">Press to show hint</button> -->
 
       <button id="btn-show-hide-debug-info" onclick="showHideDebugInfo()">> Show info</button>
-      <div id="debug-info"></div> <!--renamed from div-debug-info-->
+      <div id="debug-info"></div>
+      <!--renamed from div-debug-info-->
 
       <!-- Train Settings -->
       <div id="train-cases-container" class="popup-container">
