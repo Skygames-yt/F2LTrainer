@@ -205,38 +205,22 @@ window.addEventListener("load", () => {
   // }
 
   // Change Mode
-  ELEM_CHANGE_MODE.addEventListener("click", function () {
-    if (mode == 0) {
-      mode = 1;
-      nextScramble(1);
-      ELEM_CHANGE_MODE.innerHTML = "Select cases";
-      ELEM_WINDOW_SELECT.style.display = "none";
-      // ELEM_SIDE_CONTAINER.style.display = "none";
-      ELEM_SELECT_GROUP.style.display = "none";
-      ELEM_WINDOW_TRAIN.style.display = "flex";
-      ELEM_BUTTON_SETTINGS.style.display = "flex";
-    } else {
-      mode = 0;
-      ELEM_CHANGE_MODE.innerHTML = "Train";
-      ELEM_WINDOW_SELECT.style.display = "block";
-      // ELEM_SIDE_CONTAINER.style.display = "block";
-      ELEM_SELECT_GROUP.style.display = "block";
-      ELEM_WINDOW_TRAIN.style.display = "none";
-      ELEM_BUTTON_SETTINGS.style.display = "none";
-    }
-  });
+  ELEM_CHANGE_MODE.onclick = function () {
+    changeMode();
+  };
 
   // Close Overlays
-  ELEM_OVERLAY.addEventListener("click", function () {
+  ELEM_OVERLAY.onclick = function () {
     closeOverlays();
-  });
+  };
 
   // Click Event - Open Trash
-  // btnTrash.addEventListener("click", function () {
-  //   ELEM_TRASH_CONTAINER.style.display = "block";
-  //   ELEM_OVERLAY.style.display = "block";
-  // });
-
+  /*
+  btnTrash.onclick = function () {
+    ELEM_TRASH_CONTAINER.style.display = "block";
+    ELEM_OVERLAY.style.display = "block";
+  };
+*/
   document.addEventListener("keydown", keydown);
 
   // Run this function to only show basic cases in the beginning
@@ -244,7 +228,7 @@ window.addEventListener("load", () => {
 });
 
 function addElementsToBOM() {
-  // Iterate "Basic", "Basic Back", "Advanced"
+  // Iterate "Basic", "Basic Back", "Advanced", "Expert"
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
     ELEM_GROUP_CONTAINER[indexGroup] = document.createElement("div");
@@ -906,4 +890,25 @@ function collapseCategory(indexGroup, indexCategory) {
     GROUP.collapse[indexCategory] = true;
   }
   saveUserData();
+}
+
+function changeMode() {
+  if (mode == 0) {
+    mode = 1;
+    nextScramble(1);
+    ELEM_CHANGE_MODE.innerHTML = "Select cases";
+    ELEM_WINDOW_SELECT.style.display = "none";
+    // ELEM_SIDE_CONTAINER.style.display = "none";
+    ELEM_SELECT_GROUP.style.display = "none";
+    ELEM_WINDOW_TRAIN.style.display = "flex";
+    ELEM_BUTTON_SETTINGS.style.display = "flex";
+  } else {
+    mode = 0;
+    ELEM_CHANGE_MODE.innerHTML = "Train";
+    ELEM_WINDOW_SELECT.style.display = "block";
+    // ELEM_SIDE_CONTAINER.style.display = "block";
+    ELEM_SELECT_GROUP.style.display = "block";
+    ELEM_WINDOW_TRAIN.style.display = "none";
+    ELEM_BUTTON_SETTINGS.style.display = "none";
+  }
 }
