@@ -33,6 +33,38 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+li {
+  width: fit-content;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+}
+.color-transparent {
+  border: dashed;
+}
+.color-yellow {
+  border-style: dashed solid;
+  background-color: rgb(236 236 0);
+  color: black;
+}
+.color-green {
+  border: solid;
+  background-color: rgb(0 196 0);
+}
+
+.img-inline {
+  width: 1rem;
+  filter: var(--var-filter-img);
+}
+
+.border-inline {
+  border-style: solid;
+  border-color: var(--var-color-img);
+  border-radius: 0.4rem;
+  padding: 0.08rem;
+}
+
 /* Disable scolling */
 /* html,
 body {
@@ -61,10 +93,7 @@ p,
 a {
   font-size: 1.2rem;
   color: var(--var-color-text);
-}
-
-div {
-  /* border: solid; */
+  line-height: 1.7rem;
 }
 
 .group-container {
