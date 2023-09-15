@@ -31,7 +31,7 @@
         <img src="./images/info.svg" alt="Info" class="side-img" title="Info" />
       </button>
 
-      <select id="select-group" onchange="groupSelected()">
+      <select id="select-group" onchange="showSelectedGroup()">
         <option value="basic" selected>Basic Cases</option>
         <option value="basicBack">Basic Cases Backslot</option>
         <option value="advanced">Advanced Cases</option>
@@ -47,7 +47,8 @@
     </div>
 
     <!-- All the Cases will be listed here -->
-    <div id="select-layout">
+    <div id="window-select">
+      <!--renamed!!!!! from select-layout -->
       <!-- <div class="div-container">
         <div class="case-number">1</div>
         <div class="image-container" id="image-container">
@@ -117,7 +118,8 @@
     </div>
 
     <!-- Train Mode -->
-    <div id="train-container">
+    <div id="window-train">
+      <!-- renamed!!!!! from train-container -->
       <div class="div-centering">
         <div id="scramble-container">
           <img
@@ -128,7 +130,7 @@
             class="btn-next-prev"
             title="Previous Scramble"
           />
-          <div id="scramble-div">no case selected</div>
+          <div id="scramble">no case selected</div> <!--renamed from scramble-div-->
           <img
             src="./images/arrow_right.svg"
             onclick="nextScramble(1)"
@@ -148,11 +150,11 @@
           onclick="nextScramble(1)"
         />
       </div>
-      <div id="hint-div" onclick="showHint()">Press to show hint</div>
-      <!-- <button type="button" id="hint-div" onclick="showHint()">Press to show hint</button> -->
+      <div id="hint" onclick="showHint()">Press to show hint</div>
+      <!-- <button type="button" id="hint" onclick="showHint()">Press to show hint</button> -->
 
       <button id="btn-show-hide-debug-info" onclick="showHideDebugInfo()">> Show info</button>
-      <div id="div-debug-info"></div>
+      <div id="debug-info"></div> <!--renamed from div-debug-info-->
 
       <!-- Train Settings -->
       <div id="train-cases-container" class="popup-container">

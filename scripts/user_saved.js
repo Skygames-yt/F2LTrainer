@@ -65,23 +65,23 @@ function saveUserData() {
   // Saving hint settings
   localStorage.setItem("hintSelection", hintSelection);
 
-  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
-    const group = groups[indexGroup];
-    // console.log(group);
-    for (let indexCategory = 0; indexCategory < group.categoryCases.length; indexCategory++) {
+  for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
+    const GROUP = GROUPS[indexGroup];
+    // console.log(GROUP);
+    for (let indexCategory = 0; indexCategory < GROUP.categoryCases.length; indexCategory++) {
       /*console.log(
         "saveName: " +
-          group.saveName +
+          GROUP.saveName +
           "collapse" +
           indexCategory +
           "\ngroup.collapse[" +
           indexCategory +
           "]: " +
-          group.collapse[indexCategory]
+          GROUP.collapse[indexCategory]
       );*/
-      localStorage.setItem(group.saveName + "collapse" + indexCategory, group.collapse[indexCategory]);
+      localStorage.setItem(GROUP.saveName + "collapse" + indexCategory, GROUP.collapse[indexCategory]);
 
-      let categoryItems = group.categoryCases[indexCategory];
+      let categoryItems = GROUP.categoryCases[indexCategory];
       for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
         let indexCase = categoryItems[indexCategoryItem] - 1;
       }
@@ -90,17 +90,17 @@ function saveUserData() {
         let indexCase = categoryItems[indexCategoryItem] - 1;
 
         // Save Trash
-        localStorage.setItem(group.saveName + "trash" + indexCase, group.trash[indexCase]);
+        localStorage.setItem(GROUP.saveName + "trash" + indexCase, GROUP.trash[indexCase]);
         // Save Case Selection
-        localStorage.setItem(group.saveName + "caseSelection" + indexCase, group.caseSelection[indexCase]);
+        localStorage.setItem(GROUP.saveName + "caseSelection" + indexCase, GROUP.caseSelection[indexCase]);
         // Save Custom Algorithms
-        localStorage.setItem(group.saveName + "customAlgorithms" + indexCase, group.customAlgorithms[indexCase]);
+        localStorage.setItem(GROUP.saveName + "customAlgorithms" + indexCase, GROUP.customAlgorithms[indexCase]);
         // Save Algorithm Selection
-        localStorage.setItem(group.saveName + "algorithmSelection" + indexCase, group.algorithmSelection[indexCase]);
+        localStorage.setItem(GROUP.saveName + "algorithmSelection" + indexCase, GROUP.algorithmSelection[indexCase]);
       }
     }
 
-    // for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
+    // for (let indexCase = 0; indexCase < GROUP.numberCases; indexCase++) {
 
     // }
   }
@@ -127,59 +127,59 @@ function loadUserData() {
   aufSelection = loadBoolean("aufSelection", aufSelection);
   hintSelection = loadBoolean("hintSelection", hintSelection);
 
-  for (let indexGroup = 0; indexGroup < groups.length; indexGroup++) {
-    const group = groups[indexGroup];
+  for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
+    const GROUP = GROUPS[indexGroup];
 
-    for (let indexCategory = 0; indexCategory < group.categoryCases.length; indexCategory++) {
-      temp = localStorage.getItem(group.saveName + "collapse" + indexCategory);
+    for (let indexCategory = 0; indexCategory < GROUP.categoryCases.length; indexCategory++) {
+      temp = localStorage.getItem(GROUP.saveName + "collapse" + indexCategory);
       if (temp !== null && temp == "true") {
-        group.collapse.push(true);
+        GROUP.collapse.push(true);
       } else {
-        group.collapse.push(false);
+        GROUP.collapse.push(false);
       }
 
-      // let categoryItems = group.categoryCases[indexCategory];
+      // let categoryItems = GROUP.categoryCases[indexCategory];
       // for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
       //   let indexCase = categoryItems[indexCategoryItem] - 1;
       // }
     }
 
-    for (let indexCase = 0; indexCase < group.numberCases; indexCase++) {
+    for (let indexCase = 0; indexCase < GROUP.numberCases; indexCase++) {
       // Load Trash
-      temp = localStorage.getItem(group.saveName + "trash" + indexCase);
+      temp = localStorage.getItem(GROUP.saveName + "trash" + indexCase);
       if (temp !== null) {
-        group.trash.push(temp);
+        GROUP.trash.push(temp);
       } else {
-        group.trash.push(false);
+        GROUP.trash.push(false);
       }
 
       // Load Case Selection
-      temp = localStorage.getItem(group.saveName + "caseSelection" + indexCase);
+      temp = localStorage.getItem(GROUP.saveName + "caseSelection" + indexCase);
       if (temp !== null) {
-        group.caseSelection.push(temp);
+        GROUP.caseSelection.push(temp);
       } else {
         // If site visited first time - set basic cases -> category 1 to "Learning"
-        if (indexGroup == 0 && group.categoryCases[0].includes(indexCase + 1)) {
-          group.caseSelection.push(1);
+        if (indexGroup == 0 && GROUP.categoryCases[0].includes(indexCase + 1)) {
+          GROUP.caseSelection.push(1);
         } else {
-          group.caseSelection.push(0);
+          GROUP.caseSelection.push(0);
         }
       }
 
       // Load Custom Algorithms
-      temp = localStorage.getItem(group.saveName + "customAlgorithms" + indexCase);
+      temp = localStorage.getItem(GROUP.saveName + "customAlgorithms" + indexCase);
       if (temp !== null) {
-        group.customAlgorithms.push(temp);
+        GROUP.customAlgorithms.push(temp);
       } else {
-        group.customAlgorithms.push("");
+        GROUP.customAlgorithms.push("");
       }
 
       // Load Algorithm Selection
-      temp = localStorage.getItem(group.saveName + "algorithmSelection" + indexCase);
+      temp = localStorage.getItem(GROUP.saveName + "algorithmSelection" + indexCase);
       if (temp !== null) {
-        group.algorithmSelection.push(temp);
+        GROUP.algorithmSelection.push(temp);
       } else {
-        group.algorithmSelection.push(0);
+        GROUP.algorithmSelection.push(0);
       }
     }
   }
@@ -189,9 +189,9 @@ function loadUserData() {
 }
 
 function loadBoolean(saveName, varName) {
-  const temp = localStorage.getItem(saveName);
-  if (temp != null) {
-    if (temp == "true") {
+  const TEMP = localStorage.getItem(saveName);
+  if (TEMP != null) {
+    if (TEMP == "true") {
       return true;
     } else {
       return false;

@@ -1,4 +1,5 @@
-const basicCollection = {
+const BASIC_COLLECTION = {
+  // renamed!!!!! from basicCollection
   saveName: "basic_",
   name: "Basic Cases",
   idName: "Basic",
@@ -61,7 +62,8 @@ const basicCollection = {
   btnRecover: [],
 };
 
-const basicBackCollection = {
+const BASIC_BACK_COLLECTION = {
+  // renamed!!!!! from basicBackCollection
   saveName: "basicBack_",
   name: "Basic Cases Backslot",
   idName: "BasicBack",
@@ -124,7 +126,8 @@ const basicBackCollection = {
   btnRecover: [],
 };
 
-const advancedCollection = {
+const ADVANCED_COLLECTION = {
+  // renamed!!!!! from advancedCollection
   saveName: "advanced_",
   name: "Advanced Cases",
   idName: "Advanced",
@@ -180,7 +183,8 @@ const advancedCollection = {
   btnRecover: [],
 };
 
-const expertCollection = {
+const EXPERT_COLLECTION = {
+  // renamed!!!!! from expertCollection
   saveName: "expert_",
   name: "Expert Cases",
   idName: "Expert",
@@ -230,4 +234,4 @@ const expertCollection = {
   btnRecover: [],
 };
 
-const groups = [basicCollection, basicBackCollection, advancedCollection, expertCollection];
+const GROUPS = [BASIC_COLLECTION, BASIC_BACK_COLLECTION, ADVANCED_COLLECTION, EXPERT_COLLECTION]; // renamed!!!!!! from groups

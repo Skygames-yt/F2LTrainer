@@ -67,7 +67,7 @@ div {
   /* border: solid; */
 }
 
-.all-alg-container {
+.group-container {
   z-index: 0;
   display: flex;
   flex-wrap: wrap;
@@ -89,7 +89,7 @@ div {
   height: auto;
 }
 
-.div-category-container {
+.category-container {
   display: flex;
   flex-direction: column;
   flex-grow: 0;
@@ -104,7 +104,7 @@ div {
 }
 
 /* Selection */
-.div-container {
+.case-container {
   display: flex;
   /* display: none; */
   flex-direction: row;
@@ -128,7 +128,7 @@ div {
   margin-right: 0.5rem;
 }
 
-.image-container {
+.img-case-container {
   display: flex;
   flex-shrink: 1;
   height: 100px;
@@ -152,7 +152,7 @@ div {
   /* margin: auto; */
 }
 
-.div-container:hover .img-edit-trash {
+.case-container:hover .img-edit-trash {
   visibility: visible;
 }
 
@@ -235,7 +235,7 @@ div {
   border-color: var(--var-color-img);
 }
 
-#train-container {
+#window-train {
   display: none;
   flex-direction: column;
   align-items: center;
@@ -492,7 +492,7 @@ div {
   width: 30px;
 }
 
-#scramble-div {
+#scramble {
   display: flex;
   justify-content: space-around;
   font-size: 1.5rem;
@@ -514,7 +514,7 @@ div {
   width: 150px;
 }
 
-#hint-div {
+#hint {
   display: flex;
   justify-content: center;
   border: solid;
@@ -552,7 +552,7 @@ div {
   background-color: var(--var-color-btn-hover);
 }
 
-#div-debug-info {
+#debug-info {
   display: none;
   font-size: 1rem;
 }
@@ -578,8 +578,8 @@ div {
 .side-button:focus,
 #editalg-btn:hover,
 #editalg-btn:focus,
-#hint-div:hover,
-#hint-div:focus,
+#hint:hover,
+#hint:focus,
 .btn-next-prev:hover,
 .btn-next-prev:focus {
   /* background-color: var(--var-color-btn-hover); */
@@ -588,8 +588,8 @@ div {
   transform: scale(1.03);
   transition: 0.2s ease;
 }
-.image-container:hover,
-.image-container:focus,
+.img-case-container:hover,
+.img-case-container:focus,
 .img-edit-trash:hover {
   -webkit-transform: scale(1.04);
   -ms-transform: scale(1.04);
@@ -599,7 +599,7 @@ div {
 
 /* Media Query */
 @media (max-width: 100em) {
-  .image-container {
+  .img-case-container {
     height: 70px;
   }
   .algorithm {
@@ -617,13 +617,13 @@ div {
   /* .all-alg-container {
     flex-direction: row;
   } */
-  .div-category-container {
+  .category-container {
     flex-direction: row;
   }
-  .div-container {
+  .case-container {
     width: fit-content;
   }
-  #scramble-div {
+  #scramble {
     font-size: 3rem;
   }
   #hint-img {
@@ -632,7 +632,7 @@ div {
   #select-group {
     font-size: 1.5rem;
   }
-  #hint-div {
+  #hint {
     font-size: 2rem;
   }
   .editalg-listentry {
