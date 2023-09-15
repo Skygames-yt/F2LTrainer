@@ -102,20 +102,32 @@ window.addEventListener("load", () => {
   for (let i = 0; i < NUM_ALG; i++) {
     ELEM_EDITALG_LISTENTRY.push(document.createElement("div"));
     ELEM_EDITALG_LISTENTRY[i].classList.add("editalg-listentry");
+    ELEM_EDITALG_LISTENTRY[i].onclick = function () {
+      // Change Background when selected
+      if (selectedAlgNumber < GROUPS[ELEM_SELECT_GROUP.selectedIndex].algorithms[selectedCase + 1].length) {
+        ELEM_EDITALG_LISTENTRY[selectedAlgNumber].style.background = ALG_COLORS[0];
+      } else {
+        ELEM_EDITALG_CUSTOMALG.style.background = ALG_COLORS[0];
+      }
+      ELEM_EDITALG_LISTENTRY[i].style.background = ALG_COLORS[1];
+      selectedAlgNumber = i;
+    };
 
     ELEM_EDITALG_LIST.appendChild(ELEM_EDITALG_LISTENTRY[i]);
   }
 
   //Edit Button - Click on Edit Button
+  /*
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
     GROUP.imgEdit.forEach(function (button, indexCase) {
       button.addEventListener("click", function () {
-        console.log("indexGroup: " + indexGroup + "\nindexCase: " + indexCase);
+        // console.log("indexGroup: " + indexGroup + "\nindexCase: " + indexCase);
         editAlgs(indexGroup, indexCase);
       });
     });
   }
+  */
 
   // Click Event - Change Case to Unlearned, Learning, Finished
   // for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
@@ -136,6 +148,7 @@ window.addEventListener("load", () => {
   // }
 
   // Select algorithm - Click on algorithm
+  /*
   ELEM_EDITALG_LISTENTRY.forEach(function (button, i) {
     button.addEventListener("click", function () {
       // Change Background when selected
@@ -148,26 +161,19 @@ window.addEventListener("load", () => {
       selectedAlgNumber = i;
     });
   });
+*/
 
   // Click Event - Collapse Category
+  /*
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
-    GROUP.collapseContainer.forEach(function (button, i) {
+    GROUP.collapseContainer.forEach(function (button, indexCase) {
       button.addEventListener("click", function () {
-        if (GROUP.categoryContainer[i].style.display == "none") {
-          GROUP.categoryContainer[i].style.display = "flex";
-          GROUP.categoryCollapseImg[i].src = IMG_PATH_DOWN_ARROW;
-          GROUP.collapse[i] = false;
-        } else {
-          GROUP.categoryContainer[i].style.display = "none";
-          GROUP.categoryCollapseImg[i].src = IMG_PATH_RIGHT_ARROW;
-          GROUP.collapse[i] = true;
-        }
-        saveUserData();
+        collapseCategory(indexGroup, indexCase);
       });
     });
   }
-
+*/
   // Click Event - Delete Button clicked
   // for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
   //   const GROUP = GROUPS[indexGroup];
@@ -253,6 +259,9 @@ function addElementsToBOM() {
       GROUP.collapseContainer.push(document.createElement("button"));
       GROUP.collapseContainer[indexCategory].type = "button";
       GROUP.collapseContainer[indexCategory].classList.add("collapse-container");
+      GROUP.collapseContainer[indexCategory].onclick = function () {
+        collapseCategory(indexGroup, indexCategory);
+      };
 
       GROUP.categoryCollapseImg.push(document.createElement("img"));
       GROUP.categoryCollapseImg[indexCategory].classList.add("img-collapse-category");
@@ -303,8 +312,6 @@ function addElementsToBOM() {
         };
         // GROUP.imgContainer[indexCase].id = "img-case-container-" + indexCase;
 
-        // console.log(GROUP.imgContainer[indexCase]);
-
         GROUP.imgCase[indexCase] = document.createElement("img");
         GROUP.imgCase[indexCase].classList.add("img-case");
 
@@ -317,6 +324,9 @@ function addElementsToBOM() {
 
         GROUP.imgEdit[indexCase] = document.createElement("img");
         GROUP.imgEdit[indexCase].classList.add("img-edit-trash");
+        GROUP.imgEdit[indexCase].onclick = function () {
+          editAlgs(indexGroup, indexCase);
+        };
         // console.log("Creating:\nindexGroup: " + indexGroup + "\nindexCase: " + indexCase);
 
         GROUP.divAlgorithm[indexCase] = document.createElement("div");
@@ -881,5 +891,19 @@ function changeCategory(indexGroup, indexCase) {
   GROUP.divContainer[indexCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[indexCase]];
   GROUP.divContainer[indexCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[indexCase]];
 
+  saveUserData();
+}
+
+function collapseCategory(indexGroup, indexCategory) {
+  const GROUP = GROUPS[indexGroup];
+  if (GROUP.categoryContainer[indexCategory].style.display == "none") {
+    GROUP.categoryContainer[indexCategory].style.display = "flex";
+    GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_DOWN_ARROW;
+    GROUP.collapse[indexCategory] = false;
+  } else {
+    GROUP.categoryContainer[indexCategory].style.display = "none";
+    GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
+    GROUP.collapse[indexCategory] = true;
+  }
   saveUserData();
 }
