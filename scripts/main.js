@@ -91,6 +91,7 @@ let generatedScrambles = [];
 
 // ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
+  checkForDuplicates();
   // Load User saved Data (user_saved.js)
   loadUserData();
   // Create all Entries
@@ -867,7 +868,7 @@ function showInfo() {
 function changeCategory(indexGroup, indexCase) {
   const GROUP = GROUPS[indexGroup];
   GROUP.caseSelection[indexCase]++;
-  console.log(GROUP.caseSelection[indexCase]);
+  // console.log(GROUP.caseSelection[indexCase]);
   if (GROUP.caseSelection[indexCase] >= 3) {
     GROUP.caseSelection[indexCase] = 0;
   }
@@ -910,5 +911,20 @@ function changeMode() {
     ELEM_SELECT_GROUP.style.display = "block";
     ELEM_WINDOW_TRAIN.style.display = "none";
     ELEM_BUTTON_SETTINGS.style.display = "none";
+  }
+}
+
+function checkForDuplicates() {
+  for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
+    const GROUP = GROUPS[indexGroup];
+    const FLATTENED_LIST = GROUP.categoryCases.flat();
+    for (let i = 0; i < FLATTENED_LIST.length; i++) {
+      const CASE_I = FLATTENED_LIST[i];
+      for (let j = 0; j < FLATTENED_LIST.length; j++) {
+        if (i == j) continue;
+        const CASE_J = FLATTENED_LIST[j];
+        if (CASE_I == CASE_J) console.warn("Duplicate Case in Group " + GROUP.name + ", Case " + CASE_I);
+      }
+    }
   }
 }
