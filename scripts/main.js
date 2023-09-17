@@ -94,6 +94,7 @@ window.addEventListener("load", () => {
   checkForDuplicates();
   // Load User saved Data (user_saved.js)
   loadUserData();
+  ELEM_SELECT_GROUP.selectedIndex = viewSelection; // Set view
   // Create all Entries
   addElementsToBOM();
   // addTrashElementsToBOM();
@@ -633,6 +634,8 @@ function showSelectedGroup() {
   }
   // Scroll to the top
   window.scrollTo(0, 0);
+  viewSelection = ELEM_SELECT_GROUP.selectedIndex;
+  saveUserData();
 }
 
 function generateTrainCaseList() {

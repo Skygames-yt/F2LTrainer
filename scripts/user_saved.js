@@ -26,6 +26,9 @@ let expertAlgorithmSelection = [];
 let expertCustomAlgorithms = [];
 let expertCollapse = [];
 
+// View selection
+let viewSelection = 0;
+
 // 0 -> unlearned
 // 1 -> learning
 // 2 -> finished
@@ -54,6 +57,9 @@ function saveUserData() {
   for (let i = 0; i < trainGroupSelection.length; i++) {
     localStorage.setItem("trainGroupSelection" + i, trainGroupSelection[i]);
   }
+
+  // Saving viewSelection
+  localStorage.setItem("viewSelection", viewSelection);
 
   // Saving left right train selection
   localStorage.setItem("leftSelection", leftSelection);
@@ -111,6 +117,10 @@ function saveUserData() {
 function loadUserData() {
   console.log("Loading User Data");
   let temp;
+
+  // Load viewSelection
+  temp = localStorage.getItem("viewSelection");
+  if (temp != null) viewSelection = parseInt(temp);
 
   // Load trainStateSelection
   for (let i = 0; i < trainStateSelection.length; i++) {
