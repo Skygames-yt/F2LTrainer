@@ -68,6 +68,7 @@
 
     <div id="overlay"></div>
 
+    <!-- POPUP-CONTAINER START -->
     <!-- Info -->
     <div id="info-container" class="popup-container">
       <h1>Here some info</h1>
@@ -104,6 +105,9 @@
         <a href="https://github.com/Dave2ooo/F2LTrainer/issues" target="_blank" rel="noopener noreferrer">Github</a>
         if you need <b>help</b>, have ideas for <b>improvement</b> or find any <b>bugs</b>.
       </p>
+      <div class="update-cancal-buttons">
+        <input type="button" class="btn-overlay" id="btn-close-info" onclick="closeOverlays()" value="Close" />
+      </div>
     </div>
 
     <!-- Trash -->
@@ -134,10 +138,11 @@
         <input type="text" placeholder="Enter Custom Algorithm" id="editalg-customalg" />
       </div>
       <div class="update-cancal-buttons">
-        <input type="button" id="editalg-btn" onclick="updateAlg()" value="Update" />
-        <input type="button" id="editalg-btn" onclick="closeOverlays()" value="Cancel" />
+        <input type="button" class="btn-overlay" onclick="updateAlg()" value="Update" />
+        <input type="button" class="btn-overlay" onclick="closeOverlays()" value="Cancel" />
       </div>
     </div>
+    <!-- POPUP-CONTAINER END -->
 
     <!-- Train Mode -->
     <div id="window-train">
@@ -281,8 +286,8 @@
 
         <!-- Buttons: Update, Cancel Settings -->
         <div class="update-cancal-buttons">
-          <button type="button" id="editalg-btn" onclick="updateTrainCases()">Update</button>
-          <button type="button" id="editalg-btn" onclick="closeOverlays()">Cancel</button>
+          <button type="button" class="btn-overlay" onclick="updateTrainCases()">Update</button>
+          <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
         </div>
       </div>
     </div>
