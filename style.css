@@ -425,7 +425,7 @@ a {
   margin-top: 20px;
 }
 
-#editalg-btn {
+.btn-overlay {
   font-size: 1.3rem;
   background: transparent;
   color: var(--var-color-text);
@@ -613,8 +613,8 @@ a {
 #change-mode:focus,
 .side-button:hover,
 .side-button:focus,
-#editalg-btn:hover,
-#editalg-btn:focus,
+.btn-overlay:hover,
+.btn-overlay:focus,
 #hint:hover,
 #hint:focus,
 .btn-next-prev:hover,
