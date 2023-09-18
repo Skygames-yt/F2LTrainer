@@ -1,5 +1,7 @@
 "use strict";
 
+const ELEM_BODY = document.querySelector("body");
+
 const ELEM_EDITALG_CONTAINER = document.getElementById("editalg-container"); // renamed from editalgContainer
 const ELEM_EDITALG_IMG = document.getElementById("editalg-img"); // renamed from editalgImg
 const ELEM_EDITALG_LIST = document.getElementById("editalg-list"); // renamed from editalgList
@@ -222,6 +224,7 @@ window.addEventListener("load", () => {
   btnTrash.onclick = function () {
     ELEM_TRASH_CONTAINER.style.display = "block";
     ELEM_OVERLAY.style.display = "block";
+    ELEM_BODY.style.overflow = "hiden";
   };
 */
   document.addEventListener("keydown", keydown);
@@ -438,6 +441,7 @@ function closeOverlays() {
   ELEM_TRASH_CONTAINER.style.display = "none";
   ELEM_EDITALG_CONTAINER.style.display = "none";
   ELEM_SETTINGS_CONTAINER.style.display = "none";
+  ELEM_BODY.style.overflow = "auto";
   ELEM_OVERLAY.style.display = "none";
 }
 
@@ -480,6 +484,8 @@ function editAlgs(indexGroup, indexCase) {
   ELEM_EDITALG_CONTAINER.style.display = "block";
   // Make overlay visible
   ELEM_OVERLAY.style.display = "block";
+  // Disable scolling on main page
+  ELEM_BODY.style.overflow = "hidden";
 }
 
 function customAlgSelected() {
@@ -585,6 +591,7 @@ function showSettingsTrain() {
   updateCheckboxStatus();
   ELEM_SETTINGS_CONTAINER.style.display = "block";
   ELEM_OVERLAY.style.display = "block";
+  ELEM_BODY.style.overflow = "hidden";
 }
 
 function updateTrainCases() {
@@ -866,6 +873,7 @@ function showHideDebugInfo() {
 function showInfo() {
   ELEM_INFO_CONTAINER.style.display = "block";
   ELEM_OVERLAY.style.display = "block";
+  ELEM_BODY.style.overflow = "hidden";
 }
 
 // Called when image is clicked
