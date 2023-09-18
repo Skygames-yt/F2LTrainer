@@ -23,6 +23,7 @@ const ELEM_SIDE_CONTAINER = document.getElementById("side-container"); // rename
 const ELEM_CHANGE_MODE = document.getElementById("change-mode"); // renamed from changeMode
 const ELEM_OVERLAY = document.getElementById("overlay"); // renamed from overlay
 const ELEM_INFO_CONTAINER = document.getElementById("info-container"); // renamed from infoContainer
+const ELEM_LOADING_SCREEN = document.getElementById("loading-screen");
 
 // side buttons
 // const btnSetting = document.getElementById("btn-settings");
@@ -99,7 +100,7 @@ window.addEventListener("load", () => {
   loadUserData();
   ELEM_SELECT_GROUP.selectedIndex = viewSelection; // Set view
   // Create all Entries
-  addElementsToBOM();
+  addElementsToDOM();
   // addTrashElementsToBOM();
   // addSelectGroupTrain();
 
@@ -231,9 +232,14 @@ window.addEventListener("load", () => {
 
   // Run this function to only show basic cases in the beginning
   showSelectedGroup();
+
+  // Hide Loading Screen
+  setTimeout(() => {
+    ELEM_LOADING_SCREEN.style.display = "none";
+  }, 100);
 });
 
-function addElementsToBOM() {
+function addElementsToDOM() {
   // Iterate "Basic", "Basic Back", "Advanced", "Expert"
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
