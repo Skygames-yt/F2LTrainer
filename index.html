@@ -147,6 +147,107 @@
     <div id="loading-screen" class="popup-container">
       <h1>LOADING</h1>
     </div>
+
+    <!-- Train Settings -->
+    <div id="train-cases-container" class="popup-container">
+      <h2>Algorithms to learn</h2>
+      <div id="div-algs-to-learn" class="div-checkbox-container-container">
+        <!-- Checkbox: Unlearned, Learning, Finished -->
+        <div class="checkbox-container">
+          <h3>Status</h3>
+          <label class="checkbox" for="checkboxUnlearnedId">
+            <input type="checkbox" class="checkbox__input" name="checkboxUnlearned" id="checkboxUnlearnedId" />
+            <div class="checkbox__box"></div>
+            Unlearned
+          </label>
+
+          <label class="checkbox" for="checkboxLearningId">
+            <input type="checkbox" class="checkbox__input" name="checkboxLearning" id="checkboxLearningId" />
+            <div class="checkbox__box"></div>
+            Learning
+          </label>
+
+          <label class="checkbox" for="checkboxFinishedId">
+            <input type="checkbox" class="checkbox__input" name="checkboxFinished" id="checkboxFinishedId" />
+            <div class="checkbox__box"></div>
+            Finished
+          </label>
+        </div>
+
+        <!-- Checkbox: Groups -->
+        <div class="checkbox-container">
+          <h3>Group</h3>
+          <label class="checkbox" for="checkboxGroupBasicId">
+            <input type="checkbox" class="checkbox__input" name="checkboxGroupBasic" id="checkboxGroupBasicId" />
+            <div class="checkbox__box"></div>
+            Basic
+          </label>
+
+          <label class="checkbox" for="checkboxGroupBasicBackId">
+            <input
+              type="checkbox"
+              class="checkbox__input"
+              name="checkboxGroupBasicBack"
+              id="checkboxGroupBasicBackId"
+            />
+            <div class="checkbox__box"></div>
+            Basic Back
+          </label>
+
+          <label class="checkbox" for="checkboxGroupAdvancedId">
+            <input type="checkbox" class="checkbox__input" name="checkboxGroupAdvanced" id="checkboxGroupAdvancedId" />
+            <div class="checkbox__box"></div>
+            Advanced
+          </label>
+
+          <label class="checkbox" for="checkboxGroupExpertId">
+            <input type="checkbox" class="checkbox__input" name="checkboxExpertAdvanced" id="checkboxGroupExpertId" />
+            <div class="checkbox__box"></div>
+            Expert
+          </label>
+        </div>
+      </div>
+
+      <div class="div-checkbox-container-container">
+        <div class="checkbox-container">
+          <h3>Left / Right Slot</h3>
+          <label class="checkbox" for="checkboxLeftId">
+            <input type="checkbox" class="checkbox__input" name="checkboxLeft" id="checkboxLeftId" />
+            <div class="checkbox__box"></div>
+            Left
+          </label>
+
+          <label class="checkbox" for="checkboxRightId">
+            <input type="checkbox" class="checkbox__input" name="checkboxRight" id="checkboxRightId" />
+            <div class="checkbox__box"></div>
+            Right
+          </label>
+        </div>
+        <div class="checkbox-container">
+          <h3>AUF</h3>
+          <label class="checkbox" for="checkboxAUFId">
+            <input type="checkbox" class="checkbox__input" name="checkboxAUF" id="checkboxAUFId" />
+            <div class="checkbox__box"></div>
+            Add AUF
+          </label>
+        </div>
+      </div>
+
+      <div class="checkbox-container">
+        <h2>Hint Settings</h2>
+        <label class="checkbox" for="checkboxShowHintId">
+          <input type="checkbox" class="checkbox__input" name="checkboxShowHint" id="checkboxShowHintId" />
+          <div class="checkbox__box"></div>
+          Show Image
+        </label>
+      </div>
+
+      <!-- Buttons: Update, Cancel Settings -->
+      <div class="update-cancal-buttons">
+        <button type="button" class="btn-overlay" onclick="updateTrainCases()">Update</button>
+        <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
+      </div>
+    </div>
     <!-- POPUP-CONTAINER END -->
 
     <!-- Train Mode -->
@@ -189,112 +290,6 @@
       <button id="btn-show-hide-debug-info" onclick="showHideDebugInfo()">> Show info</button>
       <div id="debug-info"></div>
       <!--renamed from div-debug-info-->
-
-      <!-- Train Settings -->
-      <div id="train-cases-container" class="popup-container">
-        <h2>Algorithms to learn</h2>
-        <div id="div-algs-to-learn" class="div-checkbox-container-container">
-          <!-- Checkbox: Unlearned, Learning, Finished -->
-          <div class="checkbox-container">
-            <h3>Status</h3>
-            <label class="checkbox" for="checkboxUnlearnedId">
-              <input type="checkbox" class="checkbox__input" name="checkboxUnlearned" id="checkboxUnlearnedId" />
-              <div class="checkbox__box"></div>
-              Unlearned
-            </label>
-
-            <label class="checkbox" for="checkboxLearningId">
-              <input type="checkbox" class="checkbox__input" name="checkboxLearning" id="checkboxLearningId" />
-              <div class="checkbox__box"></div>
-              Learning
-            </label>
-
-            <label class="checkbox" for="checkboxFinishedId">
-              <input type="checkbox" class="checkbox__input" name="checkboxFinished" id="checkboxFinishedId" />
-              <div class="checkbox__box"></div>
-              Finished
-            </label>
-          </div>
-
-          <!-- Checkbox: Groups -->
-          <div class="checkbox-container">
-            <h3>Group</h3>
-            <label class="checkbox" for="checkboxGroupBasicId">
-              <input type="checkbox" class="checkbox__input" name="checkboxGroupBasic" id="checkboxGroupBasicId" />
-              <div class="checkbox__box"></div>
-              Basic
-            </label>
-
-            <label class="checkbox" for="checkboxGroupBasicBackId">
-              <input
-                type="checkbox"
-                class="checkbox__input"
-                name="checkboxGroupBasicBack"
-                id="checkboxGroupBasicBackId"
-              />
-              <div class="checkbox__box"></div>
-              Basic Back
-            </label>
-
-            <label class="checkbox" for="checkboxGroupAdvancedId">
-              <input
-                type="checkbox"
-                class="checkbox__input"
-                name="checkboxGroupAdvanced"
-                id="checkboxGroupAdvancedId"
-              />
-              <div class="checkbox__box"></div>
-              Advanced
-            </label>
-
-            <label class="checkbox" for="checkboxGroupExpertId">
-              <input type="checkbox" class="checkbox__input" name="checkboxExpertAdvanced" id="checkboxGroupExpertId" />
-              <div class="checkbox__box"></div>
-              Expert
-            </label>
-          </div>
-        </div>
-
-        <div class="div-checkbox-container-container">
-          <div class="checkbox-container">
-            <h3>Left / Right Slot</h3>
-            <label class="checkbox" for="checkboxLeftId">
-              <input type="checkbox" class="checkbox__input" name="checkboxLeft" id="checkboxLeftId" />
-              <div class="checkbox__box"></div>
-              Left
-            </label>
-
-            <label class="checkbox" for="checkboxRightId">
-              <input type="checkbox" class="checkbox__input" name="checkboxRight" id="checkboxRightId" />
-              <div class="checkbox__box"></div>
-              Right
-            </label>
-          </div>
-          <div class="checkbox-container">
-            <h3>AUF</h3>
-            <label class="checkbox" for="checkboxAUFId">
-              <input type="checkbox" class="checkbox__input" name="checkboxAUF" id="checkboxAUFId" />
-              <div class="checkbox__box"></div>
-              Add AUF
-            </label>
-          </div>
-        </div>
-
-        <div class="checkbox-container">
-          <h2>Hint Settings</h2>
-          <label class="checkbox" for="checkboxShowHintId">
-            <input type="checkbox" class="checkbox__input" name="checkboxShowHint" id="checkboxShowHintId" />
-            <div class="checkbox__box"></div>
-            Show Image
-          </label>
-        </div>
-
-        <!-- Buttons: Update, Cancel Settings -->
-        <div class="update-cancal-buttons">
-          <button type="button" class="btn-overlay" onclick="updateTrainCases()">Update</button>
-          <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
-        </div>
-      </div>
     </div>
 
     <!-- Scripts -->

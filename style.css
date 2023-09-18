@@ -471,6 +471,7 @@ a {
   display: none;
   flex-direction: column;
   max-width: 400px;
+  margin-inline: max(20px, 50svw - 400px/2);
 }
 
 #train-cases-container > h2 {
