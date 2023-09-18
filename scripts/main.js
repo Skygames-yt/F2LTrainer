@@ -24,6 +24,7 @@ const ELEM_CHANGE_MODE = document.getElementById("change-mode"); // renamed from
 const ELEM_OVERLAY = document.getElementById("overlay"); // renamed from overlay
 const ELEM_INFO_CONTAINER = document.getElementById("info-container"); // renamed from infoContainer
 const ELEM_LOADING_SCREEN = document.getElementById("loading-screen");
+const ELEM_CHANGE_STATE_POPUP = document.getElementById("popup-change-state");
 
 // side buttons
 // const btnSetting = document.getElementById("btn-settings");
@@ -70,6 +71,12 @@ const ELEM_HINT = document.getElementById("hint"); // renamed from hintDiv
 const ELEM_HINT_IMG = document.getElementById("hint-img"); // renamed from hintImg
 let algHint = "";
 
+const ELEM_RADIO_UNLEARNED = document.getElementById("radio-state-unlearned");
+const ELEM_RADIO_LEARNING = document.getElementById("radio-state-learning");
+const ELEM_RADIO_FINISHED = document.getElementById("radio-state-finished");
+let currentTrainGroup = -1;
+let currentTrainCase = -1;
+
 let selectedTrainIndex = 0;
 let hintCounter = 0;
 
@@ -77,7 +84,7 @@ let mode = 0; // 0: select, 1: train
 
 // List that contains all the randomly selected cases
 let trainCaseList = [];
-let currentTrainCase = -1;
+let currentTrainCaseNumber = -1;
 
 // Basic, Basic Back, Advanced, Exert
 const ELEM_SELECT_GROUP = document.getElementById("select-group"); // renamed from selectGroup
@@ -233,7 +240,7 @@ window.addEventListener("load", () => {
   // Run this function to only show basic cases in the beginning
   showSelectedGroup();
 
-  // Hide Loading Screen
+  // Hide Loading Screen after some time
   setTimeout(() => {
     ELEM_LOADING_SCREEN.style.display = "none";
   }, 100);
@@ -301,10 +308,10 @@ function addElementsToDOM() {
 
         GROUP.imgContainer[indexCase] = document.createElement("button");
         GROUP.imgContainer[indexCase].classList.add("img-case-container"); // renamed from image-container
-        // GROUP.imgContainer[indexCase].setAttribute("onclick", "changeCategory(indexGroup, indexCase)");
+        // GROUP.imgContainer[indexCase].setAttribute("onclick", "changeState(indexGroup, indexCase)");
         GROUP.imgContainer[indexCase].onclick = function () {
           // console.log("indexGroup: " + indexGroup + ", indexCase: " + indexCase);
-          changeCategory(indexGroup, indexCase);
+          changeState(indexGroup, indexCase);
         };
         // GROUP.imgContainer[indexCase].id = "img-case-container-" + indexCase;
 
@@ -447,6 +454,7 @@ function closeOverlays() {
   ELEM_TRASH_CONTAINER.style.display = "none";
   ELEM_EDITALG_CONTAINER.style.display = "none";
   ELEM_SETTINGS_CONTAINER.style.display = "none";
+  ELEM_CHANGE_STATE_POPUP.style.display = "none";
   ELEM_BODY.style.overflow = "auto";
   ELEM_OVERLAY.style.display = "none";
 }
@@ -617,7 +625,7 @@ function updateTrainCases() {
   aufSelection = ELEM_CHECKBOX_AUF.checked;
   hintSelection = ELEM_CHECKBOX_HINT.checked;
 
-  currentTrainCase = -1;
+  currentTrainCaseNumber = -1;
   generatedScrambles = [];
   closeOverlays();
   generateTrainCaseList();
@@ -628,7 +636,7 @@ function updateTrainCases() {
 function showHint() {
   if (generatedScrambles.length == 0) return;
   // Get algorithm and convert to list
-  const ALG_LIST = generatedScrambles[currentTrainCase].algHint.split(" ");
+  const ALG_LIST = generatedScrambles[currentTrainCaseNumber].algHint.split(" ");
   ELEM_HINT_IMG.style.opacity = 100;
   if (hintCounter < ALG_LIST.length) {
     ELEM_HINT.innerText = ALG_LIST.slice(0, hintCounter + 1).join(" ");
@@ -742,23 +750,23 @@ function nextScramble(nextPrevious) {
   ELEM_HINT.innerText = "Press to show hint";
 
   if (nextPrevious) {
-    currentTrainCase++;
-    if (currentTrainCase >= generatedScrambles.length) {
+    currentTrainCaseNumber++;
+    if (currentTrainCaseNumber >= generatedScrambles.length) {
       generateTrainCaseList();
       if (generatedScrambles.length <= 0) {
         return;
       }
     }
-  } else if (currentTrainCase > 0) {
-    currentTrainCase--;
+  } else if (currentTrainCaseNumber > 0) {
+    currentTrainCaseNumber--;
   }
 
-  const INDEX_GROUP = generatedScrambles[currentTrainCase].indexGroup;
-  const INDEX_CASE = generatedScrambles[currentTrainCase].indexCase;
-  const INDEX_SCRAMBLE = generatedScrambles[currentTrainCase].indexScramble;
-  const MIRRORING = generatedScrambles[currentTrainCase].mirroring;
-  const SELECTED_SCRAMBLE = generatedScrambles[currentTrainCase].selectedScramble;
-  const ALG_HINT = generatedScrambles[currentTrainCase].algHint;
+  const INDEX_GROUP = generatedScrambles[currentTrainCaseNumber].indexGroup;
+  const INDEX_CASE = generatedScrambles[currentTrainCaseNumber].indexCase;
+  const INDEX_SCRAMBLE = generatedScrambles[currentTrainCaseNumber].indexScramble;
+  const MIRRORING = generatedScrambles[currentTrainCaseNumber].mirroring;
+  const SELECTED_SCRAMBLE = generatedScrambles[currentTrainCaseNumber].selectedScramble;
+  const ALG_HINT = generatedScrambles[currentTrainCaseNumber].algHint;
 
   const GROUP = GROUPS[INDEX_GROUP];
 
@@ -785,6 +793,9 @@ function nextScramble(nextPrevious) {
     GROUPS[INDEX_GROUP].algorithmSelection[INDEX_CASE] +
     ", mirrored: " +
     MIRRORING;
+
+  currentTrainGroup = INDEX_GROUP;
+  currentTrainCase = INDEX_CASE;
 }
 
 // obsolete? ----------------------------------------------------------------????????????????????????
@@ -883,7 +894,7 @@ function showInfo() {
 }
 
 // Called when image is clicked
-function changeCategory(indexGroup, indexCase) {
+function changeState(indexGroup, indexCase) {
   const GROUP = GROUPS[indexGroup];
   GROUP.caseSelection[indexCase]++;
   // console.log(GROUP.caseSelection[indexCase]);
@@ -945,4 +956,26 @@ function checkForDuplicates() {
       }
     }
   }
+}
+
+function showSetStateMenu() {
+  ELEM_CHANGE_STATE_POPUP.style.display = "block";
+  ELEM_OVERLAY.style.display = "block";
+  ELEM_BODY.style.overflow = "hidden";
+}
+
+function changeStateRadio() {
+  console.log("group: " + currentTrainGroup + ", case: " + currentTrainCase);
+  const GROUP = GROUPS[currentTrainGroup];
+  if (ELEM_RADIO_UNLEARNED.checked == true) GROUP.caseSelection[currentTrainCase] = 0;
+  if (ELEM_RADIO_LEARNING.checked == true) GROUP.caseSelection[currentTrainCase] = 1;
+  if (ELEM_RADIO_FINISHED.checked == true) GROUP.caseSelection[currentTrainCase] = 2;
+  console.log(GROUP.caseSelection[currentTrainCase]);
+  GROUP.divContainer[currentTrainCase].style.background = CATEGORY_COLORS[GROUP.caseSelection[currentTrainCase]];
+  GROUP.divContainer[currentTrainCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[currentTrainCase]];
+  GROUP.divContainer[currentTrainCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[currentTrainCase]];
+
+  saveUserData();
+
+  closeOverlays();
 }

@@ -248,6 +248,29 @@
         <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
       </div>
     </div>
+
+    <!-- Change State Popup -->
+    <div id="popup-change-state" class="popup-container">
+      <h1>Change learning state to</h1>
+
+      <div>
+        <input class="radio-state" type="radio" id="radio-state-unlearned" name="state" value="unlearned" checked />
+        <label class="color-transparent label-state" for="radio-state-unlearned">Unlearned</label>
+      </div>
+      <div>
+        <input class="radio-state" type="radio" id="radio-state-learning" name="state" value="learning" />
+        <label class="color-yellow label-state" for="radio-state-learning">Learning</label>
+      </div>
+      <div>
+        <input class="radio-state" type="radio" id="radio-state-finished" name="state" value="finished" />
+        <label class="color-green label-state" for="radio-state-finished">Finished</label>
+      </div>
+
+      <div class="update-cancal-buttons">
+        <button type="button" class="btn-overlay" onclick="changeStateRadio()">Update</button>
+        <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
+      </div>
+    </div>
     <!-- POPUP-CONTAINER END -->
 
     <!-- Train Mode -->
@@ -286,6 +309,8 @@
       </div>
       <div id="hint" onclick="showHint()">Press to show hint</div>
       <!-- <button type="button" id="hint" onclick="showHint()">Press to show hint</button> -->
+
+      <button id="btn-change-state" onclick="showSetStateMenu()">Change state</button>
 
       <button id="btn-show-hide-debug-info" onclick="showHideDebugInfo()">> Show info</button>
       <div id="debug-info"></div>

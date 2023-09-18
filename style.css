@@ -34,7 +34,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-li {
+li .label-state {
   width: fit-content;
   padding: 0.2rem;
   margin: 0.2rem;
@@ -342,6 +342,22 @@ a {
   max-height: calc(100svh - 40px - 20px);
 }
 
+/* #popup-change-state {
+  
+} */
+
+.radio-state {
+  margin-top: 1.7rem;
+  margin-bottom: 1.7rem;
+}
+
+.label-state {
+  font-size: 1.5rem;
+  border-radius: 0.7rem;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+}
+
 #loading-screen {
   display: block;
   top: 0;
@@ -619,6 +635,18 @@ a {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 } */
+
+#btn-change-state {
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin: 1.5rem;
+  padding: 0.5rem;
+  /* border-style: solid; */
+  /* border-radius: 0.6rem; */
+  border-color: var(--var-color-img);
+}
+
+#btn-change-state:hover,
 #change-mode:hover,
 #change-mode:focus,
 .side-button:hover,
