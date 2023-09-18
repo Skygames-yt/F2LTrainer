@@ -32,7 +32,8 @@ const ELEM_TRASH_CONTAINER = document.getElementById("trash-container"); // rena
 const CATEGORY_NAMES = ["Unlearned", "Learning", "Finished", "All"]; // renamed!!!!!!! from possibleStates
 
 const CATEGORY_COLORS = ["rgba(0, 0, 0, 0)", "rgb(236 236 0)", "rgb(0 196 0)"]; // renamed!!!!! from colors
-const CATEGORY_BORDERS = ["dashed", "dashed solid", "solid"]; // renamed!!!!! from borders
+// const CATEGORY_BORDERS = ["dashed", "dashed solid", "solid"]; // renamed!!!!! from borders
+const CATEGORY_BORDERS = ["solid", "solid", "solid"];
 const CATEGORY_TEXT_COLOR = ["rgb(255 255 255)", "rgb(0 0 0)", "rgb(255 255 255)"]; // renamed!!!!! from colorsText
 
 const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg"; // renamed!!!!! from imgPathRightArrow
