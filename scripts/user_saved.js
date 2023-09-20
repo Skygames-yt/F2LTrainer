@@ -74,18 +74,7 @@ function saveUserData() {
 
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
-    // console.log(GROUP);
     for (let indexCategory = 0; indexCategory < GROUP.categoryCases.length; indexCategory++) {
-      /*console.log(
-        "saveName: " +
-          GROUP.saveName +
-          "collapse" +
-          indexCategory +
-          "\ngroup.collapse[" +
-          indexCategory +
-          "]: " +
-          GROUP.collapse[indexCategory]
-      );*/
       localStorage.setItem(GROUP.saveName + "collapse" + indexCategory, GROUP.collapse[indexCategory]);
 
       let categoryItems = GROUP.categoryCases[indexCategory];
@@ -106,10 +95,6 @@ function saveUserData() {
         localStorage.setItem(GROUP.saveName + "algorithmSelection" + indexCase, GROUP.algorithmSelection[indexCase]);
       }
     }
-
-    // for (let indexCase = 0; indexCase < GROUP.numberCases; indexCase++) {
-
-    // }
   }
   updateHintVisibility();
 }
@@ -148,11 +133,6 @@ function loadUserData() {
       } else {
         GROUP.collapse.push(false);
       }
-
-      // let categoryItems = GROUP.categoryCases[indexCategory];
-      // for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
-      //   let indexCase = categoryItems[indexCategoryItem] - 1;
-      // }
     }
 
     for (let indexCase = 0; indexCase < GROUP.numberCases; indexCase++) {
