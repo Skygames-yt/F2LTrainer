@@ -8,6 +8,7 @@ const COLOR_TEXT = getComputedStyle(document.documentElement).getPropertyValue("
 const COLOR_TEXT_INVERTED = getComputedStyle(document.documentElement).getPropertyValue("--color-text-inverted");
 const FILTER_IMG = getComputedStyle(document.documentElement).getPropertyValue("--filter-img");
 const FILTER_WHITE = getComputedStyle(document.documentElement).getPropertyValue("--filter-white");
+const FILTER_BLACK = getComputedStyle(document.documentElement).getPropertyValue("--filter-black");
 const COLOR_IMG = getComputedStyle(document.documentElement).getPropertyValue("--color-img");
 const COLOR_POPUP = getComputedStyle(document.documentElement).getPropertyValue("--color-popup");
 const COLOR_BTN_HOVER = getComputedStyle(document.documentElement).getPropertyValue("--color-btn-hover");
@@ -53,11 +54,7 @@ const CATEGORY_COLORS = [COLOR_UNLEARNED, COLOR_LEARNING, COLOR_FINISHED]; // re
 // const CATEGORY_BORDERS = ["dashed", "dashed solid", "solid"]; // renamed!!!!! from borders
 const CATEGORY_BORDERS = ["solid", "solid", "solid"];
 const CATEGORY_TEXT_COLOR = [COLOR_TEXT, COLOR_TEXT_INVERTED, COLOR_TEXT]; // renamed!!!!! from colorsText
-const COLORS_BTN_EDIT = [
-  "invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%)",
-  "brightness(0) saturate(100%) invert(0%) sepia(99%) saturate(40%) hue-rotate(77deg) brightness(100%) contrast(101%)",
-  "brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg) brightness(102%) contrast(102%)",
-];
+const COLORS_BTN_EDIT = [FILTER_IMG, FILTER_BLACK, FILTER_WHITE];
 
 const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg"; // renamed!!!!! from imgPathRightArrow
 const IMG_PATH_DOWN_ARROW = "./images/arrow_collapse_down.svg"; // renamed!!!!! from imgPathDownArrow
@@ -118,6 +115,9 @@ const ELEM_BTN_SHOW_HIDE_DEBUG_INFO = document.getElementById("btn-show-hide-deb
 const ELEM_DEBUG_INFO = document.getElementById("debug-info"); // renamed from divDebug
 
 let generatedScrambles = [];
+
+// Flag is set when data is saved
+let flagSave = false;
 
 // ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
@@ -682,6 +682,7 @@ function showSelectedGroup() {
 
 function generateTrainCaseList() {
   trainCaseList = [];
+  currentTrainCaseNumber = 0;
 
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
@@ -768,7 +769,10 @@ function nextScramble(nextPrevious) {
   updateHintVisibility();
   hintCounter = 0;
   ELEM_HINT.innerText = "Press to show hint";
-
+  if (flagSave) {
+    generateTrainCaseList();
+    flagSave = false;
+  }
   if (nextPrevious) {
     currentTrainCaseNumber++;
     if (currentTrainCaseNumber >= generatedScrambles.length) {
@@ -979,14 +983,28 @@ function checkForDuplicates() {
 }
 
 function showSetStateMenu() {
+  const STATE = GROUPS[currentTrainGroup].caseSelection[currentTrainCase];
+  switch (STATE) {
+    case "0":
+      ELEM_RADIO_UNLEARNED.checked = true;
+      break;
+    case "1":
+      ELEM_RADIO_LEARNING.checked = true;
+      break;
+    case "2":
+      ELEM_RADIO_FINISHED.checked = true;
+      break;
+  }
+
   ELEM_CHANGE_STATE_POPUP.style.display = "block";
   ELEM_OVERLAY.style.display = "block";
   ELEM_BODY.style.overflow = "hidden";
 }
 
 function changeStateRadio() {
-  console.log("group: " + currentTrainGroup + ", case: " + currentTrainCase);
+  // console.log("group: " + currentTrainGroup + ", case: " + currentTrainCase);
   const GROUP = GROUPS[currentTrainGroup];
+  if (GROUP == undefined) return;
   if (ELEM_RADIO_UNLEARNED.checked == true) GROUP.caseSelection[currentTrainCase] = 0;
   if (ELEM_RADIO_LEARNING.checked == true) GROUP.caseSelection[currentTrainCase] = 1;
   if (ELEM_RADIO_FINISHED.checked == true) GROUP.caseSelection[currentTrainCase] = 2;
