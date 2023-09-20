@@ -27,16 +27,16 @@ let selectedCase = 0;
 let selectedAlgNumber = 0;
 
 // Maximum number of algs per Case
-const NUM_ALG = 20; 
+const NUM_ALG = 20;
 const ALG_COLORS = ["transparent", "#009900"];
 
 const ELEM_WINDOW_SELECT = document.getElementById("window-select");
 const ELEM_WINDOW_TRAIN = document.getElementById("window-train");
 
 const ELEM_GROUP_CONTAINER = Array(GROUPS.length);
-const ELEM_SIDE_CONTAINER = document.getElementById("side-container"); 
-const ELEM_CHANGE_MODE = document.getElementById("change-mode"); 
-const ELEM_OVERLAY = document.getElementById("overlay"); 
+const ELEM_SIDE_CONTAINER = document.getElementById("side-container");
+const ELEM_CHANGE_MODE = document.getElementById("change-mode");
+const ELEM_OVERLAY = document.getElementById("overlay");
 const ELEM_INFO_CONTAINER = document.getElementById("info-container");
 const ELEM_LOADING_SCREEN = document.getElementById("loading-screen");
 const ELEM_CHANGE_STATE_POPUP = document.getElementById("popup-change-state");
@@ -54,30 +54,30 @@ const CATEGORY_BORDERS = ["solid", "solid", "solid"];
 const CATEGORY_TEXT_COLOR = [COLOR_TEXT, COLOR_TEXT_INVERTED, COLOR_TEXT];
 const COLORS_BTN_EDIT = [FILTER_IMG, FILTER_BLACK, FILTER_WHITE];
 
-const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg"; 
-const IMG_PATH_DOWN_ARROW = "./images/arrow_collapse_down.svg"; 
+const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg";
+const IMG_PATH_DOWN_ARROW = "./images/arrow_collapse_down.svg";
 
 const ELEM_CHECKBOX_UNLEARNED = document.getElementById("checkboxUnlearnedId");
-const ELEM_CHECKBOX_LEARNING = document.getElementById("checkboxLearningId"); 
-const ELEM_CHECKBOX_FINISHED = document.getElementById("checkboxFinishedId"); 
+const ELEM_CHECKBOX_LEARNING = document.getElementById("checkboxLearningId");
+const ELEM_CHECKBOX_FINISHED = document.getElementById("checkboxFinishedId");
 
 const ELEM_CHECKBOX_BASIC = document.getElementById("checkboxGroupBasicId");
 const ELEM_CHECKBOX_BASIC_BACK = document.getElementById("checkboxGroupBasicBackId");
-const ELEM_CHECKBOX_ADVANCED = document.getElementById("checkboxGroupAdvancedId"); 
-const ELEM_CHECKBOX_EXPERT = document.getElementById("checkboxGroupExpertId"); 
+const ELEM_CHECKBOX_ADVANCED = document.getElementById("checkboxGroupAdvancedId");
+const ELEM_CHECKBOX_EXPERT = document.getElementById("checkboxGroupExpertId");
 
-const ELEM_CHECKBOX_LEFT = document.getElementById("checkboxLeftId"); 
+const ELEM_CHECKBOX_LEFT = document.getElementById("checkboxLeftId");
 const ELEM_CHECKBOX_RIGHT = document.getElementById("checkboxRightId");
 
-const ELEM_CHECKBOX_AUF = document.getElementById("checkboxAUFId"); 
+const ELEM_CHECKBOX_AUF = document.getElementById("checkboxAUFId");
 
 const ELEM_CHECKBOX_HINT = document.getElementById("checkboxShowHintId");
 
 const ELEM_BUTTON_SETTINGS = document.getElementById("btn-settings-train");
 const ELEM_SETTINGS_CONTAINER = document.getElementById("train-cases-container");
 
-const ELEM_SCRAMBLE = document.getElementById("scramble"); 
-const ELEM_HINT = document.getElementById("hint"); 
+const ELEM_SCRAMBLE = document.getElementById("scramble");
+const ELEM_HINT = document.getElementById("hint");
 const ELEM_HINT_IMG = document.getElementById("hint-img");
 let algHint = "";
 
@@ -100,8 +100,8 @@ let currentTrainCaseNumber = -1;
 const ELEM_SELECT_GROUP = document.getElementById("select-group");
 
 let boolShowDebugInfo = false;
-const ELEM_BTN_SHOW_HIDE_DEBUG_INFO = document.getElementById("btn-show-hide-debug-info"); 
-const ELEM_DEBUG_INFO = document.getElementById("debug-info"); 
+const ELEM_BTN_SHOW_HIDE_DEBUG_INFO = document.getElementById("btn-show-hide-debug-info");
+const ELEM_DEBUG_INFO = document.getElementById("debug-info");
 
 let generatedScrambles = [];
 
@@ -136,9 +136,6 @@ window.addEventListener("load", () => {
 
     ELEM_EDITALG_LIST.appendChild(ELEM_EDITALG_LISTENTRY[i]);
   }
-
-
-
 
   // Click Event - Collapse Category
   /*
@@ -564,7 +561,7 @@ function showSelectedGroup() {
 
 function generateTrainCaseList() {
   trainCaseList = [];
-  currentTrainCaseNumber = 0;
+  // currentTrainCaseNumber = 0;
 
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
@@ -642,6 +639,7 @@ function generateTrainCaseList() {
     trainCaseList[J] = TEMP;
   }
   generatedScrambles = generatedScrambles.concat(trainCaseList);
+  console.log("trainCaseList: " + trainCaseList);
 }
 
 function nextScramble(nextPrevious) {
@@ -663,6 +661,8 @@ function nextScramble(nextPrevious) {
   } else if (currentTrainCaseNumber > 0) {
     currentTrainCaseNumber--;
   }
+
+  if (generatedScrambles[currentTrainCaseNumber] == undefined) return;
 
   const INDEX_GROUP = generatedScrambles[currentTrainCaseNumber].indexGroup;
   const INDEX_CASE = generatedScrambles[currentTrainCaseNumber].indexCase;
@@ -769,7 +769,8 @@ function collapseCategory(indexGroup, indexCategory) {
 function changeMode() {
   if (mode == 0) {
     mode = 1;
-    nextScramble(1);
+    updateTrainCases();
+    // nextScramble(1);
     ELEM_CHANGE_MODE.innerHTML = "Select cases";
     ELEM_WINDOW_SELECT.style.display = "none";
     ELEM_SELECT_GROUP.style.display = "none";
