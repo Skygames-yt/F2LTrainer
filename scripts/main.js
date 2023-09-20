@@ -28,7 +28,7 @@ let selectedAlgNumber = 0;
 
 // Maximum number of algs per Case
 const NUM_ALG = 20;
-const ALG_COLORS = ["transparent", "#009900"];
+const COLORS_ALG = ["transparent", "#009900"];
 
 const ELEM_WINDOW_SELECT = document.getElementById("window-select");
 const ELEM_WINDOW_TRAIN = document.getElementById("window-train");
@@ -126,11 +126,11 @@ window.addEventListener("load", () => {
     ELEM_EDITALG_LISTENTRY[i].onclick = function () {
       // Change Background when selected
       if (selectedAlgNumber < GROUPS[ELEM_SELECT_GROUP.selectedIndex].algorithms[selectedCase + 1].length) {
-        ELEM_EDITALG_LISTENTRY[selectedAlgNumber].style.background = ALG_COLORS[0];
+        ELEM_EDITALG_LISTENTRY[selectedAlgNumber].style.background = COLORS_ALG[0];
       } else {
-        ELEM_EDITALG_CUSTOMALG.style.background = ALG_COLORS[0];
+        ELEM_EDITALG_CUSTOMALG.style.background = COLORS_ALG[0];
       }
-      ELEM_EDITALG_LISTENTRY[i].style.background = ALG_COLORS[1];
+      ELEM_EDITALG_LISTENTRY[i].style.background = COLORS_ALG[1];
       selectedAlgNumber = i;
     };
 
@@ -432,17 +432,17 @@ function editAlgs(indexGroup, indexCase) {
       ELEM_EDITALG_LISTENTRY[alg].style.display = "none";
     }
     // Reset all backgrounds
-    ELEM_EDITALG_LISTENTRY[alg].style.background = ALG_COLORS[0];
+    ELEM_EDITALG_LISTENTRY[alg].style.background = COLORS_ALG[0];
   }
   // Check if previously saved alg is default of custom
   if (selectedAlgNumber < GROUP.algorithms[selectedCase + 1].length) {
     // If alg is default set color of selected alg
-    ELEM_EDITALG_LISTENTRY[GROUP.algorithmSelection[selectedCase]].style.background = ALG_COLORS[1];
+    ELEM_EDITALG_LISTENTRY[GROUP.algorithmSelection[selectedCase]].style.background = COLORS_ALG[1];
     // and reset color of custom
-    ELEM_EDITALG_CUSTOMALG.style.background = ALG_COLORS[0];
+    ELEM_EDITALG_CUSTOMALG.style.background = COLORS_ALG[0];
   } else {
     // If alg is custom set color
-    ELEM_EDITALG_CUSTOMALG.style.background = ALG_COLORS[1];
+    ELEM_EDITALG_CUSTOMALG.style.background = COLORS_ALG[1];
   }
 
   // Set text in Textbox to saved value
@@ -459,9 +459,9 @@ function customAlgSelected() {
   // Custon Alg Textbox clicked
 
   // Set Background of Textbox
-  ELEM_EDITALG_LISTENTRY[selectedAlgNumber].style.background = ALG_COLORS[0];
+  ELEM_EDITALG_LISTENTRY[selectedAlgNumber].style.background = COLORS_ALG[0];
   // Reset Background of previously selected Alg
-  ELEM_EDITALG_CUSTOMALG.style.background = ALG_COLORS[1];
+  ELEM_EDITALG_CUSTOMALG.style.background = COLORS_ALG[1];
   // Set selected Alg to number of selected Alg
   selectedAlgNumber = GROUPS[ELEM_SELECT_GROUP.selectedIndex].algorithms[selectedCase + 1].length;
 }
