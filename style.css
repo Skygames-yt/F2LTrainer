@@ -647,10 +647,10 @@ a {
 #btn-change-state {
   cursor: pointer;
   font-size: 1.5rem;
-  margin: 1.5rem;
+  margin: 5rem;
   padding: 0.5rem;
-  /* border-style: solid; */
-  /* border-radius: 0.6rem; */
+  border-style: solid;
+  border-radius: 0.6rem;
   border-color: var(--color-img);
 }
 
