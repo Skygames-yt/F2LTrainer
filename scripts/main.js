@@ -2,6 +2,20 @@
 
 const ELEM_BODY = document.querySelector("body");
 
+// Get colors from css
+const COLOR_BACKGROUND = getComputedStyle(document.documentElement).getPropertyValue("--color-background");
+const COLOR_TEXT = getComputedStyle(document.documentElement).getPropertyValue("--color-text");
+const COLOR_TEXT_INVERTED = getComputedStyle(document.documentElement).getPropertyValue("--color-text-inverted");
+const FILTER_IMG = getComputedStyle(document.documentElement).getPropertyValue("--filter-img");
+const FILTER_WHITE = getComputedStyle(document.documentElement).getPropertyValue("--filter-white");
+const COLOR_IMG = getComputedStyle(document.documentElement).getPropertyValue("--color-img");
+const COLOR_POPUP = getComputedStyle(document.documentElement).getPropertyValue("--color-popup");
+const COLOR_BTN_HOVER = getComputedStyle(document.documentElement).getPropertyValue("--color-btn-hover");
+const COLOR_OVERLAY = getComputedStyle(document.documentElement).getPropertyValue("--color-overlay");
+const COLOR_UNLEARNED = getComputedStyle(document.documentElement).getPropertyValue("--color-unleaned");
+const COLOR_LEARNING = getComputedStyle(document.documentElement).getPropertyValue("--color-learning");
+const COLOR_FINISHED = getComputedStyle(document.documentElement).getPropertyValue("--color-finished");
+
 const ELEM_EDITALG_CONTAINER = document.getElementById("editalg-container"); // renamed from editalgContainer
 const ELEM_EDITALG_IMG = document.getElementById("editalg-img"); // renamed from editalgImg
 const ELEM_EDITALG_LIST = document.getElementById("editalg-list"); // renamed from editalgList
@@ -35,10 +49,15 @@ const ELEM_TRASH_CONTAINER = document.getElementById("trash-container"); // rena
 // const ELEM_SELECT_STATE = document.getElementById("select-state"); // renamed from selectState // obsolete?
 const CATEGORY_NAMES = ["Unlearned", "Learning", "Finished", "All"]; // renamed!!!!!!! from possibleStates
 
-const CATEGORY_COLORS = ["rgba(0, 0, 0, 0)", "rgb(236 236 0)", "rgb(0 196 0)"]; // renamed!!!!! from colors
+const CATEGORY_COLORS = [COLOR_UNLEARNED, COLOR_LEARNING, COLOR_FINISHED]; // renamed!!!!! from colors
 // const CATEGORY_BORDERS = ["dashed", "dashed solid", "solid"]; // renamed!!!!! from borders
 const CATEGORY_BORDERS = ["solid", "solid", "solid"];
-const CATEGORY_TEXT_COLOR = ["rgb(255 255 255)", "rgb(0 0 0)", "rgb(255 255 255)"]; // renamed!!!!! from colorsText
+const CATEGORY_TEXT_COLOR = [COLOR_TEXT, COLOR_TEXT_INVERTED, COLOR_TEXT]; // renamed!!!!! from colorsText
+const COLORS_BTN_EDIT = [
+  "invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%)",
+  "brightness(0) saturate(100%) invert(0%) sepia(99%) saturate(40%) hue-rotate(77deg) brightness(100%) contrast(101%)",
+  "brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg) brightness(102%) contrast(102%)",
+];
 
 const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg"; // renamed!!!!! from imgPathRightArrow
 const IMG_PATH_DOWN_ARROW = "./images/arrow_collapse_down.svg"; // renamed!!!!! from imgPathDownArrow
@@ -327,6 +346,7 @@ function addElementsToDOM() {
 
         GROUP.imgEdit[indexCase] = document.createElement("img");
         GROUP.imgEdit[indexCase].classList.add("img-edit-trash");
+        GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
         GROUP.imgEdit[indexCase].onclick = function () {
           editAlgs(indexGroup, indexCase);
         };
@@ -904,7 +924,7 @@ function changeState(indexGroup, indexCase) {
   GROUP.divContainer[indexCase].style.background = CATEGORY_COLORS[GROUP.caseSelection[indexCase]];
   GROUP.divContainer[indexCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[indexCase]];
   GROUP.divContainer[indexCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[indexCase]];
-
+  GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
   saveUserData();
 }
 
