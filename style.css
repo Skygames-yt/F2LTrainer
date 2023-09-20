@@ -4,7 +4,10 @@
   --color-text-inverted: black;
   /* --color-text-train: #c953c9; */
   --filter-img: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
-  --filter-white: invert(14%) sepia(59%) saturate(4183%) hue-rotate(353deg) brightness(90%) contrast(125%);
+  --filter-white: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg) brightness(102%)
+    contrast(102%);
+  --filter-black: brightness(0) saturate(100%) invert(0%) sepia(99%) saturate(40%) hue-rotate(77deg) brightness(100%)
+    contrast(101%);
   --color-img: #00ee00;
   --color-popup: #1f3d52;
   --color-btn-hover: #140553;
