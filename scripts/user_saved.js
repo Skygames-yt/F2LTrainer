@@ -48,6 +48,7 @@ let hintSelection = true;
 // Save
 function saveUserData() {
   console.log("Saving User Data");
+  flagSave = true;
 
   // Saving trainStateSelection
   for (let i = 0; i < trainStateSelection.length; i++) {
