@@ -639,7 +639,6 @@ function generateTrainCaseList() {
     trainCaseList[J] = TEMP;
   }
   generatedScrambles = generatedScrambles.concat(trainCaseList);
-  console.log("trainCaseList: " + trainCaseList);
 }
 
 function nextScramble(nextPrevious) {
@@ -803,6 +802,7 @@ function checkForDuplicates() {
 
 function showSetStateMenu() {
   const STATE = GROUPS[currentTrainGroup].caseSelection[currentTrainCase];
+  console.log(STATE);
   switch (STATE) {
     case "0":
       ELEM_RADIO_UNLEARNED.checked = true;
@@ -826,7 +826,6 @@ function changeStateRadio() {
   if (ELEM_RADIO_UNLEARNED.checked == true) GROUP.caseSelection[currentTrainCase] = 0;
   if (ELEM_RADIO_LEARNING.checked == true) GROUP.caseSelection[currentTrainCase] = 1;
   if (ELEM_RADIO_FINISHED.checked == true) GROUP.caseSelection[currentTrainCase] = 2;
-  console.log(GROUP.caseSelection[currentTrainCase]);
   GROUP.divContainer[currentTrainCase].style.background = CATEGORY_COLORS[GROUP.caseSelection[currentTrainCase]];
   GROUP.divContainer[currentTrainCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[currentTrainCase]];
   GROUP.divContainer[currentTrainCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[currentTrainCase]];
