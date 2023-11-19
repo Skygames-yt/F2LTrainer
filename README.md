@@ -34,6 +34,10 @@ Finished
 
 ## Practicing
 
+![train_mode](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/58f99d09-275d-4161-abe4-687f9f08ff27)
+
+Press the cube or space ont the keyboard to get the next case.
+
 
 
 
