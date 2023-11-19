@@ -13,7 +13,25 @@ This [F2L Trainer](https://dave2ooo.github.io/F2LTrainer/) was created to help y
 
 # How to use the F2L Trainer
 
+## Selecting group
+![select_group](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/8d4d1e42-a3d4-4d99-8578-ed50ca1437ad)
+
 ## Changing learing state
+
+<img source="https://github.com/Dave2ooo/F2LTrainer/assets/71500391/a446a9b3-bcd2-433c-acb4-abeef4fe5cdf" width=50% height=50%>
+
+
+Press the cube to change the learning state to
+
+![gray](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/8ff591aa-74f4-4c3b-b7d9-c223e0beeeef)
+Unlearned
+
+![yellow](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/39d6e4c5-06e0-4000-a440-78264da76dde)
+Learning
+
+![green](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/56e9b198-6177-41a2-b9e2-51624983f0e1)
+Finished
+
 
 ## Practicing
 
