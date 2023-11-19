@@ -18,8 +18,7 @@ This [F2L Trainer](https://dave2ooo.github.io/F2LTrainer/) was created to help y
 
 ## Changing learing state
 
-<img source="https://github.com/Dave2ooo/F2LTrainer/assets/71500391/a446a9b3-bcd2-433c-acb4-abeef4fe5cdf" width=50% height=50%>
-
+![change_state_](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/1a18360d-e5eb-4165-af8f-d7c4aa653c7e)
 
 Press the cube to change the learning state to
 
