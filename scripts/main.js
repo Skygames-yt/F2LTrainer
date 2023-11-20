@@ -773,8 +773,10 @@ function collapseCategory(indexGroup, indexCategory) {
     GROUP.categoryContainer[indexCategory].style.display = "flex";
     //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_DOWN_ARROW;
     GROUP.categoryCollapseImg[indexCategory].classList.add("rotate-arrow");
+
     GROUP.collapse[indexCategory] = false;
   } else {
+    GROUP.categoryContainer[indexCategory].classList.add("hide-secti");
     GROUP.categoryContainer[indexCategory].style.display = "none";
     //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
     GROUP.categoryCollapseImg[indexCategory].classList.remove("rotate-arrow");

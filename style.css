@@ -121,6 +121,9 @@ a {
   padding-top: 10px;
   border-top: dotted;
   cursor: pointer;
+  /* background-color: var(--color-background);
+  opacity: 100%;
+  z-index: 1; */
 }
 
 .img-collapse-category {
@@ -136,6 +139,7 @@ a {
   flex-grow: 0;
   justify-content: start;
   flex-wrap: wrap;
+  transition: transform 0.3s;
 }
 
 .heading-category-name {
@@ -740,3 +744,7 @@ a {
 .rotate-arrow {
   transform: rotate(90deg);
 }
+
+/* .hide-section {
+  transform: translate(0, -100px);
+} */
