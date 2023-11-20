@@ -230,11 +230,13 @@ function addElementsToDOM() {
       GROUP.categoryCollapseImg.push(document.createElement("img"));
       GROUP.categoryCollapseImg[indexCategory].classList.add("img-collapse-category");
 
+      GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
       if (GROUP.collapse[indexCategory]) {
         GROUP.categoryContainer[indexCategory].style.display = "none";
-        GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
+        //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
       } else {
-        GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_DOWN_ARROW;
+        //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_DOWN_ARROW;
+        GROUP.categoryCollapseImg[indexCategory].classList.add("rotate-arrow");
       }
 
       GROUP.headingCategoryName.push(document.createElement("h2"));
@@ -750,7 +752,7 @@ function changeState(indexGroup, indexCase) {
   GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
   saveUserData();
 }
-
+/*
 function collapseCategory(indexGroup, indexCategory) {
   const GROUP = GROUPS[indexGroup];
   if (GROUP.categoryContainer[indexCategory].style.display == "none") {
@@ -760,6 +762,22 @@ function collapseCategory(indexGroup, indexCategory) {
   } else {
     GROUP.categoryContainer[indexCategory].style.display = "none";
     GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
+    GROUP.collapse[indexCategory] = true;
+  }
+  saveUserData();
+}
+*/
+function collapseCategory(indexGroup, indexCategory) {
+  const GROUP = GROUPS[indexGroup];
+  if (GROUP.categoryContainer[indexCategory].style.display == "none") {
+    GROUP.categoryContainer[indexCategory].style.display = "flex";
+    //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_DOWN_ARROW;
+    GROUP.categoryCollapseImg[indexCategory].classList.add("rotate-arrow");
+    GROUP.collapse[indexCategory] = false;
+  } else {
+    GROUP.categoryContainer[indexCategory].style.display = "none";
+    //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
+    GROUP.categoryCollapseImg[indexCategory].classList.remove("rotate-arrow");
     GROUP.collapse[indexCategory] = true;
   }
   saveUserData();

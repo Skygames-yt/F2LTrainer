@@ -127,6 +127,7 @@ a {
   /* height: 1rem;
   align-content: center; */
   height: auto;
+  transition: transform 0.3s;
 }
 
 .category-container {
@@ -734,4 +735,8 @@ a {
   .img-edit-trash {
     visibility: visible;
   }
+}
+
+.rotate-arrow {
+  transform: rotate(90deg);
 }
