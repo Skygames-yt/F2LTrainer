@@ -776,7 +776,7 @@ function collapseCategory(indexGroup, indexCategory) {
 
     GROUP.collapse[indexCategory] = false;
   } else {
-    GROUP.categoryContainer[indexCategory].classList.add("hide-secti");
+    // GROUP.categoryContainer[indexCategory].classList.add("hide-section");
     GROUP.categoryContainer[indexCategory].style.display = "none";
     //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
     GROUP.categoryCollapseImg[indexCategory].classList.remove("rotate-arrow");
