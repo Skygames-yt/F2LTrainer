@@ -140,7 +140,7 @@ a {
   flex-grow: 0;
   justify-content: start;
   flex-wrap: wrap;
-  transition: transform 0.3s;
+  transition: transform 200ms;
 }
 
 .heading-category-name {
@@ -761,6 +761,8 @@ a {
   transform: translate(0, -100px);
 } */
 
-label {
+.acessibility-label {
   display: none;
 }
+
+/* -------------------------------------------------------------- */

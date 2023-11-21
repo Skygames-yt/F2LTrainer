@@ -212,19 +212,21 @@ function addElementsToDOM() {
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
     ELEM_GROUP_CONTAINER[indexGroup] = document.createElement("div");
-    ELEM_GROUP_CONTAINER[indexGroup].classList.add("group-container"); // renamed!!!!! from all-alg-container
+    ELEM_GROUP_CONTAINER[indexGroup].classList.add("group-container");
 
     // Iterate over all cases
     for (let indexCategory = 0; indexCategory < GROUP.categoryCases.length; indexCategory++) {
       let categoryItems = GROUP.categoryCases[indexCategory];
       GROUP.categoryContainer[indexCategory] = document.createElement("div");
-      GROUP.categoryContainer[indexCategory].classList.add("category-container"); // renamed from div-category-container
-
+      GROUP.categoryContainer[indexCategory].classList.add("category-container");
+      GROUP.categoryContainer[indexCategory].id = "expand-contract-group" + indexGroup + "-category" + indexCategory;
       GROUP.collapseContainer.push(document.createElement("button"));
       GROUP.collapseContainer[indexCategory].type = "button";
       GROUP.collapseContainer[indexCategory].classList.add("collapse-container");
       GROUP.collapseContainer[indexCategory].onclick = function () {
         collapseCategory(indexGroup, indexCategory);
+        const COLLAPSECLASS = "#expand-contract-group" + indexGroup + "-category" + indexCategory;
+        $(COLLAPSECLASS).slideToggle(200);
       };
 
       GROUP.categoryCollapseImg.push(document.createElement("img"));
@@ -234,9 +236,7 @@ function addElementsToDOM() {
       GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
       if (GROUP.collapse[indexCategory]) {
         GROUP.categoryContainer[indexCategory].style.display = "none";
-        //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
       } else {
-        //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_DOWN_ARROW;
         GROUP.categoryCollapseImg[indexCategory].classList.add("rotate-arrow");
       }
 
@@ -260,7 +260,7 @@ function addElementsToDOM() {
         const IMG_CASE_PATH = GROUP.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
 
         GROUP.divContainer[indexCase] = document.createElement("div");
-        GROUP.divContainer[indexCase].classList.add("case-container"); // renamed from div-container
+        GROUP.divContainer[indexCase].classList.add("case-container");
         GROUP.divContainer[indexCase].style.background = CATEGORY_COLORS[GROUP.caseSelection[indexCase]];
         GROUP.divContainer[indexCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[indexCase]];
         GROUP.divContainer[indexCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[indexCase]];
@@ -755,33 +755,13 @@ function changeState(indexGroup, indexCase) {
   GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
   saveUserData();
 }
-/*
-function collapseCategory(indexGroup, indexCategory) {
-  const GROUP = GROUPS[indexGroup];
-  if (GROUP.categoryContainer[indexCategory].style.display == "none") {
-    GROUP.categoryContainer[indexCategory].style.display = "flex";
-    GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_DOWN_ARROW;
-    GROUP.collapse[indexCategory] = false;
-  } else {
-    GROUP.categoryContainer[indexCategory].style.display = "none";
-    GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
-    GROUP.collapse[indexCategory] = true;
-  }
-  saveUserData();
-}
-*/
-function collapseCategory(indexGroup, indexCategory) {
-  const GROUP = GROUPS[indexGroup];
-  if (GROUP.categoryContainer[indexCategory].style.display == "none") {
-    GROUP.categoryContainer[indexCategory].style.display = "flex";
-    //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_DOWN_ARROW;
-    GROUP.categoryCollapseImg[indexCategory].classList.add("rotate-arrow");
 
+function collapseCategory(indexGroup, indexCategory) {
+  const GROUP = GROUPS[indexGroup];
+  if (GROUP.collapse[indexCategory] == true) {
+    GROUP.categoryCollapseImg[indexCategory].classList.add("rotate-arrow");
     GROUP.collapse[indexCategory] = false;
   } else {
-    // GROUP.categoryContainer[indexCategory].classList.add("hide-section");
-    GROUP.categoryContainer[indexCategory].style.display = "none";
-    //GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
     GROUP.categoryCollapseImg[indexCategory].classList.remove("rotate-arrow");
     GROUP.collapse[indexCategory] = true;
   }
