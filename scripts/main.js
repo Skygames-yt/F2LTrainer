@@ -229,6 +229,7 @@ function addElementsToDOM() {
 
       GROUP.categoryCollapseImg.push(document.createElement("img"));
       GROUP.categoryCollapseImg[indexCategory].classList.add("img-collapse-category");
+      GROUP.categoryCollapseImg[indexCategory].alt = "collapse category";
 
       GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
       if (GROUP.collapse[indexCategory]) {
@@ -286,6 +287,7 @@ function addElementsToDOM() {
         GROUP.imgEdit[indexCase] = document.createElement("img");
         GROUP.imgEdit[indexCase].classList.add("img-edit-trash");
         GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
+        GROUP.imgEdit[indexCase].alt = "edit case " + (indexCase + 1);
         GROUP.imgEdit[indexCase].onclick = function () {
           editAlgs(indexGroup, indexCase);
         };
@@ -302,6 +304,7 @@ function addElementsToDOM() {
 
         GROUP.caseNumber[indexCase].innerHTML = indexCase + 1;
         GROUP.imgCase[indexCase].src = IMG_CASE_PATH;
+        GROUP.imgCase[indexCase].alt = GROUP.name + ", Case " + (indexCase + 1);
 
         // Set shown alg
         if (GROUP.algorithmSelection[indexCase] < GROUP.algorithms[indexCase + 1].length) {
