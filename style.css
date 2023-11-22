@@ -14,7 +14,7 @@
   --color-overlay: gray;
   --color-unleaned: rgba(0, 0, 0, 0);
   --color-learning: rgb(236 236 0);
-  --color-finished: rgb(0 196 0);
+  --color-finished: rgb(0, 223, 0);
 }
 
 body {

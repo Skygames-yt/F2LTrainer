@@ -51,7 +51,7 @@ const CATEGORY_NAMES = ["Unlearned", "Learning", "Finished", "All"];
 const CATEGORY_COLORS = [COLOR_UNLEARNED, COLOR_LEARNING, COLOR_FINISHED];
 // const CATEGORY_BORDERS = ["dashed", "dashed solid", "solid"];
 const CATEGORY_BORDERS = ["solid", "solid", "solid"];
-const CATEGORY_TEXT_COLOR = [COLOR_TEXT, COLOR_TEXT_INVERTED, COLOR_TEXT];
+const CATEGORY_TEXT_COLOR = [COLOR_TEXT, COLOR_TEXT_INVERTED, COLOR_TEXT_INVERTED];
 const COLORS_BTN_EDIT = [FILTER_IMG, FILTER_BLACK, FILTER_WHITE];
 
 const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg";
