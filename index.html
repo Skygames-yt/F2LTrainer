@@ -36,14 +36,16 @@
         <img src="./images/info.svg" alt="Info" class="side-img" title="Info" />
       </button>
 
-      <label for="select-group" class="acessibility-label">Choose a Group:</label>
-      <!-- for accesibility -->
-      <select id="select-group" onchange="showSelectedGroup()">
-        <option value="basic" selected>Basic Cases</option>
-        <option value="basicBack">Basic Cases Backslot</option>
-        <option value="advanced">Advanced Cases</option>
-        <option value="expert">Expert Cases</option>
-      </select>
+      <div class="container-select-group">
+        <label for="select-group" class="acessibility-label">Choose a Group:</label>
+        <!-- for accesibility -->
+        <select id="select-group" onchange="showSelectedGroup()">
+          <option value="basic" selected>Basic Cases</option>
+          <option value="basicBack">Basic Cases Backslot</option>
+          <option value="advanced">Advanced Cases</option>
+          <option value="expert">Expert Cases</option>
+        </select>
+      </div>
 
       <!-- Button Settings Train -->
       <div class="side-button" id="btn-settings-train" , onclick="showSettingsTrain()">
