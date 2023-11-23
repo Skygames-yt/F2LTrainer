@@ -131,6 +131,7 @@ a {
   /* height: 1rem;
   align-content: center; */
   /* height: auto; */
+  width: 32px;
   height: 32px;
   transition: transform 300ms;
 }
@@ -256,7 +257,7 @@ a {
 
 .side-img {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .btn-edit,
@@ -713,7 +714,7 @@ a {
   } */
   .img-collapse-category {
     height: 25px;
-    width: auto;
+    width: 25px;
   }
   .img-edit-trash {
     height: 18px;
