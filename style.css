@@ -256,6 +256,7 @@ a {
 
 .side-img {
   width: 100%;
+  height: auto;
 }
 
 .btn-edit,
@@ -712,6 +713,7 @@ a {
   } */
   .img-collapse-category {
     height: 25px;
+    width: auto;
   }
   .img-edit-trash {
     height: 18px;
