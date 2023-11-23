@@ -225,8 +225,8 @@ function addElementsToDOM() {
       GROUP.collapseContainer[indexCategory].classList.add("collapse-container");
       GROUP.collapseContainer[indexCategory].onclick = function () {
         collapseCategory(indexGroup, indexCategory);
-        const COLLAPSECLASS = "#expand-contract-group" + indexGroup + "-category" + indexCategory;
-        $(COLLAPSECLASS).slideToggle(200);
+        // const COLLAPSECLASS = "#expand-contract-group" + indexGroup + "-category" + indexCategory;
+        // $(COLLAPSECLASS).slideToggle(200);
       };
 
       GROUP.categoryCollapseImg.push(document.createElement("img"));
@@ -235,7 +235,8 @@ function addElementsToDOM() {
 
       GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
       if (GROUP.collapse[indexCategory]) {
-        GROUP.categoryContainer[indexCategory].style.display = "none";
+        // GROUP.categoryContainer[indexCategory].style.display = "none";
+        GROUP.categoryContainer[indexCategory].classList.add("display-none");
       } else {
         GROUP.categoryCollapseImg[indexCategory].classList.add("rotate-arrow");
       }
@@ -758,15 +759,71 @@ function changeState(indexGroup, indexCase) {
 
 function collapseCategory(indexGroup, indexCategory) {
   const GROUP = GROUPS[indexGroup];
+  const CATEGORY_CONATINER = GROUP.categoryContainer[indexCategory];
   if (GROUP.collapse[indexCategory] == true) {
+    // expand
     GROUP.categoryCollapseImg[indexCategory].classList.add("rotate-arrow");
+    expand(CATEGORY_CONATINER, 300);
     GROUP.collapse[indexCategory] = false;
   } else {
+    // colapse
     GROUP.categoryCollapseImg[indexCategory].classList.remove("rotate-arrow");
+    collapse(CATEGORY_CONATINER, 300);
     GROUP.collapse[indexCategory] = true;
   }
   saveUserData();
 }
+
+function collapse(target, duration = 300) {
+  target.style.transitionProperty = "height, margin, padding";
+  target.style.transitionDuration = duration + "ms";
+  target.style.boxSizing = "border-box";
+  target.style.height = target.offsetHeight + "px";
+  target.offsetHeight;
+  target.style.overflow = "hidden";
+  target.style.height = 0;
+  target.style.paddingTop = 0;
+  target.style.paddingBottom = 0;
+  target.style.marginTop = 0;
+  target.style.marginBottom = 0;
+  window.setTimeout(() => {
+    target.classList.add("display-none");
+    target.style.removeProperty("height");
+    target.style.removeProperty("padding-top");
+    target.style.removeProperty("padding-bottom");
+    target.style.removeProperty("margin-top");
+    target.style.removeProperty("margin-bottom");
+    target.style.removeProperty("overflow");
+    target.style.removeProperty("transition-duration");
+    target.style.removeProperty("transition-property");
+  }, duration);
+}
+
+let expand = (target, duration = 300) => {
+  target.classList.remove("display-none");
+  let height = target.offsetHeight;
+  target.style.overflow = "hidden";
+  target.style.height = 0;
+  target.style.paddingTop = 0;
+  target.style.paddingBottom = 0;
+  target.style.marginTop = 0;
+  target.style.marginBottom = 0;
+  target.offsetHeight;
+  target.style.boxSizing = "border-box";
+  target.style.transitionProperty = "height, margin, padding";
+  target.style.transitionDuration = duration + "ms";
+  target.style.height = height + "px";
+  target.style.removeProperty("padding-top");
+  target.style.removeProperty("padding-bottom");
+  target.style.removeProperty("margin-top");
+  target.style.removeProperty("margin-bottom");
+  window.setTimeout(() => {
+    target.style.removeProperty("height");
+    target.style.removeProperty("overflow");
+    target.style.removeProperty("transition-duration");
+    target.style.removeProperty("transition-property");
+  }, duration);
+};
 
 function changeMode() {
   if (mode == 0) {
