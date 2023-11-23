@@ -778,8 +778,8 @@ a {
     flex-direction: row;
   }
   .acessibility-label {
-  font-size: 1.2rem;
-}
+    font-size: 1.2rem;
+  }
 }
 
 @media (pointer: coarse) {
