@@ -76,7 +76,7 @@ const ELEM_CHECKBOX_AUF = document.getElementById("checkboxAUFId");
 
 const ELEM_CHECKBOX_HINT = document.getElementById("checkboxShowHintId");
 
-const ELEM_BUTTON_SETTINGS = document.getElementById("btn-settings-train");
+const ELEM_BUTTON_SETTINGS = document.querySelector(".btn-settings-train");
 const ELEM_SETTINGS_CONTAINER = document.getElementById("train-cases-container");
 
 const ELEM_SCRAMBLE = document.getElementById("scramble");
@@ -836,14 +836,14 @@ function changeMode() {
     ELEM_CHANGE_MODE.innerHTML = "Select cases";
     ELEM_WINDOW_SELECT.style.display = "none";
     ELEM_WINDOW_TRAIN.style.display = "flex";
-    ELEM_BUTTON_SETTINGS.style.display = "flex";
+    ELEM_BUTTON_SETTINGS.classList.remove("display-none");
     ELEM_CONTAINER_SELECT_GROUP.classList.add("display-none");
   } else {
     mode = 0;
     ELEM_CHANGE_MODE.innerHTML = "Train";
     ELEM_WINDOW_SELECT.style.display = "block";
     ELEM_WINDOW_TRAIN.style.display = "none";
-    ELEM_BUTTON_SETTINGS.style.display = "none";
+    ELEM_BUTTON_SETTINGS.classList.add("display-none");
     ELEM_CONTAINER_SELECT_GROUP.classList.remove("display-none");
   }
 }
