@@ -52,7 +52,7 @@ const CATEGORY_COLORS = [COLOR_UNLEARNED, COLOR_LEARNING, COLOR_FINISHED];
 // const CATEGORY_BORDERS = ["dashed", "dashed solid", "solid"];
 const CATEGORY_BORDERS = ["solid", "solid", "solid"];
 const CATEGORY_TEXT_COLOR = [COLOR_TEXT, COLOR_TEXT_INVERTED, COLOR_TEXT_INVERTED];
-const COLORS_BTN_EDIT = [FILTER_IMG, FILTER_BLACK, FILTER_WHITE];
+const COLORS_BTN_EDIT = [FILTER_IMG, FILTER_BLACK, FILTER_BLACK];
 
 const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg";
 const IMG_PATH_DOWN_ARROW = "./images/arrow_collapse_down.svg";
@@ -869,12 +869,15 @@ function showSetStateMenu() {
   switch (STATE) {
     case "0":
       ELEM_RADIO_UNLEARNED.checked = true;
+      // console.log("0 here");
       break;
     case "1":
       ELEM_RADIO_LEARNING.checked = true;
+      // console.log("1 here");
       break;
     case "2":
       ELEM_RADIO_FINISHED.checked = true;
+      // console.log("2 here");
       break;
   }
 
@@ -892,6 +895,7 @@ function changeStateRadio() {
   GROUP.divContainer[currentTrainCase].style.background = CATEGORY_COLORS[GROUP.caseSelection[currentTrainCase]];
   GROUP.divContainer[currentTrainCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[currentTrainCase]];
   GROUP.divContainer[currentTrainCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[currentTrainCase]];
+  GROUP.imgEdit[currentTrainCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[currentTrainCase]];
 
   saveUserData();
 
