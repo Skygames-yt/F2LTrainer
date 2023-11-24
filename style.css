@@ -701,6 +701,7 @@ a {
 .acessibility-label {
   /* display: none; */
   font-size: 0.8rem;
+  padding-right: 0.5rem;
 }
 
 .container-select-group {
@@ -783,7 +784,6 @@ a {
     visibility: visible;
   }
 }
-
 
 /* --- Keep at the end of .css file --- */
 .display-none {
