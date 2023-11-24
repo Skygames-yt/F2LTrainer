@@ -710,10 +710,6 @@ a {
   justify-content: center;
 }
 
-.display-none {
-  display: none;
-}
-
 /* -------------------------------------------------------------- */
 
 /* Media Query */
@@ -786,4 +782,10 @@ a {
   .img-edit-trash {
     visibility: visible;
   }
+}
+
+
+/* --- Keep at the end of .css file --- */
+.display-none {
+  display: none;
 }
