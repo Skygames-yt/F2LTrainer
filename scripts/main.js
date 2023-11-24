@@ -57,6 +57,9 @@ const COLORS_BTN_EDIT = [FILTER_IMG, FILTER_BLACK, FILTER_WHITE];
 const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg";
 const IMG_PATH_DOWN_ARROW = "./images/arrow_collapse_down.svg";
 
+const ELEM_LABEL_CHOOSE_GROUP = document.querySelector(".acessibility-label");
+const ELEM_CONTAINER_SELECT_GROUP = document.querySelector(".container-select-group");
+
 const ELEM_CHECKBOX_UNLEARNED = document.getElementById("checkboxUnlearnedId");
 const ELEM_CHECKBOX_LEARNING = document.getElementById("checkboxLearningId");
 const ELEM_CHECKBOX_FINISHED = document.getElementById("checkboxFinishedId");
@@ -832,16 +835,16 @@ function changeMode() {
     // nextScramble(1);
     ELEM_CHANGE_MODE.innerHTML = "Select cases";
     ELEM_WINDOW_SELECT.style.display = "none";
-    ELEM_SELECT_GROUP.style.display = "none";
     ELEM_WINDOW_TRAIN.style.display = "flex";
     ELEM_BUTTON_SETTINGS.style.display = "flex";
+    ELEM_CONTAINER_SELECT_GROUP.classList.add("display-none");
   } else {
     mode = 0;
     ELEM_CHANGE_MODE.innerHTML = "Train";
     ELEM_WINDOW_SELECT.style.display = "block";
-    ELEM_SELECT_GROUP.style.display = "block";
     ELEM_WINDOW_TRAIN.style.display = "none";
     ELEM_BUTTON_SETTINGS.style.display = "none";
+    ELEM_CONTAINER_SELECT_GROUP.classList.add("display-none");
   }
 }
 
