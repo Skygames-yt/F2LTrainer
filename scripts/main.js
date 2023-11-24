@@ -844,7 +844,7 @@ function changeMode() {
     ELEM_WINDOW_SELECT.style.display = "block";
     ELEM_WINDOW_TRAIN.style.display = "none";
     ELEM_BUTTON_SETTINGS.style.display = "none";
-    ELEM_CONTAINER_SELECT_GROUP.classList.add("display-none");
+    ELEM_CONTAINER_SELECT_GROUP.classList.remove("display-none");
   }
 }
 
