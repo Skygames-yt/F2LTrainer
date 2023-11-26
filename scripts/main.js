@@ -31,7 +31,7 @@ const NUM_ALG = 20;
 const COLORS_ALG = ["transparent", "#009900"];
 
 const ELEM_WINDOW_SELECT = document.getElementById("window-select");
-const ELEM_WINDOW_TRAIN = document.getElementById("window-train");
+const ELEM_WINDOW_TRAIN = document.querySelector(".window-train");
 
 const ELEM_GROUP_CONTAINER = Array(GROUPS.length);
 const ELEM_SIDE_CONTAINER = document.getElementById("side-container");
