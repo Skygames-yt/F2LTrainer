@@ -834,15 +834,19 @@ function changeMode() {
     updateTrainCases();
     // nextScramble(1);
     ELEM_CHANGE_MODE.innerHTML = "Select cases";
-    ELEM_WINDOW_SELECT.style.display = "none";
-    ELEM_WINDOW_TRAIN.style.display = "flex";
+    // ELEM_WINDOW_SELECT.style.display = "none";
+    ELEM_WINDOW_SELECT.classList.add("display-none");
+    // ELEM_WINDOW_TRAIN.style.display = "flex";
+    ELEM_WINDOW_TRAIN.classList.remove("display-none");
     ELEM_BUTTON_SETTINGS.classList.remove("display-none");
     ELEM_CONTAINER_SELECT_GROUP.classList.add("display-none");
   } else {
     mode = 0;
     ELEM_CHANGE_MODE.innerHTML = "Train";
-    ELEM_WINDOW_SELECT.style.display = "block";
-    ELEM_WINDOW_TRAIN.style.display = "none";
+    // ELEM_WINDOW_SELECT.style.display = "block";
+    ELEM_WINDOW_SELECT.classList.remove("display-none");
+    // ELEM_WINDOW_TRAIN.style.display = "none";
+    ELEM_WINDOW_TRAIN.classList.add("display-none");
     ELEM_BUTTON_SETTINGS.classList.add("display-none");
     ELEM_CONTAINER_SELECT_GROUP.classList.remove("display-none");
   }
