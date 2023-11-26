@@ -7,13 +7,13 @@ Visit the Trainer here -> https://dave2ooo.github.io/F2LTrainer/ <-
 
 Press the cube to change the learning state to
 
-![gray](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/8ff591aa-74f4-4c3b-b7d9-c223e0beeeef)
+- ![gray](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/8ff591aa-74f4-4c3b-b7d9-c223e0beeeef)
 Unlearned
 
-![yellow](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/39d6e4c5-06e0-4000-a440-78264da76dde)
+- ![yellow](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/39d6e4c5-06e0-4000-a440-78264da76dde)
 Learning
 
-![green](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/56e9b198-6177-41a2-b9e2-51624983f0e1)
+- ![green](https://github.com/Dave2ooo/F2LTrainer/assets/71500391/56e9b198-6177-41a2-b9e2-51624983f0e1)
 Finished
 
 # About
