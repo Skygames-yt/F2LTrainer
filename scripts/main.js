@@ -697,6 +697,8 @@ function nextScramble(nextPrevious) {
     (INDEX_CASE + 1) +
     ", Scramble: " +
     INDEX_SCRAMBLE +
+    ", State: " +
+    CATEGORY_NAMES[GROUPS[INDEX_GROUP].caseSelection[INDEX_CASE]] +
     ", Algorithm: " +
     GROUPS[INDEX_GROUP].algorithmSelection[INDEX_CASE] +
     ", mirrored: " +
