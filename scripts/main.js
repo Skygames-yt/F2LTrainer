@@ -871,20 +871,16 @@ function checkForDuplicates() {
 
 function showSetStateMenu() {
   const STATE = GROUPS[currentTrainGroup].caseSelection[currentTrainCase];
-  console.log(STATE);
-  switch (STATE) {
-    case "0":
-      ELEM_RADIO_UNLEARNED.checked = true;
-      // console.log("0 here");
-      break;
-    case "1":
-      ELEM_RADIO_LEARNING.checked = true;
-      // console.log("1 here");
-      break;
-    case "2":
-      ELEM_RADIO_FINISHED.checked = true;
-      // console.log("2 here");
-      break;
+  console.log("indexGroup: " + currentTrainGroup + ", indexCase: " + currentTrainCase + "caseSelection: " + STATE);
+  if (STATE == 0 || STATE == "0") {
+    ELEM_RADIO_UNLEARNED.checked = true;
+    console.log("0 here");
+  } else if (STATE == 1 || STATE == "1") {
+    ELEM_RADIO_LEARNING.checked = true;
+    console.log("1 here");
+  } else if (STATE == 2 || STATE == "2") {
+    ELEM_RADIO_FINISHED.checked = true;
+    console.log("2 here");
   }
 
   ELEM_CHANGE_STATE_POPUP.style.display = "block";
@@ -895,11 +891,11 @@ function showSetStateMenu() {
 function changeStateRadio() {
   const GROUP = GROUPS[currentTrainGroup];
   if (GROUP == undefined) return;
-  // console.log(GROUP.caseSelection[currentTrainCase]);
+  console.log(GROUP.caseSelection[currentTrainCase]);
   if (ELEM_RADIO_UNLEARNED.checked == true) GROUP.caseSelection[currentTrainCase] = 0;
   if (ELEM_RADIO_LEARNING.checked == true) GROUP.caseSelection[currentTrainCase] = 1;
   if (ELEM_RADIO_FINISHED.checked == true) GROUP.caseSelection[currentTrainCase] = 2;
-  // console.log(GROUP.caseSelection[currentTrainCase]);
+  console.log(GROUP.caseSelection[currentTrainCase]);
   GROUP.divContainer[currentTrainCase].style.background = CATEGORY_COLORS[GROUP.caseSelection[currentTrainCase]];
   GROUP.divContainer[currentTrainCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[currentTrainCase]];
   GROUP.divContainer[currentTrainCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[currentTrainCase]];
