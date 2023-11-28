@@ -18,69 +18,6 @@
   </head>
 
   <body>
-    <!-- Top bar -->
-    <div id="side-container">
-      <!-- <div class="side-button" id="btn-settings">
-        <img
-          src="./images/settings.svg"
-          alt="Settings"
-          class="side-img"
-          title="Settings"
-        />
-      </div> -->
-      <!-- <div class="side-button" id="btn-trash">
-        <img
-          src="./images/trash.svg"
-          alt="Trash"
-          class="side-img"
-          title="Trash"
-        />
-      </div> -->
-      <button type="button" class="side-button" id="btn-info" onclick="showInfo()">
-        <img src="./images/info.svg" alt="Info" class="side-img" title="Info" />
-      </button>
-
-      <div class="container-select-group">
-        <label for="select-group" class="acessibility-label">Choose a Group:</label>
-        <!-- for accesibility -->
-        <select id="select-group" onchange="showSelectedGroup()">
-          <option value="basic" selected>Basic Cases</option>
-          <option value="basicBack">Basic Cases Backslot</option>
-          <option value="advanced">Advanced Cases</option>
-          <option value="expert">Expert Cases</option>
-        </select>
-      </div>
-
-      <!-- Button Settings Train -->
-      <div class="side-button display-none btn-settings-train" , onclick="showSettingsTrain()">
-        <img src="./images/settings.svg" alt="Settings" class="side-img" title="Settings" />
-      </div>
-
-      <button type="button" id="change-mode">Train</button>
-    </div>
-
-    <!-- All the Cases will be listed here -->
-    <div id="window-select">
-      <!--renamed!!!!! from select-layout -->
-      <!-- <div class="div-container">
-        <div class="case-number">1</div>
-        <div class="image-container" id="image-container">
-          <img class="img-case" src="./images/basic_cases/F2L1.svg" />
-        </div>
-        <div class="algorithm">
-          <div class="btn-edit">
-            <img src="./images/edit.svg" class="img-edit-trash" />
-          </div>
-          <div class="div-algorithm">U R U' R'</div>
-          <div class="btn-trash">
-            <img src="./images/trash.svg" class="img-edit-trash" />
-          </div>
-        </div>
-      </div> -->
-    </div>
-
-    <div id="overlay"></div>
-
     <!-- POPUP-CONTAINER START -->
     <!-- Info -->
 
@@ -297,6 +234,69 @@
       </div>
     </div>
     <!-- POPUP-CONTAINER END -->
+
+    <!-- Top bar -->
+    <div id="side-container">
+      <!-- <div class="side-button" id="btn-settings">
+        <img
+          src="./images/settings.svg"
+          alt="Settings"
+          class="side-img"
+          title="Settings"
+        />
+      </div> -->
+      <!-- <div class="side-button" id="btn-trash">
+        <img
+          src="./images/trash.svg"
+          alt="Trash"
+          class="side-img"
+          title="Trash"
+        />
+      </div> -->
+      <button type="button" class="side-button" id="btn-info" onclick="showInfo()">
+        <img src="./images/info.svg" alt="Info" class="side-img" title="Info" />
+      </button>
+
+      <div class="container-select-group">
+        <label for="select-group" class="acessibility-label">Choose a Group:</label>
+        <!-- for accesibility -->
+        <select id="select-group" onchange="showSelectedGroup()">
+          <option value="basic" selected>Basic Cases</option>
+          <option value="basicBack">Basic Cases Backslot</option>
+          <option value="advanced">Advanced Cases</option>
+          <option value="expert">Expert Cases</option>
+        </select>
+      </div>
+
+      <!-- Button Settings Train -->
+      <div class="side-button display-none btn-settings-train" , onclick="showSettingsTrain()">
+        <img src="./images/settings.svg" alt="Settings" class="side-img" title="Settings" />
+      </div>
+
+      <button type="button" id="change-mode">Train</button>
+    </div>
+
+    <!-- All the Cases will be listed here -->
+    <div id="window-select">
+      <!--renamed!!!!! from select-layout -->
+      <!-- <div class="div-container">
+        <div class="case-number">1</div>
+        <div class="image-container" id="image-container">
+          <img class="img-case" src="./images/basic_cases/F2L1.svg" />
+        </div>
+        <div class="algorithm">
+          <div class="btn-edit">
+            <img src="./images/edit.svg" class="img-edit-trash" />
+          </div>
+          <div class="div-algorithm">U R U' R'</div>
+          <div class="btn-trash">
+            <img src="./images/trash.svg" class="img-edit-trash" />
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div id="overlay"></div>
 
     <!-- Train Mode -->
     <div class="window-train display-none">
