@@ -45,6 +45,8 @@ let rightSelection = true;
 let aufSelection = true;
 let hintSelection = true;
 
+let firstVisit = true;
+
 // Save
 function saveUserData() {
   console.log("Saving User Data");
@@ -71,6 +73,9 @@ function saveUserData() {
 
   // Saving hint settings
   localStorage.setItem("hintSelection", hintSelection);
+
+  // Saving that the user just visited the site
+  localStorage.setItem("firstVisit", false);
 
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
@@ -107,6 +112,9 @@ function loadUserData() {
   // Load viewSelection
   temp = localStorage.getItem("viewSelection");
   if (temp != null) viewSelection = parseInt(temp);
+
+  // Check if user visits site for the first time
+  if (localStorage.getItem("firstVisit") != null) firstVisit = false;
 
   // Load trainStateSelection
   for (let i = 0; i < trainStateSelection.length; i++) {
