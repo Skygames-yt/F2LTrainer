@@ -37,6 +37,7 @@ const ELEM_GROUP_CONTAINER = Array(GROUPS.length);
 const ELEM_SIDE_CONTAINER = document.getElementById("side-container");
 const ELEM_CHANGE_MODE = document.getElementById("change-mode");
 const ELEM_OVERLAY = document.getElementById("overlay");
+const ELEM_WELCOME_CONATINER = document.getElementById("welcome-container");
 const ELEM_INFO_CONTAINER = document.getElementById("info-container");
 const ELEM_LOADING_SCREEN = document.getElementById("loading-screen");
 const ELEM_CHANGE_STATE_POPUP = document.getElementById("popup-change-state");
@@ -117,6 +118,8 @@ window.addEventListener("load", () => {
   // Load User saved Data (user_saved.js)
   loadUserData();
   ELEM_SELECT_GROUP.selectedIndex = viewSelection; // Set view
+
+  showWelcomePopup();
   // Create all Entries
   addElementsToDOM();
   // addTrashElementsToBOM();
@@ -205,9 +208,11 @@ window.addEventListener("load", () => {
   showSelectedGroup();
 
   // Hide Loading Screen after some time
+  /*
   setTimeout(() => {
     ELEM_LOADING_SCREEN.style.display = "none";
   }, 100);
+  */
 });
 
 function addElementsToDOM() {
@@ -412,6 +417,7 @@ function updateAlg() {
 }
 
 function closeOverlays() {
+  ELEM_WELCOME_CONATINER.style.display = "none";
   ELEM_INFO_CONTAINER.style.display = "none";
   ELEM_TRASH_CONTAINER.style.display = "none";
   ELEM_EDITALG_CONTAINER.style.display = "none";
@@ -904,4 +910,14 @@ function changeStateRadio() {
   saveUserData();
 
   closeOverlays();
+}
+
+function showWelcomePopup() {
+  if (firstVisit) {
+    ELEM_WELCOME_CONATINER.style.display = "block";
+    ELEM_OVERLAY.style.display = "block";
+    ELEM_BODY.style.overflow = "hidden";
+
+    ELEM_LOADING_SCREEN.style.display = "none";
+  }
 }
