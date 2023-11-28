@@ -18,7 +18,8 @@
 }
 
 body {
-  margin-top: 0;
+  height: 100dvh;
+  margin: 0;
   color: var(--color-text);
   /* background-color: white; */
   background-color: var(--color-background);
