@@ -378,7 +378,7 @@ a {
 }
 
 #loading-screen {
-  display: block;
+  display: none;
   top: 0;
   left: 0;
   height: 100%;
