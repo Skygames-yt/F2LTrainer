@@ -642,8 +642,7 @@ a {
 
 #btn-show-hide-debug-info {
   font-size: 1rem;
-  padding: 10px;
-  margin: 10px;
+  padding: 0.5rem;
   background-color: transparent;
   border: none;
   border-radius: 5px;
@@ -658,8 +657,9 @@ a {
 
 #btn-change-state {
   cursor: pointer;
-  font-size: 1.5rem;
-  margin: 5rem;
+  font-size: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
   padding: 0.5rem;
   border-style: solid;
   border-radius: 0.6rem;
