@@ -1,6 +1,6 @@
 # F2L Trainer
 
-Visit the Trainer here -> https://dave2ooo.github.io/F2LTrainer/ <-
+Visit the Trainer here -> https://f2l-trainer.top/ <-
 
 <image src="https://github.com/Dave2ooo/F2LTrainer/assets/71500391/efe612fa-d956-4543-bfcd-6f5bb98e0b92" width=45% height=45%> | <image src="https://github.com/Dave2ooo/F2LTrainer/assets/71500391/067cd968-cafb-450c-9eee-54d8e44f650c" width=45% height=45%>
 
