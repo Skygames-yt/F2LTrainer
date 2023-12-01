@@ -112,6 +112,8 @@ let generatedScrambles = [];
 // Flag is set when data is saved
 let flagSave = false;
 
+let flagdoublepress = false;
+
 // ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
   checkForDuplicates();
@@ -487,6 +489,26 @@ function keydown(e) {
   links: 37
   Leertaste: 32
   */
+
+  if (e.keyCode === 67) {
+    // C
+    if (flagdoublepress) {
+      clearUserData();
+      flagdoublepress = false;
+    } else {
+      flagdoublepress = true;
+      window.setTimeout(function () {
+        flagdoublepress = false;
+      }, 500);
+    }
+  } else if (e.keyCode === 71) {
+    // G
+    // Log Local Storage
+    console.log(localStorage);
+  } else {
+    // console.log("Key pressed: " + e.keyCode);
+  }
+
   if (mode === 0) return; // Do nothing when in case select mode
 
   if (e.keyCode === 32) {
@@ -499,19 +521,10 @@ function keydown(e) {
     // linke Pfeiltaste
   } else if (e.keyCode === 83) {
     // S
-    saveUserData();
+    // saveUserData();
   } else if (e.keyCode === 76) {
     // L
-    loadUserData();
-  } else if (e.keyCode === 67) {
-    // C
-    clearUserData();
-  } else if (e.keyCode === 71) {
-    // G
-    // Log Local Storage
-    console.log(localStorage);
-  } else {
-    console.log("Key pressed: " + e.keyCode);
+    // loadUserData();
   }
 }
 
