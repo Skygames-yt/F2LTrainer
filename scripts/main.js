@@ -114,6 +114,8 @@ let flagSave = false;
 
 let flagdoublepress = false;
 
+const STRING_MIRRORED = ["Right", "Left"];
+
 // ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
   checkForDuplicates();
@@ -710,18 +712,18 @@ function nextScramble(nextPrevious) {
   ELEM_SCRAMBLE.innerText = SELECTED_SCRAMBLE;
 
   ELEM_DEBUG_INFO.innerHTML =
-    "Group: " +
     GROUPS[INDEX_GROUP].name +
     ", Case: " +
     (INDEX_CASE + 1) +
     ", Scramble: " +
-    INDEX_SCRAMBLE +
-    ", State: " +
+    +INDEX_SCRAMBLE +
+    ", " +
     CATEGORY_NAMES[GROUPS[INDEX_GROUP].caseSelection[INDEX_CASE]] +
     ", Algorithm: " +
     GROUPS[INDEX_GROUP].algorithmSelection[INDEX_CASE] +
-    ", mirrored: " +
-    MIRRORING;
+    ", " +
+    STRING_MIRRORED[MIRRORING] +
+    " Slot";
 
   currentTrainGroup = INDEX_GROUP;
   currentTrainCase = INDEX_CASE;
