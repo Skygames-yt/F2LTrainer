@@ -101,7 +101,7 @@ let trainCaseList = [];
 let currentTrainCaseNumber = -1;
 
 // Basic, Basic Back, Advanced, Exert
-const ELEM_SELECT_GROUP = document.getElementById("select-group");
+const ELEM_SELECT_GROUP = document.querySelector(".select-group");
 
 let boolShowDebugInfo = false;
 const ELEM_BTN_SHOW_HIDE_DEBUG_INFO = document.getElementById("btn-show-hide-debug-info");
@@ -217,6 +217,10 @@ window.addEventListener("load", () => {
     ELEM_LOADING_SCREEN.style.display = "none";
   }, 100);
   */
+  ELEM_SELECT_GROUP.classList.add("animation-blink");
+  window.setTimeout(function () {
+    ELEM_SELECT_GROUP.classList.remove("animation-blink");
+  }, 2300);
 });
 
 function addElementsToDOM() {

@@ -619,7 +619,7 @@ a {
   cursor: pointer;
 }
 
-#select-group {
+.select-group {
   font-size: 1rem;
   background-color: var(--color-background);
   border: solid;
@@ -628,11 +628,21 @@ a {
   padding: 5px;
   color: var(--color-text);
 }
-#select-group option {
+.select-group option {
   background-color: var(--color-background);
 }
-#select-group:hover {
+.select-group:hover {
   background-color: var(--color-btn-hover);
+}
+
+.animation-blink {
+  animation: blinker 800ms linear infinite;
+}
+@keyframes blinker {
+  50% {
+    background-color: white;
+    color: black;
+  }
 }
 
 #debug-info {
@@ -752,7 +762,7 @@ a {
   #hint-img {
     width: 200px;
   }
-  #select-group {
+  .select-group {
     font-size: 1.5rem;
   }
   #hint {
