@@ -116,6 +116,10 @@ let flagdoublepress = false;
 
 const STRING_MIRRORED = ["Right", "Left"];
 
+const ELEM_LOADING_CASE = document.getElementById("loading-case");
+
+const CLASS_DISPLAY_NONE = "display-none";
+
 // ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
   checkForDuplicates();
@@ -208,19 +212,24 @@ window.addEventListener("load", () => {
 */
   document.addEventListener("keydown", keydown);
 
+  ELEM_HINT_IMG.addEventListener("load", function () {
+    ELEM_HINT_IMG.style.opacity = "1";
+    ELEM_LOADING_CASE.classList.add(CLASS_DISPLAY_NONE);
+  });
+
   // Run this function to only show basic cases in the beginning
   showSelectedGroup();
 
   // Hide Loading Screen after some time
-  /*
+
   setTimeout(() => {
     ELEM_LOADING_SCREEN.style.display = "none";
   }, 100);
-  */
-  ELEM_SELECT_GROUP.classList.add("animation-blink");
+
+  /*ELEM_SELECT_GROUP.classList.add("animation-blink");
   window.setTimeout(function () {
     ELEM_SELECT_GROUP.classList.remove("animation-blink");
-  }, 2300);
+  }, 2300);*/
 });
 
 function addElementsToDOM() {
@@ -676,13 +685,17 @@ function generateTrainCaseList() {
 }
 
 function nextScramble(nextPrevious) {
+  if (hintSelection) {
+    ELEM_HINT_IMG.style.opacity = "0.3";
+    ELEM_LOADING_CASE.classList.remove(CLASS_DISPLAY_NONE);
+  }
   updateHintVisibility();
   hintCounter = 0;
   ELEM_HINT.innerText = "Press to show hint";
-  if (flagSave) {
+  /*if (flagSave) {
     generateTrainCaseList();
     flagSave = false;
-  }
+  }*/
   if (nextPrevious) {
     currentTrainCaseNumber++;
     if (currentTrainCaseNumber >= generatedScrambles.length) {
@@ -749,9 +762,9 @@ function updateCheckboxStatus() {
 
 function updateHintVisibility() {
   if (hintSelection) {
-    ELEM_HINT_IMG.style.opacity = 100;
+    ELEM_HINT_IMG.style.visibility = "visible";
   } else {
-    ELEM_HINT_IMG.style.opacity = 0;
+    ELEM_HINT_IMG.style.visibility = "hidden";
   }
 }
 
@@ -937,6 +950,6 @@ function showWelcomePopup() {
     ELEM_OVERLAY.style.display = "block";
     ELEM_BODY.style.overflow = "hidden";
 
-    ELEM_LOADING_SCREEN.style.display = "none";
+    // ELEM_LOADING_SCREEN.style.display = "none";
   }
 }
