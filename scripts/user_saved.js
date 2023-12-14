@@ -44,6 +44,7 @@ let leftSelection = true;
 let rightSelection = true;
 let aufSelection = true;
 let hintSelection = true;
+let timerEnabled = false;
 
 let firstVisit = true;
 
@@ -73,6 +74,9 @@ function saveUserData() {
 
   // Saving hint settings
   localStorage.setItem("hintSelection", hintSelection);
+
+  // Saving timer enable settings
+  localStorage.setItem("timerEnabled", timerEnabled);
 
   // Saving that the user just visited the site
   localStorage.setItem("firstVisit", false);
@@ -130,6 +134,7 @@ function loadUserData() {
   rightSelection = loadBoolean("rightSelection", rightSelection);
   aufSelection = loadBoolean("aufSelection", aufSelection);
   hintSelection = loadBoolean("hintSelection", hintSelection);
+  timerEnabled = loadBoolean("timerEnabled", timerEnabled);
 
   for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
     const GROUP = GROUPS[indexGroup];
