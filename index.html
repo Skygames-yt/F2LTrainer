@@ -232,6 +232,15 @@
         </label>
       </div>
 
+      <div class="checkbox-container">
+        <h2>Timer Settings</h2>
+        <label class="checkbox" for="checkboxEnableTimerId">
+          <input type="checkbox" class="checkbox__input" name="checkboxEnableTimer" id="checkboxEnableTimerId" />
+          <div class="checkbox__box"></div>
+          Enable Timer
+        </label>
+      </div>
+
       <!-- Buttons: Update, Cancel Settings -->
       <div class="update-cancal-buttons">
         <button type="button" class="btn-overlay" onclick="updateTrainCases()">Update</button>
@@ -357,10 +366,13 @@
           id="hint-img"
           src="./images/basic_cases/right/F2L1.svg"
           alt="Image of F2L Case"
-          onclick="nextScramble(1)"
+          onmousedown="spaceDown()"
+          onmouseup="spaceUp()"
         />
         <div id="loading-case" class="loader display-none"></div>
       </div>
+      <div id="timer"></div>
+      <button id="btn-start-timer" onclick="toggleTimer()">Start Timer</button>
       <div id="hint" onclick="showHint()">Press to show hint</div>
       <!-- <button type="button" id="hint" onclick="showHint()">Press to show hint</button> -->
 
