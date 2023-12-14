@@ -77,6 +77,8 @@ const ELEM_CHECKBOX_AUF = document.getElementById("checkboxAUFId");
 
 const ELEM_CHECKBOX_HINT = document.getElementById("checkboxShowHintId");
 
+const ELEM_CHECKBOX_TIMER_ENABLE = document.getElementById("checkboxEnableTimerId");
+
 const ELEM_BUTTON_SETTINGS = document.querySelector(".btn-settings-train");
 const ELEM_SETTINGS_CONTAINER = document.getElementById("train-cases-container");
 
@@ -119,6 +121,14 @@ const STRING_MIRRORED = ["Right", "Left"];
 const ELEM_LOADING_CASE = document.getElementById("loading-case");
 
 const CLASS_DISPLAY_NONE = "display-none";
+
+// Timer
+const ELEM_TIMER = document.getElementById("timer");
+let flagTimerRunning;
+let second = 0;
+let count = 0;
+
+let spacePressFlag = false;
 
 // ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
@@ -211,6 +221,7 @@ window.addEventListener("load", () => {
   };
 */
   document.addEventListener("keydown", keydown);
+  document.addEventListener("keyup", keyup);
 
   ELEM_HINT_IMG.addEventListener("load", function () {
     ELEM_HINT_IMG.style.opacity = "1";
@@ -527,8 +538,8 @@ function keydown(e) {
   if (mode === 0) return; // Do nothing when in case select mode
 
   if (e.keyCode === 32) {
-    // Leertaste
-    nextScramble(1);
+    // Space key
+    spaceDown();
   } else if (e.keyCode === 39) {
     // rechte Pfeiltaste
     showHint();
@@ -540,6 +551,13 @@ function keydown(e) {
   } else if (e.keyCode === 76) {
     // L
     // loadUserData();
+  }
+}
+
+function keyup(e) {
+  if (e.keyCode === 32) {
+    // Space key
+    spaceUp();
   }
 }
 
@@ -566,6 +584,7 @@ function updateTrainCases() {
   rightSelection = ELEM_CHECKBOX_RIGHT.checked;
   aufSelection = ELEM_CHECKBOX_AUF.checked;
   hintSelection = ELEM_CHECKBOX_HINT.checked;
+  timerEnabled = ELEM_CHECKBOX_TIMER_ENABLE.checked;
 
   currentTrainCaseNumber = -1;
   generatedScrambles = [];
@@ -579,7 +598,7 @@ function showHint() {
   if (generatedScrambles.length == 0) return;
   // Get algorithm and convert to list
   const ALG_LIST = generatedScrambles[currentTrainCaseNumber].algHint.split(" ");
-  ELEM_HINT_IMG.style.opacity = 100;
+  ELEM_HINT_IMG.style.opacity = "1";
   if (hintCounter < ALG_LIST.length) {
     ELEM_HINT.innerText = ALG_LIST.slice(0, hintCounter + 1).join(" ");
   }
@@ -758,6 +777,7 @@ function updateCheckboxStatus() {
   ELEM_CHECKBOX_RIGHT.checked = rightSelection;
   ELEM_CHECKBOX_AUF.checked = aufSelection;
   ELEM_CHECKBOX_HINT.checked = hintSelection;
+  ELEM_CHECKBOX_TIMER_ENABLE.checked = timerEnabled;
 }
 
 function updateHintVisibility() {
@@ -951,5 +971,76 @@ function showWelcomePopup() {
     ELEM_BODY.style.overflow = "hidden";
 
     // ELEM_LOADING_SCREEN.style.display = "none";
+  }
+}
+
+function toggleTimer() {
+  if (flagTimerRunning) {
+    flagTimerRunning = false;
+  } else {
+    count = 0;
+    second = 0;
+    flagTimerRunning = true;
+    timer();
+  }
+}
+
+function timer() {
+  if (flagTimerRunning) {
+    count++;
+    if (count == 100) {
+      second++;
+      count = 0;
+    }
+
+    let secString = second;
+    let countString = count;
+
+    if (second < 10) {
+      secString = "0" + secString;
+    }
+    if (count < 10) {
+      countString = "0" + countString;
+    }
+
+    ELEM_TIMER.innerHTML = secString + ":" + countString;
+    setTimeout(timer, 10);
+  }
+}
+
+let timeToString = function (time) {
+  let countString = time % 100;
+  let secString = Math.floor(time / 100);
+  if (secString < 10) {
+    secString = "0" + secString;
+  }
+  if (countString < 10) {
+    countString = "0" + countString;
+  }
+  return secString + ":" + countString;
+};
+
+function spaceDown() {
+  console.log("spaceDown");
+  if (timerEnabled) {
+    if (flagTimerRunning) {
+      nextScramble(1);
+      toggleTimer();
+      spacePressFlag = true;
+      // console.log("1");
+    }
+  } else {
+    nextScramble(1);
+  }
+}
+
+function spaceUp() {
+  console.log("spaceUp");
+  if (timerEnabled) {
+    if (spacePressFlag == false) {
+      toggleTimer();
+      // console.log("2");
+    }
+    spacePressFlag = false;
   }
 }
