@@ -590,6 +590,7 @@ a {
 #div-hint-img {
   display: flex;
   justify-content: center;
+  position: relative;
   cursor: pointer;
 }
 
@@ -598,10 +599,16 @@ a {
 }
 
 #loading-case {
-  width: 32px;
-  height: 32px;
-  position: relative;
-  left: -99px;
+  /* width: 32px;
+  height: 32px; */
+  position: absolute;
+  /* left: 59px;
+  top: 63; */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
 }
 
 #hint {
@@ -729,8 +736,8 @@ a {
 
 .loader {
   display: flex;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   margin: auto;
   position: relative;
   top: 0px;
@@ -738,12 +745,12 @@ a {
 }
 .loader:before {
   content: "";
-  width: 48px;
+  width: 32px;
   height: 5px;
   background: #000;
   opacity: 0.25;
   position: absolute;
-  top: 60px;
+  top: 42px;
   left: 0;
   border-radius: 50%;
   animation: shadow 0.5s linear infinite;
@@ -880,10 +887,13 @@ a {
   .acessibility-label {
     font-size: 1.2rem;
   }
-  #loading-case {
+  .loader {
     width: 48px;
     height: 48px;
-    left: -116px;
+  }
+  .loader:before {
+    width: 48px;
+    top: 60px;
   }
 }
 
