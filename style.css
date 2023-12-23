@@ -734,6 +734,11 @@ a {
   justify-content: center;
 }
 
+#timer{
+  font-size: 2rem;
+  margin: 1rem;
+}
+
 .loader {
   display: flex;
   width: 32px;
