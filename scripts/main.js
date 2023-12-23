@@ -342,6 +342,7 @@ function addElementsToDOM() {
         GROUP.caseNumber[indexCase].innerHTML = indexCase + 1;
         GROUP.imgCase[indexCase].src = IMG_CASE_PATH;
         GROUP.imgCase[indexCase].alt = GROUP.name + ", Case " + (indexCase + 1);
+        GROUP.imgCase[indexCase].loading = "lazy";
 
         // Set shown alg
         if (GROUP.algorithmSelection[indexCase] < GROUP.algorithms[indexCase + 1].length) {
