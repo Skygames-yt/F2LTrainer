@@ -72,6 +72,9 @@ const ELEM_CHECKBOX_BASIC_BACK = document.getElementById("checkboxGroupBasicBack
 const ELEM_CHECKBOX_ADVANCED = document.getElementById("checkboxGroupAdvancedId");
 const ELEM_CHECKBOX_EXPERT = document.getElementById("checkboxGroupExpertId");
 
+const SIZE_BTN_CHANGE_LEARNING_STATE_SMALL = "1.2rem";
+const SIZE_BTN_CHANGE_LEARNING_STATE_BIG = "1.7rem";
+
 const ELEM_CHECKBOX_LEFT = document.getElementById("checkboxLeftId");
 const ELEM_CHECKBOX_RIGHT = document.getElementById("checkboxRightId");
 
@@ -1094,10 +1097,10 @@ function changeLearningStateBulk(indexGroup, indexCategory, state) {
   const GROUP = GROUPS[indexGroup];
   let categoryItems = GROUP.categoryCases[indexCategory];
 
-  GROUP.btnChangeLearningState[0][indexCategory].style.height = "1.2rem";
-  GROUP.btnChangeLearningState[1][indexCategory].style.height = "1.2rem";
-  GROUP.btnChangeLearningState[2][indexCategory].style.height = "1.2rem";
-  GROUP.btnChangeLearningState[state][indexCategory].style.height = "1.7rem";
+  GROUP.btnChangeLearningState[0][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_SMALL;
+  GROUP.btnChangeLearningState[1][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_SMALL;
+  GROUP.btnChangeLearningState[2][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_SMALL;
+  GROUP.btnChangeLearningState[state][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_BIG;
 
   for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
     let indexCase = categoryItems[indexCategoryItem] - 1;
@@ -1125,13 +1128,16 @@ function highlightBulkChangeTrainingStateButton(indexGroup, indexCategory) {
     if (GROUP.caseSelection[indexCase] == 2) numFinished++;
   }
 
-  GROUP.btnChangeLearningState[0][indexCategory].style.height = "1.2rem";
-  GROUP.btnChangeLearningState[1][indexCategory].style.height = "1.2rem";
-  GROUP.btnChangeLearningState[2][indexCategory].style.height = "1.2rem";
+  GROUP.btnChangeLearningState[0][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_SMALL;
+  GROUP.btnChangeLearningState[1][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_SMALL;
+  GROUP.btnChangeLearningState[2][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_SMALL;
 
-  if (numLearning + numFinished == 0) GROUP.btnChangeLearningState[0][indexCategory].style.height = "1.7rem";
-  if (numFinished + numUnlearned == 0) GROUP.btnChangeLearningState[1][indexCategory].style.height = "1.7rem";
-  if (numUnlearned + numLearning == 0) GROUP.btnChangeLearningState[2][indexCategory].style.height = "1.7rem";
+  if (numLearning + numFinished == 0)
+    GROUP.btnChangeLearningState[0][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_BIG;
+  if (numFinished + numUnlearned == 0)
+    GROUP.btnChangeLearningState[1][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_BIG;
+  if (numUnlearned + numLearning == 0)
+    GROUP.btnChangeLearningState[2][indexCategory].style.height = SIZE_BTN_CHANGE_LEARNING_STATE_BIG;
 
   // console.log("numUnlearned: " + numUnlearned + ", numLearning: " + numLearning + ", numFinished: " + numFinished);
 }
