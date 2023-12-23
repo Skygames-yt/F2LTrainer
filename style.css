@@ -519,10 +519,20 @@ a {
 }
 
 .checkbox {
+  border-radius: 0.5rem;
   display: inline-flex;
   align-items: center;
   margin: 5px;
   cursor: pointer;
+}
+
+.checkbox-learning {
+  background-color: var(--color-learning);
+  color: var(--color-text-inverted);
+}
+.checkbox-finished {
+  background-color: var(--color-finished);
+  color: var(--color-text-inverted);
 }
 
 .checkbox__input {
@@ -540,6 +550,15 @@ a {
   margin-right: 10px;
   flex-shrink: 0;
   transition: background 0.15s, border-color 0.15s;
+}
+
+.checkbox__box_learning {
+  /* border-color: var(--color-text-inverted); */
+  background-color: var(--color-background);
+}
+.checkbox__box_finished {
+  /* border-color: var(--color-text-inverted); */
+  background-color: var(--color-background);
 }
 
 .checkbox__box::after {
