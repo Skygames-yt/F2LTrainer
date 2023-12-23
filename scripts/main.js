@@ -1133,7 +1133,7 @@ function highlightBulkChangeTrainingStateButton(indexGroup, indexCategory) {
   if (numFinished + numUnlearned == 0) GROUP.btnChangeLearningState[1][indexCategory].style.height = "1.7rem";
   if (numUnlearned + numLearning == 0) GROUP.btnChangeLearningState[2][indexCategory].style.height = "1.7rem";
 
-  console.log("numUnlearned: " + numUnlearned + ", numLearning: " + numLearning + ", numFinished: " + numFinished);
+  // console.log("numUnlearned: " + numUnlearned + ", numLearning: " + numLearning + ", numFinished: " + numFinished);
 }
 
 function highlightAllBulkChangeTrainingStateButtons() {
