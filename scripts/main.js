@@ -57,6 +57,8 @@ const COLORS_BTN_EDIT = [FILTER_IMG, FILTER_BLACK, FILTER_BLACK];
 
 const IMG_PATH_RIGHT_ARROW = "./images/arrow_collapse_right.svg";
 const IMG_PATH_DOWN_ARROW = "./images/arrow_collapse_down.svg";
+const IMG_PATH_CHANGE_LEARNING_STATE = "./images/change_learning_state.svg";
+const IMG_PATH_CHANGE_LEARNING_STATE_HOLLOW = "./images/change_learning_state_hollow.svg";
 
 const ELEM_LABEL_CHOOSE_GROUP = document.querySelector(".acessibility-label");
 const ELEM_CONTAINER_SELECT_GROUP = document.querySelector(".container-select-group");
@@ -142,6 +144,7 @@ window.addEventListener("load", () => {
   addElementsToDOM();
   // addTrashElementsToBOM();
   // addSelectGroupTrain();
+  highlightAllBulkChangeTrainingStateButtons();
 
   // Generate placeholder for algs to select
   for (let i = 0; i < NUM_ALG; i++) {
@@ -259,15 +262,18 @@ function addElementsToDOM() {
       GROUP.collapseContainer.push(document.createElement("button"));
       GROUP.collapseContainer[indexCategory].type = "button";
       GROUP.collapseContainer[indexCategory].classList.add("collapse-container");
-      GROUP.collapseContainer[indexCategory].onclick = function () {
-        collapseCategory(indexGroup, indexCategory);
-        // const COLLAPSECLASS = "#expand-contract-group" + indexGroup + "-category" + indexCategory;
-        // $(COLLAPSECLASS).slideToggle(200);
-      };
+      // GROUP.collapseContainer[indexCategory].onclick = function () {
+      //   collapseCategory(indexGroup, indexCategory);
+      //   // const COLLAPSECLASS = "#expand-contract-group" + indexGroup + "-category" + indexCategory;
+      //   // $(COLLAPSECLASS).slideToggle(200);
+      // };
 
       GROUP.categoryCollapseImg.push(document.createElement("img"));
       GROUP.categoryCollapseImg[indexCategory].classList.add("img-collapse-category");
       GROUP.categoryCollapseImg[indexCategory].alt = "collapse category";
+      GROUP.categoryCollapseImg[indexCategory].onclick = function () {
+        collapseCategory(indexGroup, indexCategory);
+      };
 
       GROUP.categoryCollapseImg[indexCategory].src = IMG_PATH_RIGHT_ARROW;
       if (GROUP.collapse[indexCategory]) {
@@ -279,11 +285,41 @@ function addElementsToDOM() {
 
       GROUP.headingCategoryName.push(document.createElement("h2"));
       GROUP.headingCategoryName[indexCategory].classList.add("heading-category-name");
-
       GROUP.headingCategoryName[indexCategory].innerHTML = GROUP.categoryNames[indexCategory];
+      GROUP.headingCategoryName[indexCategory].onclick = function () {
+        collapseCategory(indexGroup, indexCategory);
+      };
+
+      GROUP.btnChangeLearningState[0].push(document.createElement("img"));
+      GROUP.btnChangeLearningState[0][indexCategory].title = "Change state to Unlearned";
+      GROUP.btnChangeLearningState[0][indexCategory].classList.add("btn-change-learing-state");
+      GROUP.btnChangeLearningState[0][indexCategory].classList.add("filter-unlearned");
+      GROUP.btnChangeLearningState[0][indexCategory].src = IMG_PATH_CHANGE_LEARNING_STATE_HOLLOW;
+      GROUP.btnChangeLearningState[0][indexCategory].onclick = function () {
+        changeLearningStateBulk(indexGroup, indexCategory, 0);
+      };
+      GROUP.btnChangeLearningState[1].push(document.createElement("img"));
+      GROUP.btnChangeLearningState[1][indexCategory].title = "Change state to Learning";
+      GROUP.btnChangeLearningState[1][indexCategory].classList.add("btn-change-learing-state");
+      GROUP.btnChangeLearningState[1][indexCategory].classList.add("filter-learning");
+      GROUP.btnChangeLearningState[1][indexCategory].src = IMG_PATH_CHANGE_LEARNING_STATE;
+      GROUP.btnChangeLearningState[1][indexCategory].onclick = function () {
+        changeLearningStateBulk(indexGroup, indexCategory, 1);
+      };
+      GROUP.btnChangeLearningState[2].push(document.createElement("img"));
+      GROUP.btnChangeLearningState[2][indexCategory].title = "Change state to Finished";
+      GROUP.btnChangeLearningState[2][indexCategory].classList.add("btn-change-learing-state");
+      GROUP.btnChangeLearningState[2][indexCategory].classList.add("filter-finished");
+      GROUP.btnChangeLearningState[2][indexCategory].src = IMG_PATH_CHANGE_LEARNING_STATE;
+      GROUP.btnChangeLearningState[2][indexCategory].onclick = function () {
+        changeLearningStateBulk(indexGroup, indexCategory, 2);
+      };
 
       GROUP.collapseContainer[indexCategory].appendChild(GROUP.categoryCollapseImg[indexCategory]);
       GROUP.collapseContainer[indexCategory].appendChild(GROUP.headingCategoryName[indexCategory]);
+      GROUP.collapseContainer[indexCategory].appendChild(GROUP.btnChangeLearningState[0][indexCategory]);
+      GROUP.collapseContainer[indexCategory].appendChild(GROUP.btnChangeLearningState[1][indexCategory]);
+      GROUP.collapseContainer[indexCategory].appendChild(GROUP.btnChangeLearningState[2][indexCategory]);
       ELEM_GROUP_CONTAINER[indexGroup].appendChild(GROUP.collapseContainer[indexCategory]);
 
       for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
@@ -308,7 +344,7 @@ function addElementsToDOM() {
         GROUP.imgContainer[indexCase] = document.createElement("button");
         GROUP.imgContainer[indexCase].classList.add("img-case-container");
         GROUP.imgContainer[indexCase].onclick = function () {
-          changeState(indexGroup, indexCase);
+          changeState(indexGroup, indexCategory, indexCase);
         };
 
         GROUP.imgCase[indexCase] = document.createElement("img");
@@ -814,7 +850,7 @@ function showInfo() {
 }
 
 // Called when image is clicked
-function changeState(indexGroup, indexCase) {
+function changeState(indexGroup, indexCategory, indexCase) {
   const GROUP = GROUPS[indexGroup];
   GROUP.caseSelection[indexCase]++;
   if (GROUP.caseSelection[indexCase] >= 3) {
@@ -824,6 +860,7 @@ function changeState(indexGroup, indexCase) {
   GROUP.divContainer[indexCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[indexCase]];
   GROUP.divContainer[indexCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[indexCase]];
   GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
+  highlightBulkChangeTrainingStateButton(indexGroup, indexCategory, indexCase);
   saveUserData();
 }
 
@@ -1049,5 +1086,61 @@ function spaceUp() {
       // console.log("2");
     }
     spacePressFlag = false;
+  }
+}
+
+function changeLearningStateBulk(indexGroup, indexCategory, state) {
+  console.log("indexGroup: " + indexGroup + ", indexCategory: " + indexCategory + ", state: " + state);
+  const GROUP = GROUPS[indexGroup];
+  let categoryItems = GROUP.categoryCases[indexCategory];
+
+  GROUP.btnChangeLearningState[0][indexCategory].style.height = "1.2rem";
+  GROUP.btnChangeLearningState[1][indexCategory].style.height = "1.2rem";
+  GROUP.btnChangeLearningState[2][indexCategory].style.height = "1.2rem";
+  GROUP.btnChangeLearningState[state][indexCategory].style.height = "1.7rem";
+
+  for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
+    let indexCase = categoryItems[indexCategoryItem] - 1;
+
+    GROUP.caseSelection[indexCase] = state;
+
+    GROUP.divContainer[indexCase].style.background = CATEGORY_COLORS[GROUP.caseSelection[indexCase]];
+    GROUP.divContainer[indexCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[indexCase]];
+    GROUP.divContainer[indexCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[indexCase]];
+    GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
+  }
+  saveUserData();
+}
+
+function highlightBulkChangeTrainingStateButton(indexGroup, indexCategory) {
+  const GROUP = GROUPS[indexGroup];
+  let categoryItems = GROUP.categoryCases[indexCategory];
+  let numUnlearned = 0,
+    numLearning = 0,
+    numFinished = 0;
+  for (let indexCategoryItem = 0; indexCategoryItem < categoryItems.length; indexCategoryItem++) {
+    let indexCase = categoryItems[indexCategoryItem] - 1;
+    if (GROUP.caseSelection[indexCase] == 0) numUnlearned++;
+    if (GROUP.caseSelection[indexCase] == 1) numLearning++;
+    if (GROUP.caseSelection[indexCase] == 2) numFinished++;
+  }
+
+  GROUP.btnChangeLearningState[0][indexCategory].style.height = "1.2rem";
+  GROUP.btnChangeLearningState[1][indexCategory].style.height = "1.2rem";
+  GROUP.btnChangeLearningState[2][indexCategory].style.height = "1.2rem";
+
+  if (numLearning + numFinished == 0) GROUP.btnChangeLearningState[0][indexCategory].style.height = "1.7rem";
+  if (numFinished + numUnlearned == 0) GROUP.btnChangeLearningState[1][indexCategory].style.height = "1.7rem";
+  if (numUnlearned + numLearning == 0) GROUP.btnChangeLearningState[2][indexCategory].style.height = "1.7rem";
+
+  console.log("numUnlearned: " + numUnlearned + ", numLearning: " + numLearning + ", numFinished: " + numFinished);
+}
+
+function highlightAllBulkChangeTrainingStateButtons() {
+  for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
+    const GROUP = GROUPS[indexGroup];
+    for (let indexCategory = 0; indexCategory < GROUP.categoryCases.length; indexCategory++) {
+      highlightBulkChangeTrainingStateButton(indexGroup, indexCategory);
+    }
   }
 }
