@@ -587,6 +587,12 @@ function updateTrainCases() {
   hintSelection = ELEM_CHECKBOX_HINT.checked;
   timerEnabled = ELEM_CHECKBOX_TIMER_ENABLE.checked;
 
+  if (timerEnabled) {
+    ELEM_TIMER.style.display = "block";
+  } else {
+    ELEM_TIMER.style.display = "none";
+  }
+
   currentTrainCaseNumber = -1;
   generatedScrambles = [];
   closeOverlays();
