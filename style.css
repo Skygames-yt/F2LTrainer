@@ -15,6 +15,10 @@
   --color-unleaned: rgba(0, 0, 0, 0);
   --color-learning: rgb(236 236 0);
   --color-finished: rgb(0, 223, 0);
+  --filter-learning: brightness(0) saturate(100%) invert(81%) sepia(53%) saturate(849%) hue-rotate(7deg)
+    brightness(103%) contrast(100%);
+  --filter-finished: brightness(0) saturate(100%) invert(52%) sepia(86%) saturate(3169%) hue-rotate(87deg)
+    brightness(113%) contrast(117%);
 }
 
 body {
@@ -734,9 +738,33 @@ a {
   justify-content: center;
 }
 
-#timer{
+#timer {
   font-size: 2rem;
   margin: 1rem;
+}
+
+.btn-change-learing-state {
+  display: flex;
+  align-items: center;
+  /* height: calc(1rem + 2 * 5px - 2 * 2px); */
+  height: 1.2rem;
+  margin-left: 0.2rem;
+  margin-right: 0.2em;
+  /* margin-top: 2px;
+  margin-bottom: 2px; */
+  margin-top: auto;
+  margin-bottom: auto;
+  /* margin: 5px 3px 5px 3px; */
+}
+
+.filter-unlearned {
+  filter: var(--filter-white);
+}
+.filter-learning {
+  filter: var(--filter-learning);
+}
+.filter-finished {
+  filter: var(--filter-finished);
 }
 
 .loader {
