@@ -151,15 +151,15 @@
             Unlearned
           </label>
 
-          <label class="checkbox" for="checkboxLearningId">
+          <label class="checkbox checkbox-learning" for="checkboxLearningId">
             <input type="checkbox" class="checkbox__input" name="checkboxLearning" id="checkboxLearningId" />
-            <div class="checkbox__box"></div>
+            <div class="checkbox__box checkbox__box_learning"></div>
             Learning
           </label>
 
-          <label class="checkbox" for="checkboxFinishedId">
+          <label class="checkbox checkbox-finished" for="checkboxFinishedId">
             <input type="checkbox" class="checkbox__input" name="checkboxFinished" id="checkboxFinishedId" />
-            <div class="checkbox__box"></div>
+            <div class="checkbox__box checkbox__box_finished"></div>
             Finished
           </label>
         </div>
@@ -295,9 +295,9 @@
       </button>
 
       <div class="container-select-group">
-        <label for="select-group" class="acessibility-label">Choose a Group:</label>
+        <label for="select-group-id" class="acessibility-label">Choose a Group:</label>
         <!-- for accesibility -->
-        <select class="select-group" onchange="showSelectedGroup()">
+        <select id="select-group-id" class="select-group" onchange="showSelectedGroup()">
           <option value="basic" selected>Basic Cases</option>
           <option value="basicBack">Basic Cases Backslot</option>
           <option value="advanced">Advanced Cases</option>
