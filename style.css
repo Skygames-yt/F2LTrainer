@@ -155,6 +155,7 @@ a {
 .heading-category-name {
   display: flex;
   margin: 5px;
+  margin-right: auto;
   align-items: center;
   cursor: pointer;
 }
@@ -949,6 +950,9 @@ a {
   .loader:before {
     width: 48px;
     top: 60px;
+  }
+  .heading-category-name {
+    margin-right: 5px;
   }
 }
 

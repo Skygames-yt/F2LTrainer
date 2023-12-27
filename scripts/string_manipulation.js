@@ -1,19 +1,5 @@
-let __moves = ["R", "L", "F", "B", "r", "l", "f", "b", "U", "D", "u", "d", "y"];
-let __mirror = [
-  "L",
-  "R",
-  "F",
-  "B",
-  "l",
-  "r",
-  "f",
-  "b",
-  "U",
-  "D",
-  "u",
-  "d",
-  "y",
-];
+let __moves = ["R", "L", "F", "B", "r", "l", "f", "b", "U", "D", "u", "d", "y", "S"];
+let __mirror = ["L", "R", "F", "B", "l", "r", "f", "b", "U", "D", "u", "d", "y", "S"];
 
 function mirrorAlg(alg) {
   let algList = alg.split(" ");
