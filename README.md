@@ -2,6 +2,11 @@
 
 Visit the Trainer here -> https://f2l-trainer.top/ <-
 
+
+[![Youtube Video](https://img.youtube.com/vi/EQbZvKssp7s/0.jpg)](https://www.youtube.com/watch?v=EQbZvKssp7s)
+
+
+
 <image src="https://github.com/Dave2ooo/F2LTrainer/assets/71500391/efe612fa-d956-4543-bfcd-6f5bb98e0b92" width=45% height=45%> | <image src="https://github.com/Dave2ooo/F2LTrainer/assets/71500391/067cd968-cafb-450c-9eee-54d8e44f650c" width=45% height=45%>
 
 
