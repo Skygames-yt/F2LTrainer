@@ -137,7 +137,7 @@ let spacePressFlag = false;
 
 // ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
-  checkForDuplicates();
+  //checkForDuplicates();
   // Load User saved Data (user_saved.js)
   loadUserData();
   ELEM_SELECT_GROUP.selectedIndex = viewSelection; // Set view
@@ -149,7 +149,7 @@ window.addEventListener("load", () => {
   // addSelectGroupTrain();
   highlightAllBulkChangeTrainingStateButtons();
 
-  // Generate placeholder for algs to select
+  // Generate placeholder for algs to select in Edit Algorithm Pop Up
   for (let i = 0; i < NUM_ALG; i++) {
     ELEM_EDITALG_LISTENTRY.push(document.createElement("div"));
     ELEM_EDITALG_LISTENTRY[i].classList.add("editalg-listentry");
@@ -166,18 +166,6 @@ window.addEventListener("load", () => {
 
     ELEM_EDITALG_LIST.appendChild(ELEM_EDITALG_LISTENTRY[i]);
   }
-
-  // Click Event - Collapse Category
-  /*
-  for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
-    const GROUP = GROUPS[indexGroup];
-    GROUP.collapseContainer.forEach(function (button, indexCase) {
-      button.addEventListener("click", function () {
-        collapseCategory(indexGroup, indexCase);
-      });
-    });
-  }
-*/
   // Click Event - Delete Button clicked
   // for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
   //   const GROUP = GROUPS[indexGroup];
@@ -209,14 +197,14 @@ window.addEventListener("load", () => {
   // }
 
   // Change Mode
-  ELEM_CHANGE_MODE.onclick = function () {
-    changeMode();
-  };
+  // ELEM_CHANGE_MODE.onclick = function () {
+  //   changeMode();
+  // };
 
   // Close Overlays
-  ELEM_OVERLAY.onclick = function () {
-    closeOverlays();
-  };
+  // ELEM_OVERLAY.onclick = function () {
+  //   closeOverlays();
+  // };
 
   // Click Event - Open Trash
   /*
@@ -238,10 +226,10 @@ window.addEventListener("load", () => {
   showSelectedGroup();
 
   // Hide Loading Screen after some time
-
-  setTimeout(() => {
-    ELEM_LOADING_SCREEN.style.display = "none";
-  }, 100);
+  // setTimeout(() => {
+  //   ELEM_LOADING_SCREEN.style.display = "none";
+  // }, 100);
+  ELEM_LOADING_SCREEN.style.display = "none";
 
   /*ELEM_SELECT_GROUP.classList.add("animation-blink");
   window.setTimeout(function () {
