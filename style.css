@@ -95,6 +95,11 @@ button {
   color: var(--color-text);
 }
 
+iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
 .side-img,
 .img-collapse-category,
 .btn-next-prev {
