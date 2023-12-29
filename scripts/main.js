@@ -356,6 +356,10 @@ function addElementsToDOM() {
         GROUP.algorithm[indexCase] = document.createElement("div");
         GROUP.algorithm[indexCase].classList.add("algorithm");
 
+        GROUP.btnContainer[indexCase] = document.createElement("div");
+        GROUP.btnContainer[indexCase].classList.add("btn-container");
+
+        // Edit
         GROUP.btnEdit[indexCase] = document.createElement("div");
         GROUP.btnEdit[indexCase].classList.add("btn-edit");
         GROUP.btnEdit[indexCase].title = "Edit";
@@ -366,6 +370,19 @@ function addElementsToDOM() {
         GROUP.imgEdit[indexCase].alt = "edit case " + (indexCase + 1);
         GROUP.imgEdit[indexCase].onclick = function () {
           editAlgs(indexGroup, indexCase);
+        };
+
+        // Mirror
+        GROUP.btnMirror[indexCase] = document.createElement("div");
+        GROUP.btnMirror[indexCase].classList.add("btn-edit");
+        GROUP.btnMirror[indexCase].title = "Mirror";
+
+        GROUP.imgMirror[indexCase] = document.createElement("img");
+        GROUP.imgMirror[indexCase].classList.add("img-edit-trash");
+        GROUP.imgMirror[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
+        GROUP.imgMirror[indexCase].alt = "edit case " + (indexCase + 1);
+        GROUP.imgMirror[indexCase].onclick = function () {
+          mirrorCase(indexGroup, indexCase);
         };
 
         GROUP.divAlgorithm[indexCase] = document.createElement("div");
@@ -391,6 +408,7 @@ function addElementsToDOM() {
           GROUP.divAlgorithm[indexCase].innerHTML = GROUP.customAlgorithms[indexCase];
         }
 
+        GROUP.imgMirror[indexCase].src = "./images/mirror1.svg";
         GROUP.imgEdit[indexCase].src = "./images/edit.svg";
         GROUP.imgTrash[indexCase].src = "./images/trash.svg";
 
@@ -405,9 +423,15 @@ function addElementsToDOM() {
         GROUP.divContainer[indexCase].appendChild(GROUP.imgContainer[indexCase]);
         GROUP.imgContainer[indexCase].appendChild(GROUP.imgCase[indexCase]);
         GROUP.divContainer[indexCase].appendChild(GROUP.algorithm[indexCase]);
+        // GROUP.algorithm[indexCase].appendChild(GROUP.btnMirror[indexCase]);
+        // GROUP.btnMirror[indexCase].appendChild(GROUP.imgMirror[indexCase]);
         GROUP.algorithm[indexCase].appendChild(GROUP.divAlgorithm[indexCase]);
-        GROUP.algorithm[indexCase].appendChild(GROUP.btnEdit[indexCase]);
+        // GROUP.algorithm[indexCase].appendChild(GROUP.btnEdit[indexCase]);
+        GROUP.algorithm[indexCase].appendChild(GROUP.btnContainer[indexCase]);
+        GROUP.btnContainer[indexCase].appendChild(GROUP.btnEdit[indexCase]);
+        GROUP.btnContainer[indexCase].appendChild(GROUP.btnMirror[indexCase]);
         GROUP.btnEdit[indexCase].appendChild(GROUP.imgEdit[indexCase]);
+        GROUP.btnMirror[indexCase].appendChild(GROUP.imgMirror[indexCase]);
 
         GROUP.categoryContainer[indexCategory].appendChild(GROUP.divContainer[indexCase]);
       }
@@ -863,6 +887,7 @@ function changeState(indexGroup, indexCategory, indexCase) {
   GROUP.divContainer[indexCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[indexCase]];
   GROUP.divContainer[indexCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[indexCase]];
   GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
+  GROUP.imgMirror[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
   highlightBulkChangeTrainingStateButton(indexGroup, indexCategory, indexCase);
   saveUserData();
 }
@@ -1148,5 +1173,26 @@ function highlightAllBulkChangeTrainingStateButtons() {
     for (let indexCategory = 0; indexCategory < GROUP.categoryCases.length; indexCategory++) {
       highlightBulkChangeTrainingStateButton(indexGroup, indexCategory);
     }
+  }
+}
+
+function mirrorCase(indexGroup, indexCase) {
+  const GROUP = GROUPS[indexGroup];
+  let tempAlg = "";
+
+  if (GROUP.algorithmSelection[indexCase] < GROUP.algorithms[indexCase + 1].length) {
+    tempAlg = GROUP.algorithms[indexCase + 1][GROUP.algorithmSelection[indexCase]];
+  } else {
+    tempAlg = GROUP.customAlgorithms[indexCase];
+  }
+
+  if (GROUP.flagMirrored[indexCase] == undefined || GROUP.flagMirrored[indexCase] == false) {
+    GROUP.imgCase[indexCase].src = GROUP.imgPath + "left/F2L" + (indexCase + 1) + ".svg";
+    GROUP.flagMirrored[indexCase] = true;
+    GROUP.divAlgorithm[indexCase].innerHTML = mirrorAlg(tempAlg);
+  } else {
+    GROUP.imgCase[indexCase].src = GROUP.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
+    GROUP.flagMirrored[indexCase] = false;
+    GROUP.divAlgorithm[indexCase].innerHTML = tempAlg;
   }
 }
