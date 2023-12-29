@@ -327,6 +327,7 @@ a {
   background: var(--color-overlay);
   opacity: 40%;
   display: none;
+  cursor: pointer;
 }
 
 /* #info-container {
@@ -499,6 +500,7 @@ a {
   padding: 3px 15px;
   border-radius: 8px;
   margin: 0 3px;
+  cursor: pointer;
 }
 
 /* Train Settings */
