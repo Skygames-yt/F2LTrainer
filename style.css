@@ -225,6 +225,8 @@ a {
   height: 24px;
   visibility: hidden;
   cursor: pointer;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .div-algorithm {
@@ -236,7 +238,13 @@ a {
   vertical-align: middle;
   line-height: normal;
   margin: auto;
-  margin-left: 10px;
+  margin-left: 6px;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Side Buttons */
@@ -319,6 +327,7 @@ a {
   background: var(--color-overlay);
   opacity: 40%;
   display: none;
+  cursor: pointer;
 }
 
 /* #info-container {
@@ -491,6 +500,7 @@ a {
   padding: 3px 15px;
   border-radius: 8px;
   margin: 0 3px;
+  cursor: pointer;
 }
 
 /* Train Settings */
@@ -910,7 +920,8 @@ a {
     width: 25px;
   }
   .img-edit-trash {
-    height: 18px;
+    /* height: 18px; */
+    height: 20px;
   }
 }
 @media (min-width: 40em) {

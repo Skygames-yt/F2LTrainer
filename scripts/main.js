@@ -35,7 +35,7 @@ const ELEM_WINDOW_TRAIN = document.querySelector(".window-train");
 
 const ELEM_GROUP_CONTAINER = Array(GROUPS.length);
 const ELEM_SIDE_CONTAINER = document.getElementById("side-container");
-const ELEM_CHANGE_MODE = document.getElementById("change-mode");
+const ELEM_BTN_CHANGE_MODE = document.getElementById("change-mode");
 const ELEM_OVERLAY = document.getElementById("overlay");
 const ELEM_WELCOME_CONATINER = document.getElementById("welcome-container");
 const ELEM_INFO_CONTAINER = document.getElementById("info-container");
@@ -137,7 +137,7 @@ let spacePressFlag = false;
 
 // ----------------------------------------- LOADING -------------------------------------------------------
 window.addEventListener("load", () => {
-  checkForDuplicates();
+  //checkForDuplicates();
   // Load User saved Data (user_saved.js)
   loadUserData();
   ELEM_SELECT_GROUP.selectedIndex = viewSelection; // Set view
@@ -149,7 +149,7 @@ window.addEventListener("load", () => {
   // addSelectGroupTrain();
   highlightAllBulkChangeTrainingStateButtons();
 
-  // Generate placeholder for algs to select
+  // Generate placeholder for algs to select in Edit Algorithm Pop Up
   for (let i = 0; i < NUM_ALG; i++) {
     ELEM_EDITALG_LISTENTRY.push(document.createElement("div"));
     ELEM_EDITALG_LISTENTRY[i].classList.add("editalg-listentry");
@@ -166,18 +166,6 @@ window.addEventListener("load", () => {
 
     ELEM_EDITALG_LIST.appendChild(ELEM_EDITALG_LISTENTRY[i]);
   }
-
-  // Click Event - Collapse Category
-  /*
-  for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
-    const GROUP = GROUPS[indexGroup];
-    GROUP.collapseContainer.forEach(function (button, indexCase) {
-      button.addEventListener("click", function () {
-        collapseCategory(indexGroup, indexCase);
-      });
-    });
-  }
-*/
   // Click Event - Delete Button clicked
   // for (let indexGroup = 0; indexGroup < GROUPS.length; indexGroup++) {
   //   const GROUP = GROUPS[indexGroup];
@@ -209,14 +197,14 @@ window.addEventListener("load", () => {
   // }
 
   // Change Mode
-  ELEM_CHANGE_MODE.onclick = function () {
-    changeMode();
-  };
+  // ELEM_BTN_CHANGE_MODE.onclick = function () {
+  //   changeMode();
+  // };
 
   // Close Overlays
-  ELEM_OVERLAY.onclick = function () {
-    closeOverlays();
-  };
+  // ELEM_OVERLAY.onclick = function () {
+  //   closeOverlays();
+  // };
 
   // Click Event - Open Trash
   /*
@@ -238,10 +226,10 @@ window.addEventListener("load", () => {
   showSelectedGroup();
 
   // Hide Loading Screen after some time
-
-  setTimeout(() => {
-    ELEM_LOADING_SCREEN.style.display = "none";
-  }, 100);
+  // setTimeout(() => {
+  //   ELEM_LOADING_SCREEN.style.display = "none";
+  // }, 100);
+  ELEM_LOADING_SCREEN.style.display = "none";
 
   /*ELEM_SELECT_GROUP.classList.add("animation-blink");
   window.setTimeout(function () {
@@ -356,6 +344,10 @@ function addElementsToDOM() {
         GROUP.algorithm[indexCase] = document.createElement("div");
         GROUP.algorithm[indexCase].classList.add("algorithm");
 
+        GROUP.btnContainer[indexCase] = document.createElement("div");
+        GROUP.btnContainer[indexCase].classList.add("btn-container");
+
+        // Edit
         GROUP.btnEdit[indexCase] = document.createElement("div");
         GROUP.btnEdit[indexCase].classList.add("btn-edit");
         GROUP.btnEdit[indexCase].title = "Edit";
@@ -366,6 +358,19 @@ function addElementsToDOM() {
         GROUP.imgEdit[indexCase].alt = "edit case " + (indexCase + 1);
         GROUP.imgEdit[indexCase].onclick = function () {
           editAlgs(indexGroup, indexCase);
+        };
+
+        // Mirror
+        GROUP.btnMirror[indexCase] = document.createElement("div");
+        GROUP.btnMirror[indexCase].classList.add("btn-edit");
+        GROUP.btnMirror[indexCase].title = "Mirror";
+
+        GROUP.imgMirror[indexCase] = document.createElement("img");
+        GROUP.imgMirror[indexCase].classList.add("img-edit-trash");
+        GROUP.imgMirror[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
+        GROUP.imgMirror[indexCase].alt = "edit case " + (indexCase + 1);
+        GROUP.imgMirror[indexCase].onclick = function () {
+          mirrorCase(indexGroup, indexCase);
         };
 
         GROUP.divAlgorithm[indexCase] = document.createElement("div");
@@ -391,6 +396,7 @@ function addElementsToDOM() {
           GROUP.divAlgorithm[indexCase].innerHTML = GROUP.customAlgorithms[indexCase];
         }
 
+        GROUP.imgMirror[indexCase].src = "./images/mirror1.svg";
         GROUP.imgEdit[indexCase].src = "./images/edit.svg";
         GROUP.imgTrash[indexCase].src = "./images/trash.svg";
 
@@ -405,9 +411,15 @@ function addElementsToDOM() {
         GROUP.divContainer[indexCase].appendChild(GROUP.imgContainer[indexCase]);
         GROUP.imgContainer[indexCase].appendChild(GROUP.imgCase[indexCase]);
         GROUP.divContainer[indexCase].appendChild(GROUP.algorithm[indexCase]);
+        // GROUP.algorithm[indexCase].appendChild(GROUP.btnMirror[indexCase]);
+        // GROUP.btnMirror[indexCase].appendChild(GROUP.imgMirror[indexCase]);
         GROUP.algorithm[indexCase].appendChild(GROUP.divAlgorithm[indexCase]);
-        GROUP.algorithm[indexCase].appendChild(GROUP.btnEdit[indexCase]);
+        // GROUP.algorithm[indexCase].appendChild(GROUP.btnEdit[indexCase]);
+        GROUP.algorithm[indexCase].appendChild(GROUP.btnContainer[indexCase]);
+        GROUP.btnContainer[indexCase].appendChild(GROUP.btnEdit[indexCase]);
+        GROUP.btnContainer[indexCase].appendChild(GROUP.btnMirror[indexCase]);
         GROUP.btnEdit[indexCase].appendChild(GROUP.imgEdit[indexCase]);
+        GROUP.btnMirror[indexCase].appendChild(GROUP.imgMirror[indexCase]);
 
         GROUP.categoryContainer[indexCategory].appendChild(GROUP.divContainer[indexCase]);
       }
@@ -465,17 +477,23 @@ function addTrashElementsToBOM() {
 function updateAlg() {
   // Update Alg button clicked
   const GROUP = GROUPS[ELEM_SELECT_GROUP.selectedIndex];
+  let tempAlg = "";
 
   // Read text in custom Alg Textbox
   GROUP.customAlgorithms[selectedCase] = ELEM_EDITALG_CUSTOMALG.value;
   // Check if selected alg is default or custom
   if (selectedAlgNumber < GROUP.algorithms[selectedCase + 1].length) {
     // If selected Alg is default
-    GROUP.divAlgorithm[selectedCase].innerHTML = GROUP.algorithms[selectedCase + 1][selectedAlgNumber];
+    tempAlg = GROUP.algorithms[selectedCase + 1][selectedAlgNumber];
   } else {
     // If selected Alg is custom
-    GROUP.divAlgorithm[selectedCase].innerHTML = GROUP.customAlgorithms[selectedCase];
+    tempAlg = GROUP.customAlgorithms[selectedCase];
   }
+
+  if (GROUP.flagMirrored[selectedCase] == true) tempAlg = mirrorAlg(tempAlg);
+
+  GROUP.divAlgorithm[selectedCase].innerHTML = tempAlg;
+
   // Save which Alg was selected
   GROUP.algorithmSelection[selectedCase] = selectedAlgNumber;
   closeOverlays();
@@ -863,6 +881,7 @@ function changeState(indexGroup, indexCategory, indexCase) {
   GROUP.divContainer[indexCase].style.color = CATEGORY_TEXT_COLOR[GROUP.caseSelection[indexCase]];
   GROUP.divContainer[indexCase].style.borderStyle = CATEGORY_BORDERS[GROUP.caseSelection[indexCase]];
   GROUP.imgEdit[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
+  GROUP.imgMirror[indexCase].style.filter = COLORS_BTN_EDIT[GROUP.caseSelection[indexCase]];
   highlightBulkChangeTrainingStateButton(indexGroup, indexCategory, indexCase);
   saveUserData();
 }
@@ -940,7 +959,7 @@ function changeMode() {
     mode = 1;
     updateTrainCases();
     // nextScramble(1);
-    ELEM_CHANGE_MODE.innerHTML = "Select cases";
+    ELEM_BTN_CHANGE_MODE.innerHTML = "Select cases";
     // ELEM_WINDOW_SELECT.style.display = "none";
     ELEM_WINDOW_SELECT.classList.add("display-none");
     // ELEM_WINDOW_TRAIN.style.display = "flex";
@@ -949,7 +968,7 @@ function changeMode() {
     ELEM_CONTAINER_SELECT_GROUP.classList.add("display-none");
   } else {
     mode = 0;
-    ELEM_CHANGE_MODE.innerHTML = "Train";
+    ELEM_BTN_CHANGE_MODE.innerHTML = "Train";
     // ELEM_WINDOW_SELECT.style.display = "block";
     ELEM_WINDOW_SELECT.classList.remove("display-none");
     // ELEM_WINDOW_TRAIN.style.display = "none";
@@ -957,6 +976,7 @@ function changeMode() {
     ELEM_BUTTON_SETTINGS.classList.add("display-none");
     ELEM_CONTAINER_SELECT_GROUP.classList.remove("display-none");
   }
+  ELEM_BTN_CHANGE_MODE.blur(); // Make button lose focus
 }
 
 function checkForDuplicates() {
@@ -1068,7 +1088,7 @@ let timeToString = function (time) {
 };
 
 function spaceDown() {
-  console.log("spaceDown");
+  // console.log("spaceDown");
   if (timerEnabled) {
     if (flagTimerRunning) {
       nextScramble(1);
@@ -1082,7 +1102,7 @@ function spaceDown() {
 }
 
 function spaceUp() {
-  console.log("spaceUp");
+  // console.log("spaceUp");
   if (timerEnabled) {
     if (spacePressFlag == false) {
       toggleTimer();
@@ -1148,5 +1168,26 @@ function highlightAllBulkChangeTrainingStateButtons() {
     for (let indexCategory = 0; indexCategory < GROUP.categoryCases.length; indexCategory++) {
       highlightBulkChangeTrainingStateButton(indexGroup, indexCategory);
     }
+  }
+}
+
+function mirrorCase(indexGroup, indexCase) {
+  const GROUP = GROUPS[indexGroup];
+  let tempAlg = "";
+
+  if (GROUP.algorithmSelection[indexCase] < GROUP.algorithms[indexCase + 1].length) {
+    tempAlg = GROUP.algorithms[indexCase + 1][GROUP.algorithmSelection[indexCase]];
+  } else {
+    tempAlg = GROUP.customAlgorithms[indexCase];
+  }
+
+  if (GROUP.flagMirrored[indexCase] == true) {
+    GROUP.imgCase[indexCase].src = GROUP.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
+    GROUP.flagMirrored[indexCase] = false;
+    GROUP.divAlgorithm[indexCase].innerHTML = tempAlg;
+  } else {
+    GROUP.imgCase[indexCase].src = GROUP.imgPath + "left/F2L" + (indexCase + 1) + ".svg";
+    GROUP.flagMirrored[indexCase] = true;
+    GROUP.divAlgorithm[indexCase].innerHTML = mirrorAlg(tempAlg);
   }
 }

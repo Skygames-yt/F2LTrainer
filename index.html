@@ -134,7 +134,7 @@
         <input type="text" placeholder="Enter Custom Algorithm" id="editalg-customalg" />
       </div>
       <div class="update-cancal-buttons">
-        <input type="button" class="btn-overlay" onclick="updateAlg()" value="Update" />
+        <input type="button" class="btn-overlay" onclick="updateAlg()" value="Confirm" />
         <input type="button" class="btn-overlay" onclick="closeOverlays()" value="Cancel" />
       </div>
     </div>
@@ -250,7 +250,7 @@
 
       <!-- Buttons: Update, Cancel Settings -->
       <div class="update-cancal-buttons">
-        <button type="button" class="btn-overlay" onclick="updateTrainCases()">Update</button>
+        <button type="button" class="btn-overlay" onclick="updateTrainCases()">Confirm</button>
         <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
       </div>
     </div>
@@ -273,7 +273,7 @@
       </div>
 
       <div class="update-cancal-buttons">
-        <button type="button" class="btn-overlay" onclick="changeStateRadio()">Update</button>
+        <button type="button" class="btn-overlay" onclick="changeStateRadio()">Confirm</button>
         <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
       </div>
     </div>
@@ -317,7 +317,7 @@
         <img src="./images/settings.svg" alt="Settings" class="side-img" title="Settings" />
       </div>
 
-      <button type="button" id="change-mode">Train</button>
+      <button type="button" id="change-mode" onclick="changeMode()">Train</button>
     </div>
 
     <!-- All the Cases will be listed here -->
@@ -340,7 +340,7 @@
       </div> -->
     </div>
 
-    <div id="overlay"></div>
+    <div id="overlay" onclick="closeOverlays()"></div>
 
     <!-- Train Mode -->
     <div class="window-train display-none">
