@@ -35,7 +35,7 @@ const ELEM_WINDOW_TRAIN = document.querySelector(".window-train");
 
 const ELEM_GROUP_CONTAINER = Array(GROUPS.length);
 const ELEM_SIDE_CONTAINER = document.getElementById("side-container");
-const ELEM_CHANGE_MODE = document.getElementById("change-mode");
+const ELEM_BTN_CHANGE_MODE = document.getElementById("change-mode");
 const ELEM_OVERLAY = document.getElementById("overlay");
 const ELEM_WELCOME_CONATINER = document.getElementById("welcome-container");
 const ELEM_INFO_CONTAINER = document.getElementById("info-container");
@@ -197,7 +197,7 @@ window.addEventListener("load", () => {
   // }
 
   // Change Mode
-  // ELEM_CHANGE_MODE.onclick = function () {
+  // ELEM_BTN_CHANGE_MODE.onclick = function () {
   //   changeMode();
   // };
 
@@ -953,7 +953,7 @@ function changeMode() {
     mode = 1;
     updateTrainCases();
     // nextScramble(1);
-    ELEM_CHANGE_MODE.innerHTML = "Select cases";
+    ELEM_BTN_CHANGE_MODE.innerHTML = "Select cases";
     // ELEM_WINDOW_SELECT.style.display = "none";
     ELEM_WINDOW_SELECT.classList.add("display-none");
     // ELEM_WINDOW_TRAIN.style.display = "flex";
@@ -962,7 +962,7 @@ function changeMode() {
     ELEM_CONTAINER_SELECT_GROUP.classList.add("display-none");
   } else {
     mode = 0;
-    ELEM_CHANGE_MODE.innerHTML = "Train";
+    ELEM_BTN_CHANGE_MODE.innerHTML = "Train";
     // ELEM_WINDOW_SELECT.style.display = "block";
     ELEM_WINDOW_SELECT.classList.remove("display-none");
     // ELEM_WINDOW_TRAIN.style.display = "none";
@@ -970,6 +970,7 @@ function changeMode() {
     ELEM_BUTTON_SETTINGS.classList.add("display-none");
     ELEM_CONTAINER_SELECT_GROUP.classList.remove("display-none");
   }
+  ELEM_BTN_CHANGE_MODE.blur(); // Make button lose focus
 }
 
 function checkForDuplicates() {
