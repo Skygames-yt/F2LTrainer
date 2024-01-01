@@ -477,17 +477,23 @@ function addTrashElementsToBOM() {
 function updateAlg() {
   // Update Alg button clicked
   const GROUP = GROUPS[ELEM_SELECT_GROUP.selectedIndex];
+  let tempAlg = "";
 
   // Read text in custom Alg Textbox
   GROUP.customAlgorithms[selectedCase] = ELEM_EDITALG_CUSTOMALG.value;
   // Check if selected alg is default or custom
   if (selectedAlgNumber < GROUP.algorithms[selectedCase + 1].length) {
     // If selected Alg is default
-    GROUP.divAlgorithm[selectedCase].innerHTML = GROUP.algorithms[selectedCase + 1][selectedAlgNumber];
+    tempAlg = GROUP.algorithms[selectedCase + 1][selectedAlgNumber];
   } else {
     // If selected Alg is custom
-    GROUP.divAlgorithm[selectedCase].innerHTML = GROUP.customAlgorithms[selectedCase];
+    tempAlg = GROUP.customAlgorithms[selectedCase];
   }
+
+  if (GROUP.flagMirrored[selectedCase] == true) tempAlg = mirrorAlg(tempAlg);
+
+  GROUP.divAlgorithm[selectedCase].innerHTML = tempAlg;
+
   // Save which Alg was selected
   GROUP.algorithmSelection[selectedCase] = selectedAlgNumber;
   closeOverlays();
@@ -1175,13 +1181,13 @@ function mirrorCase(indexGroup, indexCase) {
     tempAlg = GROUP.customAlgorithms[indexCase];
   }
 
-  if (GROUP.flagMirrored[indexCase] == undefined || GROUP.flagMirrored[indexCase] == false) {
-    GROUP.imgCase[indexCase].src = GROUP.imgPath + "left/F2L" + (indexCase + 1) + ".svg";
-    GROUP.flagMirrored[indexCase] = true;
-    GROUP.divAlgorithm[indexCase].innerHTML = mirrorAlg(tempAlg);
-  } else {
+  if (GROUP.flagMirrored[indexCase] == true) {
     GROUP.imgCase[indexCase].src = GROUP.imgPath + "right/F2L" + (indexCase + 1) + ".svg";
     GROUP.flagMirrored[indexCase] = false;
     GROUP.divAlgorithm[indexCase].innerHTML = tempAlg;
+  } else {
+    GROUP.imgCase[indexCase].src = GROUP.imgPath + "left/F2L" + (indexCase + 1) + ".svg";
+    GROUP.flagMirrored[indexCase] = true;
+    GROUP.divAlgorithm[indexCase].innerHTML = mirrorAlg(tempAlg);
   }
 }
