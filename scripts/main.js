@@ -1088,7 +1088,7 @@ let timeToString = function (time) {
 };
 
 function spaceDown() {
-  console.log("spaceDown");
+  // console.log("spaceDown");
   if (timerEnabled) {
     if (flagTimerRunning) {
       nextScramble(1);
@@ -1102,7 +1102,7 @@ function spaceDown() {
 }
 
 function spaceUp() {
-  console.log("spaceUp");
+  // console.log("spaceUp");
   if (timerEnabled) {
     if (spacePressFlag == false) {
       toggleTimer();
