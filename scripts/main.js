@@ -41,11 +41,10 @@ const ELEM_WELCOME_CONATINER = document.getElementById("welcome-container");
 const ELEM_INFO_CONTAINER = document.getElementById("info-container");
 const ELEM_LOADING_SCREEN = document.getElementById("loading-screen");
 const ELEM_CHANGE_STATE_POPUP = document.getElementById("popup-change-state");
+const ELEM_DIALOGS = document.querySelectorAll("dialog");
 
 // side buttons
 // const btnTrash = document.getElementById("btn-trash");
-
-const ELEM_TRASH_CONTAINER = document.getElementById("trash-container");
 
 const CATEGORY_NAMES = ["Unlearned", "Learning", "Finished", "All"];
 
@@ -214,6 +213,22 @@ window.addEventListener("load", () => {
     ELEM_BODY.style.overflow = "hiden";
   };
 */
+
+  // Close dialogs (popup-container) if clicked outside the dialog
+  ELEM_DIALOGS.forEach((elem_dialog) => {
+    elem_dialog.addEventListener("click", function (event) {
+      var rect = elem_dialog.getBoundingClientRect();
+      var isInDialog =
+        rect.top <= event.clientY &&
+        event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.left + rect.width;
+      if (!isInDialog) {
+        closeOverlays();
+      }
+    });
+  });
+
   document.addEventListener("keydown", keydown);
   document.addEventListener("keyup", keyup);
 
@@ -502,17 +517,6 @@ function updateAlg() {
   saveUserData();
 }
 
-function closeOverlays() {
-  ELEM_WELCOME_CONATINER.style.display = "none";
-  ELEM_INFO_CONTAINER.style.display = "none";
-  ELEM_TRASH_CONTAINER.style.display = "none";
-  ELEM_EDITALG_CONTAINER.style.display = "none";
-  ELEM_SETTINGS_CONTAINER.style.display = "none";
-  ELEM_CHANGE_STATE_POPUP.style.display = "none";
-  ELEM_BODY.style.overflow = "auto";
-  ELEM_OVERLAY.style.display = "none";
-}
-
 function editAlgs(indexGroup, indexCase) {
   selectedCase = indexCase;
   const GROUP = GROUPS[indexGroup];
@@ -549,11 +553,12 @@ function editAlgs(indexGroup, indexCase) {
   // Set text in Textbox to saved value
   ELEM_EDITALG_CUSTOMALG.value = GROUP.customAlgorithms[selectedCase];
   // Make container visible
-  ELEM_EDITALG_CONTAINER.style.display = "block";
+  // ELEM_EDITALG_CONTAINER.style.display = "block";
   // Make overlay visible
-  ELEM_OVERLAY.style.display = "block";
+  // ELEM_OVERLAY.style.display = "block";
   // Disable scolling on main page
-  ELEM_BODY.style.overflow = "hidden";
+  // ELEM_BODY.style.overflow = "hidden";
+  openDialog(ELEM_EDITALG_CONTAINER);
 }
 
 function customAlgSelected() {
@@ -617,13 +622,6 @@ function keyup(e) {
     // Space key
     spaceUp();
   }
-}
-
-function showSettingsTrain() {
-  updateCheckboxStatus();
-  ELEM_SETTINGS_CONTAINER.style.display = "block";
-  ELEM_OVERLAY.style.display = "block";
-  ELEM_BODY.style.overflow = "hidden";
 }
 
 function updateTrainCases() {
@@ -864,12 +862,6 @@ function showHideDebugInfo() {
   }
 }
 
-function showInfo() {
-  ELEM_INFO_CONTAINER.style.display = "block";
-  ELEM_OVERLAY.style.display = "block";
-  ELEM_BODY.style.overflow = "hidden";
-}
-
 // Called when image is clicked
 function changeState(indexGroup, indexCategory, indexCase) {
   const GROUP = GROUPS[indexGroup];
@@ -994,25 +986,6 @@ function checkForDuplicates() {
   }
 }
 
-function showSetStateMenu() {
-  const STATE = GROUPS[currentTrainGroup].caseSelection[currentTrainCase];
-  console.log("indexGroup: " + currentTrainGroup + ", indexCase: " + currentTrainCase + "caseSelection: " + STATE);
-  if (STATE == 0 || STATE == "0") {
-    ELEM_RADIO_UNLEARNED.checked = true;
-    console.log("0 here");
-  } else if (STATE == 1 || STATE == "1") {
-    ELEM_RADIO_LEARNING.checked = true;
-    console.log("1 here");
-  } else if (STATE == 2 || STATE == "2") {
-    ELEM_RADIO_FINISHED.checked = true;
-    console.log("2 here");
-  }
-
-  ELEM_CHANGE_STATE_POPUP.style.display = "block";
-  ELEM_OVERLAY.style.display = "block";
-  ELEM_BODY.style.overflow = "hidden";
-}
-
 function changeStateRadio() {
   const GROUP = GROUPS[currentTrainGroup];
   if (GROUP == undefined) return;
@@ -1029,16 +1002,6 @@ function changeStateRadio() {
   saveUserData();
   highlightAllBulkChangeTrainingStateButtons();
   closeOverlays();
-}
-
-function showWelcomePopup() {
-  if (firstVisit) {
-    ELEM_WELCOME_CONATINER.style.display = "block";
-    ELEM_OVERLAY.style.display = "block";
-    ELEM_BODY.style.overflow = "hidden";
-
-    // ELEM_LOADING_SCREEN.style.display = "none";
-  }
 }
 
 function toggleTimer() {
@@ -1191,4 +1154,75 @@ function mirrorCase(indexGroup, indexCase) {
     GROUP.flagMirrored[indexCase] = true;
     GROUP.divAlgorithm[indexCase].innerHTML = mirrorAlg(tempAlg);
   }
+}
+
+// ----------    POP-UPS    ----------
+
+function openDialog(ELEM) {
+  // ELEM.style.display = "block";
+  ELEM.showModal();
+  ELEM_BODY.style.overflow = "hidden";
+}
+
+function closeOverlays() {
+  // ELEM_WELCOME_CONATINER.style.display = "none";
+  // ELEM_INFO_CONTAINER.style.display = "none";
+  // ELEM_EDITALG_CONTAINER.style.display = "none";
+  // ELEM_SETTINGS_CONTAINER.style.display = "none";
+  // ELEM_CHANGE_STATE_POPUP.style.display = "none";
+  ELEM_BODY.style.overflow = "auto";
+  // ELEM_OVERLAY.style.display = "none";
+  ELEM_WELCOME_CONATINER.close();
+  ELEM_INFO_CONTAINER.close();
+  ELEM_EDITALG_CONTAINER.close();
+  ELEM_SETTINGS_CONTAINER.close();
+  ELEM_CHANGE_STATE_POPUP.close();
+}
+
+function showWelcomePopup() {
+  if (firstVisit) {
+    // ELEM_WELCOME_CONATINER.style.display = "block";
+    // ELEM_OVERLAY.style.display = "block";
+    // ELEM_BODY.style.overflow = "hidden";
+
+    // ELEM_LOADING_SCREEN.style.display = "none";
+
+    openDialog(ELEM_WELCOME_CONATINER);
+  }
+}
+
+function showInfo() {
+  // ELEM_INFO_CONTAINER.style.display = "block";
+  // ELEM_OVERLAY.style.display = "block";
+  // ELEM_BODY.style.overflow = "hidden";
+  // ELEM_INFO_CONTAINER.showModal();
+  openDialog(ELEM_INFO_CONTAINER);
+}
+
+function showSettingsTrain() {
+  updateCheckboxStatus();
+  // ELEM_SETTINGS_CONTAINER.style.display = "block";
+  // ELEM_OVERLAY.style.display = "block";
+  // ELEM_BODY.style.overflow = "hidden";
+  openDialog(ELEM_SETTINGS_CONTAINER);
+}
+
+function showSetStateMenu() {
+  const STATE = GROUPS[currentTrainGroup].caseSelection[currentTrainCase];
+  console.log("indexGroup: " + currentTrainGroup + ", indexCase: " + currentTrainCase + "caseSelection: " + STATE);
+  if (STATE == 0 || STATE == "0") {
+    ELEM_RADIO_UNLEARNED.checked = true;
+    console.log("0 here");
+  } else if (STATE == 1 || STATE == "1") {
+    ELEM_RADIO_LEARNING.checked = true;
+    console.log("1 here");
+  } else if (STATE == 2 || STATE == "2") {
+    ELEM_RADIO_FINISHED.checked = true;
+    console.log("2 here");
+  }
+
+  // ELEM_CHANGE_STATE_POPUP.style.display = "block";
+  // ELEM_OVERLAY.style.display = "block";
+  // ELEM_BODY.style.overflow = "hidden";
+  openDialog(ELEM_CHANGE_STATE_POPUP);
 }
