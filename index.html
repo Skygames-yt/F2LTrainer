@@ -47,7 +47,8 @@
     <!-- POPUP-CONTAINER START -->
     <!-- Info -->
 
-    <div id="welcome-container" class="popup-container">
+    <!-- Welcome Container -->
+    <dialog id="welcome-container" class="popup-container">
       <h1>Welcome to my F2L Trainer</h1>
       <p>
         Learn and practice all F2L cases you need to know. Improve your knowledge by finding better and faster
@@ -56,9 +57,10 @@
       <div class="update-cancal-buttons">
         <input type="button" class="btn-overlay" onclick="closeOverlays()" value="To the Trainer" />
       </div>
-    </div>
+    </dialog>
 
-    <div id="info-container" class="popup-container">
+    <!-- Info Container -->
+    <dialog id="info-container" class="popup-container">
       <h1>Here some info</h1>
       <h2>How to use the F2L Trainer</h2>
       <p>1. Press the image of a <b>cube</b> to change their status to</p>
@@ -102,24 +104,14 @@
         if you need <b>help</b>, have ideas for <b>improvement</b> or find any <b>bugs</b>.
       </p>
       <div class="update-cancal-buttons">
-        <input type="button" class="btn-overlay" id="btn-close-info" onclick="closeOverlays()" value="Close" />
+        <form method="dialog">
+          <button autofocus class="btn-overlay" id="btn-close-info" onclick="closeOverlays()">Close</button>
+        </form>
       </div>
-    </div>
-
-    <!-- Trash -->
-    <div id="trash-container" class="popup-container">
-      <h1>This is the trash.</h1>
-      <p>Here is only trash, nothing else.</p>
-      <!-- <div class="trash-element-container">
-        <div class="case-number-trash">1</div>
-        <div class="img-container-trash">
-          <img class="img-case-trash" src="./images/basic_cases/F2L1.svg" />
-        </div>
-      </div> -->
-    </div>
+    </dialog>
 
     <!-- Edit Algorithm -->
-    <div id="editalg-container" class="popup-container">
+    <dialog id="editalg-container" class="popup-container">
       <div id="editalg-img-container">
         <img id="editalg-img" src="./images/basic_cases/right/F2L1.svg" alt="Image of Case" />
       </div>
@@ -134,19 +126,23 @@
         <input type="text" placeholder="Enter Custom Algorithm" id="editalg-customalg" />
       </div>
       <div class="update-cancal-buttons">
-        <input type="button" class="btn-overlay" onclick="updateAlg()" value="Confirm" />
-        <input type="button" class="btn-overlay" onclick="closeOverlays()" value="Cancel" />
+        <!-- <button autofocus class="btn-overlay" id="btn-close-info" onclick="closeOverlays()">Close</button> -->
+
+        <button autofocus class="btn-overlay" onclick="updateAlg()">Confirm</button>
+        <!-- <input type="button" class="btn-overlay" onclick="updateAlg()" value="Confirm" /> -->
+        <button class="btn-overlay" onclick="closeOverlays()">Cancel</button>
+        <!-- <input type="button" class="btn-overlay" onclick="closeOverlays()" value="Cancel" /> -->
       </div>
-    </div>
+    </dialog>
 
     <!-- Loading Screen -->
-    <div id="loading-screen" class="popup-container">
+    <div id="loading-screen">
       <h1>LOADING</h1>
       <span class="loader"></span>
     </div>
 
     <!-- Train Settings -->
-    <div id="train-cases-container" class="popup-container">
+    <dialog id="train-cases-container" class="popup-container">
       <h2>Algorithms to learn</h2>
       <div id="div-algs-to-learn" class="div-checkbox-container-container">
         <!-- Checkbox: Unlearned, Learning, Finished -->
@@ -253,10 +249,10 @@
         <button type="button" class="btn-overlay" onclick="updateTrainCases()">Confirm</button>
         <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
       </div>
-    </div>
+    </dialog>
 
     <!-- Change State Popup -->
-    <div id="popup-change-state" class="popup-container">
+    <dialog id="popup-change-state" class="popup-container">
       <h1>Change learning state to</h1>
 
       <div>
@@ -276,7 +272,7 @@
         <button type="button" class="btn-overlay" onclick="changeStateRadio()">Confirm</button>
         <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
       </div>
-    </div>
+    </dialog>
     <!-- POPUP-CONTAINER END -->
 
     <!-- Top bar -->
