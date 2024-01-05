@@ -206,7 +206,10 @@ function loadBoolean(saveName, varName) {
 }
 
 function clearUserData() {
-  console.log("Clearing");
-  localStorage.clear();
-  console.log("localStorage: " + localStorage);
+  if (confirm("Reset all saved data? (learning states, selected/custom algorithms)")) {
+    console.log("Clearing");
+    localStorage.clear();
+    console.log("localStorage: " + localStorage);
+    location.reload();
+  }
 }
