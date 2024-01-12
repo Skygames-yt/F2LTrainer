@@ -391,12 +391,12 @@ function addElementsToDOM() {
         GROUP.divAlgorithm[indexCase] = document.createElement("div");
         GROUP.divAlgorithm[indexCase].classList.add("div-algorithm");
 
-        GROUP.btnDelete[indexCase] = document.createElement("div");
-        GROUP.btnDelete[indexCase].classList.add("btn-trash");
-        GROUP.btnDelete[indexCase].title = "Delete";
+        // GROUP.btnDelete[indexCase] = document.createElement("div");
+        // GROUP.btnDelete[indexCase].classList.add("btn-trash");
+        // GROUP.btnDelete[indexCase].title = "Delete";
 
-        GROUP.imgTrash[indexCase] = document.createElement("img");
-        GROUP.imgTrash[indexCase].classList.add("img-edit-trash");
+        // GROUP.imgTrash[indexCase] = document.createElement("img");
+        // GROUP.imgTrash[indexCase].classList.add("img-edit-trash");
 
         GROUP.caseNumber[indexCase].innerHTML = indexCase + 1;
         GROUP.imgCase[indexCase].src = IMG_CASE_PATH;
@@ -413,11 +413,11 @@ function addElementsToDOM() {
 
         GROUP.imgMirror[indexCase].src = "./images/mirror1.svg";
         GROUP.imgEdit[indexCase].src = "./images/edit.svg";
-        GROUP.imgTrash[indexCase].src = "./images/trash.svg";
+        // GROUP.imgTrash[indexCase].src = "./images/trash.svg";
 
-        if (GROUP.trash[indexCase] == true) {
-          GROUP.divContainer[indexCase].style.display = "none";
-        }
+        // if (GROUP.trash[indexCase] == true) {
+        //   GROUP.divContainer[indexCase].style.display = "none";
+        // }
 
         GROUP.divContainer[indexCase].style.background = CATEGORY_COLORS[GROUP.caseSelection[indexCase]];
 
@@ -518,6 +518,7 @@ function updateAlg() {
 }
 
 function editAlgs(indexGroup, indexCase) {
+  // ELEM_EDITALG_CUSTOMALG.disabled = false;
   selectedCase = indexCase;
   const GROUP = GROUPS[indexGroup];
   selectedAlgNumber = GROUP.algorithmSelection[selectedCase];
@@ -559,6 +560,7 @@ function editAlgs(indexGroup, indexCase) {
   // Disable scolling on main page
   // ELEM_BODY.style.overflow = "hidden";
   openDialog(ELEM_EDITALG_CONTAINER);
+  ELEM_EDITALG_IMG.focus();
 }
 
 function customAlgSelected() {
@@ -1209,16 +1211,16 @@ function showSettingsTrain() {
 
 function showSetStateMenu() {
   const STATE = GROUPS[currentTrainGroup].caseSelection[currentTrainCase];
-  console.log("indexGroup: " + currentTrainGroup + ", indexCase: " + currentTrainCase + "caseSelection: " + STATE);
+  // console.log("indexGroup: " + currentTrainGroup + ", indexCase: " + currentTrainCase + "caseSelection: " + STATE);
   if (STATE == 0 || STATE == "0") {
     ELEM_RADIO_UNLEARNED.checked = true;
-    console.log("0 here");
+    // console.log("0 here");
   } else if (STATE == 1 || STATE == "1") {
     ELEM_RADIO_LEARNING.checked = true;
-    console.log("1 here");
+    // console.log("1 here");
   } else if (STATE == 2 || STATE == "2") {
     ELEM_RADIO_FINISHED.checked = true;
-    console.log("2 here");
+    // console.log("2 here");
   }
 
   // ELEM_CHANGE_STATE_POPUP.style.display = "block";
