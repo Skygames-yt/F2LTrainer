@@ -54,7 +54,7 @@
         Learn and practice all F2L cases you need to know. Improve your knowledge by finding better and faster
         algirithms. Use this trainer to practice and reduce your Rubiks Cube solving times.
       </p>
-      <div class="update-cancal-buttons">
+      <div class="update-cancel-buttons">
         <input type="button" class="btn-overlay" onclick="closeOverlays()" value="To the Trainer" />
       </div>
     </dialog>
@@ -87,6 +87,7 @@
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
+        loading="lazy"
       ></iframe>
 
       <h2>Hotkeys</h2>
@@ -103,9 +104,9 @@
         <a href="https://github.com/Dave2ooo/F2LTrainer/issues" target="_blank" rel="noopener noreferrer">Github</a>
         if you need <b>help</b>, have ideas for <b>improvement</b> or find any <b>bugs</b>.
       </p>
-      <div class="update-cancal-buttons">
+      <div class="update-cancel-buttons">
         <form method="dialog">
-          <button autofocus class="btn-overlay" id="btn-close-info" onclick="closeOverlays()">Close</button>
+          <button type="button" class="btn-overlay" id="btn-close-info" onclick="closeOverlays()">Close</button>
         </form>
       </div>
     </dialog>
@@ -125,13 +126,9 @@
       <div class="editalg-listentry" onclick="customAlgSelected()">
         <input type="text" placeholder="Enter Custom Algorithm" id="editalg-customalg" />
       </div>
-      <div class="update-cancal-buttons">
-        <!-- <button autofocus class="btn-overlay" id="btn-close-info" onclick="closeOverlays()">Close</button> -->
-
-        <button autofocus class="btn-overlay" onclick="updateAlg()">Confirm</button>
-        <!-- <input type="button" class="btn-overlay" onclick="updateAlg()" value="Confirm" /> -->
-        <button class="btn-overlay" onclick="closeOverlays()">Cancel</button>
-        <!-- <input type="button" class="btn-overlay" onclick="closeOverlays()" value="Cancel" /> -->
+      <div class="update-cancel-buttons">
+        <button type="button" class="btn-overlay" onclick="updateAlg()">Confirm</button>
+        <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
       </div>
     </dialog>
 
@@ -245,7 +242,17 @@
       </div>
 
       <!-- Buttons: Update, Cancel Settings -->
-      <div class="update-cancal-buttons">
+      <!-- <div class="update-cancel-buttons"> -->
+      <!-- <button type="button" class="btn-overlay" onclick="updateTrainCases()">Confirm</button>
+        <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button> -->
+      <!-- <form method="dialog"> -->
+      <!-- <button type="button" class="btn-overlay" onclick="updateTrainCases()">Confirm</button>
+        <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button> -->
+      <!-- <a type="button" class="btn-overlay" onclick="updateTrainCases()">Confirm</a>
+          <a type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</a> -->
+      <!-- </form> -->
+      <!-- </div> -->
+      <div class="update-cancel-buttons">
         <button type="button" class="btn-overlay" onclick="updateTrainCases()">Confirm</button>
         <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
       </div>
@@ -268,7 +275,7 @@
         <label class="color-green label-state" for="radio-state-finished">Finished</label>
       </div>
 
-      <div class="update-cancal-buttons">
+      <div class="update-cancel-buttons">
         <button type="button" class="btn-overlay" onclick="changeStateRadio()">Confirm</button>
         <button type="button" class="btn-overlay" onclick="closeOverlays()">Cancel</button>
       </div>
