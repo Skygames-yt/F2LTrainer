@@ -1,5 +1,5 @@
 :root {
-  --color-background: #1f3d52;
+  --color-background: #191919;
   --color-text: #ffffff;
   --color-text-inverted: black;
   /* --color-text-train: #c953c9; */
@@ -8,13 +8,13 @@
     contrast(102%);
   --filter-black: brightness(0) saturate(100%) invert(0%) sepia(99%) saturate(40%) hue-rotate(77deg) brightness(100%)
     contrast(101%);
-  --color-img: #00ee00;
-  --color-popup: #1f3d52;
-  --color-btn-hover: #140553;
+  --color-img: #ffffff;
+  --color-popup: #191919;
+  --color-btn-hover: #929292;
   --color-overlay: gray;
   --color-unleaned: rgba(0, 0, 0, 0);
-  --color-learning: rgb(236 236 0);
-  --color-finished: rgb(0, 223, 0);
+  --color-learning: rgba(236, 236, 0, 0.671);
+  --color-finished: rgba(0, 223, 0, 0.664);
   --filter-learning: brightness(0) saturate(100%) invert(81%) sepia(53%) saturate(849%) hue-rotate(7deg)
     brightness(103%) contrast(100%);
   --filter-finished: brightness(0) saturate(100%) invert(52%) sepia(86%) saturate(3169%) hue-rotate(87deg)
